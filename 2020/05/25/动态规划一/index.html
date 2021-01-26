@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="maye" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      动态规划一 
+      
+      
+      |
+    
+     Maye&#39;s Life
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Maye's Life" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">动态规划一</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2020-05-25 19:57:27
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/leetcode/" title="leetcode">
+                    <b>#</b> leetcode
+                  </a>
+                </span>
+                
+                <span class="span--category">
+                  <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结">
+                    <b>#</b> 总结
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/dynamic-programming/" title="dynamic programming">
+                    <b>#</b> dynamic programming
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<h1 id="动态规划（一）"><a href="#动态规划（一）" class="headerlink" title="动态规划（一）"></a>动态规划（一）</h1><h2 id="一-动态规划基础"><a href="#一-动态规划基础" class="headerlink" title="一. 动态规划基础"></a>一. 动态规划基础</h2><p>此小节参考：<a target="_blank" rel="noopener" href="https://labuladong.github.io/ebook/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%AF%A6%E8%A7%A3%E8%BF%9B%E9%98%B6.html">动态规划解题套路</a></p>
+<h3 id="1-1-什么是动态规划"><a href="#1-1-什么是动态规划" class="headerlink" title="1.1 什么是动态规划"></a>1.1 什么是动态规划</h3><p>我们首先需要知道我们为什么需要动态规划，动态规划的核心思想其实就是<strong>用空间换时间</strong>，而省时间的方式就是减少Brute Force或者递归中重复的子问题。</p>
+<p>动态规划的基础是<strong>最优子结构</strong>，什么是最优子结构？其实就是从一个小规模问题推导出大规模问题的解。并且子问题之间不能相互影响，所以找出最优子结构，写出递推式是DP问题的最关键的部分，同时也是最难的部分。用花花酱的话来说，DP问题做多少都不嫌多。</p>
+<p>最直接的例子就是斐波那契数列：</p>
+<p>$$ f(n) = f(n - 1) + f(n - 2) $$</p>
+<p>有可能要计算很多重复的子问题，如果使用一个数组记录已经计算过的f(n)，计算f(n + 1)时用到f(n)时可以直接返回，而不用再次递归。</p>
+<h3 id="1-2-动态规划思路"><a href="#1-2-动态规划思路" class="headerlink" title="1.2 动态规划思路"></a>1.2 动态规划思路</h3><p>动态规划问题大多数都是求最值的，从比较小规模的最值，到当前规模的最值，一步步扩张。</p>
+<h3 id="1-2-1-top-down"><a href="#1-2-1-top-down" class="headerlink" title="1.2.1 top-down"></a>1.2.1 top-down</h3><p><strong>递归 + memorization</strong></p>
+<p>自顶向下：其实就是普通的递归加上memorization，上面提到的斐波那契数列的例子就是top-down，简单来说就是从需要计算的解，从后向前推导，记录每一步的值，直到base case结束，也就是递归终点。</p>
+<h3 id="1-2-2-bottom-up"><a href="#1-2-2-bottom-up" class="headerlink" title="1.2.2 bottom-up"></a>1.2.2 bottom-up</h3><p><strong>Loop + memorization</strong></p>
+<p>自底向上：从base case去递归求解下一个解，直到最终的目标解。以斐波那契额为例：</p>
+<pre><code>dp[1] = 1
+dp[2] = 2
+i = 3
+while (i &lt;= n) &#123;
+    dp[i] = dp[i - 1] + dp[i - 2];
+    i++;
+&#125;
+
+return dp[n];
+</code></pre>
+<h3 id="1-2-3-注意事项"><a href="#1-2-3-注意事项" class="headerlink" title="1.2.3 注意事项"></a>1.2.3 注意事项</h3><pre><code>动态规划还需要注意的很重要的一点是边界，往往边界是递归返回的base case，或者用于padding。
+</code></pre>
+<h3 id="1-3-动态规划分类"><a href="#1-3-动态规划分类" class="headerlink" title="1.3 动态规划分类"></a>1.3 动态规划分类</h3><p>这里分类是向花花酱学习的分类方式，用数据规模，时间复杂度和空间复杂度进行分类。这里是花花酱整理的<a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1yRCOJ8KysRVkq0O9IlDriT01tC6lzPapmFO4PCmDJQA/edit#gid=1674276502">不同类型DP问题分类链接</a>。</p>
+<p>本次讨论的所有动态规划问题都是属于入门级难度，大部分是：“I: O(n), S = O(n), T = O(n)”，其中I表示的是输入量级，S表示空间复杂度，T表示时间复杂度。</p>
+<p>注意，这里S的O(n)可能是O(2n),O(3n)，T也是如此，对于2n和3n的情况后面还会讨论，需要多做题熟悉。</p>
+<h2 id="二-动态规划题目总结（2020-05-25）"><a href="#二-动态规划题目总结（2020-05-25）" class="headerlink" title="二. 动态规划题目总结（2020.05.25）"></a>二. 动态规划题目总结（2020.05.25）</h2><p>本次的题目大都比较简单，比较简单的题目直接放链接和递推式，然后直接给出Java Code，需要额外写文章的这里给出链接。</p>
+<h3 id="2-1-LeetCode-53-Maximum-Subarray"><a href="#2-1-LeetCode-53-Maximum-Subarray" class="headerlink" title="2.1 LeetCode 53. Maximum Subarray"></a>2.1 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/maximum-subarray/">LeetCode 53. Maximum Subarray</a></h3><p><strong>递推式</strong>：假设F(n)为从第1到n个数中包含当前数字的子序列的最大值。</p>
+<p>$$ F(n) = max(F(n - 1) + num[n], num[n]) $$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> resultMax = nums[<span class="number">0</span>], currentMax = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            currentMax = Math.max(currentMax + nums[i], nums[i]);</span><br><span class="line">            resultMax = Math.max(resultMax, currentMax);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> resultMax;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-LeetCode-70-Climbing-Stairs"><a href="#2-2-LeetCode-70-Climbing-Stairs" class="headerlink" title="2.2 LeetCode 70. Climbing Stairs"></a>2.2 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/climbing-stairs/">LeetCode 70. Climbing Stairs</a></h3><p><strong>递推式</strong>：假设F(n)为从第1到n级台阶的走法最大值。</p>
+<p>$$ F(n) = F(n - 1) + F(n - 2) (F(1) = 1, F(2) = 2)$$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> pre = <span class="number">1</span>, cur = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (n-- &gt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = pre + cur;</span><br><span class="line">            pre = cur;</span><br><span class="line">            cur = temp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-LeetCode-121-Best-Time-to-Buy-and-Sell-Stock"><a href="#2-3-LeetCode-121-Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="2.3 LeetCode 121. Best Time to Buy and Sell Stock"></a>2.3 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">LeetCode 121. Best Time to Buy and Sell Stock</a></h3><p><strong>递推式</strong>：假设F(n)为从第1到n天，买卖股票赚钱最多赚多少钱；tempMin(1, n)为从1到n的最最低价。</p>
+<p>$$ F(n) = Math.max(F(n - 1), prices[n] - tempMin(1, n))$$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (prices.length &lt; <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> result = prices[<span class="number">1</span>] - prices[<span class="number">0</span>] &gt; <span class="number">0</span> ? prices[<span class="number">1</span>] - prices[<span class="number">0</span>] : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> tempMin = prices[<span class="number">1</span>] &gt; prices[<span class="number">0</span>] ? prices[<span class="number">0</span>] : prices[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; prices.length; i++)&#123;</span><br><span class="line">            result = prices[i] - tempMin &gt; result ? prices[i] - tempMin : result;</span><br><span class="line">            tempMin = prices[i] &lt; tempMin ? prices[i] : tempMin;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-LeetCode-198-House-Robber"><a href="#2-4-LeetCode-198-House-Robber" class="headerlink" title="2.4 LeetCode 198. House Robber"></a>2.4 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/house-robber/">LeetCode 198. House Robber</a></h3><p><strong>递推式</strong>：假设F(n)为从第1家到第n家最多能获得的财富数目，nums[n]为第n家的财富。</p>
+<p>$$ F(n) = Math.max(F(n - 1), F(n - 2) + nums[n]) (F(1) = nums[1], F(2) = Math.max(nums[1], nums[2])) $$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (nums.length == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> pre = nums[<span class="number">0</span>], cur = Math.max(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = cur;</span><br><span class="line">            cur = Math.max(pre + nums[i], cur);</span><br><span class="line">            pre = temp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-LeetCode-303-Range-Sum-Query-Immutable"><a href="#2-5-LeetCode-303-Range-Sum-Query-Immutable" class="headerlink" title="2.5 LeetCode 303. Range Sum Query - Immutable"></a>2.5 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/range-sum-query-immutable/">LeetCode 303. Range Sum Query - Immutable</a></h3><p>这道题我不觉得算是一道DP题目，最多算caching，硬要说的话也的确有dp减少重复子问题的思想在。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumArray</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] sums;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NumArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            sums = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">            sums[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">                sums[i] = nums[i] + sums[i - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> i - <span class="number">1</span> &lt; <span class="number">0</span> ? sums[j] : sums[j] - sums[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your NumArray object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * NumArray obj = new NumArray(nums);</span></span><br><span class="line"><span class="comment"> * int param_1 = obj.sumRange(i,j);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-6-LeetCode-746-Min-Cost-Climbing-Stairs"><a href="#2-6-LeetCode-746-Min-Cost-Climbing-Stairs" class="headerlink" title="2.6 LeetCode 746. Min Cost Climbing Stairs"></a>2.6 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/min-cost-climbing-stairs/">LeetCode 746. Min Cost Climbing Stairs</a></h3><p><font color=Red>注意：</font>这道题里，登上最终台阶的意思不是数组的最后一级，而是数组的最后一级再向后数一级，也就是说要越过它，到达n+1起始位置我们可以理解为从0级台阶开始，cost为0。</p>
+<p><strong>递推式</strong>：假设F(n)为从第1级到跨越n级所需要的最小cost(从n-1跳就不需要加上cost[n]， 从n-2跳就需要)。</p>
+<p>$$ F(n) = Math.min(F(n - 1), F(n - 2) + cost[n - 1]) (F(1) = nums[0], F(2) = Math.min(nums[0], nums[1]))$$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minCostClimbingStairs</span><span class="params">(<span class="keyword">int</span>[] cost)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[cost.length];</span><br><span class="line">        <span class="keyword">int</span> n = cost.length;</span><br><span class="line">        Arrays.fill(dp, <span class="number">0</span>);</span><br><span class="line">        dp[<span class="number">0</span>] = cost[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = cost[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n; i++) &#123;</span><br><span class="line">            dp[i] = Math.min(dp[i - <span class="number">1</span>], dp[i - <span class="number">2</span>]) + cost[i] ;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Math.min(dp[n - <span class="number">1</span>], dp[n - <span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-7-LeetCode-1137-N-th-Tribonacci-Number"><a href="#2-7-LeetCode-1137-N-th-Tribonacci-Number" class="headerlink" title="2.7 LeetCode 1137. N-th Tribonacci Number"></a>2.7 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/n-th-tribonacci-number/">LeetCode 1137. N-th Tribonacci Number</a></h3><p><strong>递推式</strong>：已经很明显地告知递推式了，且0 &lt;= n &lt;= 37无需多言。</p>
+<p>$$ F(n) = F(n - 1) + F(n - 2) + F(n - 3) (n &gt;= 3, F(1) = 0, F(1) = 1, F(2) = 1)$$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">38</span>];</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">tribonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        res[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        res[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        res[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">3</span> || res[n] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res[n];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        res[n] = tribonacci(n - <span class="number">1</span>) + tribonacci(n - <span class="number">2</span>) + tribonacci(n - <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/05/24/LeetCode-1008-Construct-Binary-Search-Tree-from-Preorder-Traversal/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2020-05-25 19:57:27
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/leetcode/" title="leetcode">
+                        <b>#</b> leetcode
+                      </a>
+                    </span>
+                    
+                    <span class="span--category">
+                      <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结">
+                        <b>#</b> 总结
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/dynamic-programming/" title="dynamic programming">
+                        <b>#</b> dynamic programming
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/05/26/LeetCode-1218-Longest-Arithmetic-Subsequence-of-Given-Difference/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89"><span class="toc-text">动态规划（一）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%9F%BA%E7%A1%80"><span class="toc-text">一. 动态规划基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">1.1 什么是动态规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%9D%E8%B7%AF"><span class="toc-text">1.2 动态规划思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-top-down"><span class="toc-text">1.2.1 top-down</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-bottom-up"><span class="toc-text">1.2.2 bottom-up</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">1.2.3 注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%88%86%E7%B1%BB"><span class="toc-text">1.3 动态规划分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93%EF%BC%882020-05-25%EF%BC%89"><span class="toc-text">二. 动态规划题目总结（2020.05.25）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-LeetCode-53-Maximum-Subarray"><span class="toc-text">2.1 LeetCode 53. Maximum Subarray</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-LeetCode-70-Climbing-Stairs"><span class="toc-text">2.2 LeetCode 70. Climbing Stairs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-LeetCode-121-Best-Time-to-Buy-and-Sell-Stock"><span class="toc-text">2.3 LeetCode 121. Best Time to Buy and Sell Stock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-LeetCode-198-House-Robber"><span class="toc-text">2.4 LeetCode 198. House Robber</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-LeetCode-303-Range-Sum-Query-Immutable"><span class="toc-text">2.5 LeetCode 303. Range Sum Query - Immutable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-LeetCode-746-Min-Cost-Climbing-Stairs"><span class="toc-text">2.6 LeetCode 746. Min Cost Climbing Stairs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-LeetCode-1137-N-th-Tribonacci-Number"><span class="toc-text">2.7 LeetCode 1137. N-th Tribonacci Number</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/maye1996">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="sjtumaye@163.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="facebook" href="">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" href="">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="weibo" href="">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © Oranges 2020</a>
+        
+    </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
