@@ -178,7 +178,36 @@ The second 1&#39;s next greater number needs to search circularly, which is also
 </ol>
 <h3 id="monotonous-stack（单调栈）"><a href="#monotonous-stack（单调栈）" class="headerlink" title="monotonous stack（单调栈）"></a>monotonous stack（单调栈）</h3><a href="/2020/06/18/LeetCode-496-Next-Greater-Element-I/" title="LeetCode 496. Next Greater Element I">LeetCode 496. Next Greater Element I</a>的进阶版，这里其实算法和之前是一样的，只不过数组变成了环形，而且存在“重复”的数字，所以我们不能再使用hashmap来存储，而是**使用index**来存储，因此使用arraylist是最好的。
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] nextGreaterElements(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="comment">// 和next greater element 1的区别在于这里是环形数组，之前是只能在它的后面到end之间，现在是可以绕一圈再回到自身位置，因此我们遍历到末尾后再从头遍历一次数组。</span></span><br><span class="line">        <span class="keyword">if</span> (nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> nums;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack();</span><br><span class="line">        <span class="keyword">int</span> n = nums.length;</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        Arrays.fill(res, -<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> index = i % n;</span><br><span class="line">            <span class="keyword">while</span> (!stack.isEmpty() &amp;&amp; nums[index] &gt; nums[stack.peek()]) &#123;</span><br><span class="line">                res[stack.pop()] = nums[index];</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(index);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有几点需要注意：</p>
+<ol>
+<li>这里我们push进stack的东西是数组的index，而不是数字，注意和前一道进行区分；</li>
+<li>在for循环后，stack里面剩下的，不是没有next greater element的元素，这里我们需要注意。这里我们举个例子:[5,4,3,2,1]，我们将其copy后变成[5,4,3,2,1,5,4,3,2,1]，最终stack里面剩下的是后面数组里没有next greater element的index，也就是我们后面的54321都是没用next greater element的，但是实际上4321是哟肚饿，因为在前面已经计算完了。这里需要特别注意一下！！！</li>
+</ol>
+<pre><code class="java">class Solution &#123;
+    public int[] nextGreaterElements(int[] nums) &#123;
+        // 和next greater element 1的区别在于这里是环形数组，之前是只能在它的后面到end之间，现在是可以绕一圈再回到自身位置，因此我们遍历到末尾后再从头遍历一次数组。
+        if (nums.length == 0) &#123;
+            return nums;
+        &#125;
+
+        Stack&lt;Integer&gt; stack = new Stack();
+        int n = nums.length;
+        int[] res = new int[n];
+        Arrays.fill(res, -1);
+
+        for (int i = 0; i &lt; 2 * n; i++) &#123;
+            int index = i % n;
+            while (!stack.isEmpty() &amp;&amp; nums[index] &gt; nums[stack.peek()]) &#123;
+                res[stack.pop()] = nums[index];
+            &#125;
+            stack.push(index);
+        &#125;
+
+        return res;
+    &#125;
+&#125;
+</code></pre>
+
       </div>
       
         <div class="prev-or-next">

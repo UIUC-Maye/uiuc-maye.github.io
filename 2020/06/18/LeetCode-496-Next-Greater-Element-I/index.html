@@ -187,7 +187,33 @@ Explanation:
 <li>如果栈为空，或者栈顶元素大于当前元素时，push当前元素到栈顶；</li>
 <li>如果栈不为空，且栈顶元素小于当前元素时，一直pop，直到栈为空或者栈顶元素大于当前元素。</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] nextGreaterElement(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2) &#123;</span><br><span class="line">        <span class="comment">// 找到nums2里所有元素的next greater element，由于无重复元素，因此用hashmap来存储，然后对nums1进行循环get即可。</span></span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack();</span><br><span class="line">        Map&lt;Integer, Integer&gt; dict = <span class="keyword">new</span> HashMap();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums2) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!stack.isEmpty() &amp;&amp; num &gt; stack.peek()) &#123;</span><br><span class="line">                dict.put(stack.pop(), num);</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(num);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// stack里剩下的说明都是没用next greater element的数字</span></span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">            dict.put(stack.pop(), -<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums1.length; i++) &#123;</span><br><span class="line">            nums1[i] = dict.get(nums1[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> nums1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">class Solution &#123;
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) &#123;
+        // 找到nums2里所有元素的next greater element，由于无重复元素，因此用hashmap来存储，然后对nums1进行循环get即可。
+        Stack&lt;Integer&gt; stack = new Stack();
+        Map&lt;Integer, Integer&gt; dict = new HashMap();
+
+        for (int num : nums2) &#123;
+            while (!stack.isEmpty() &amp;&amp; num &gt; stack.peek()) &#123;
+                dict.put(stack.pop(), num);
+            &#125;
+            stack.push(num);
+        &#125;
+
+        // stack里剩下的说明都是没有next greater element的数字
+        while (!stack.isEmpty()) &#123;
+            dict.put(stack.pop(), -1);
+        &#125;
+
+        for (int i = 0; i &lt; nums1.length; i++) &#123;
+            nums1[i] = dict.get(nums1[i]);
+        &#125;
+
+        return nums1;
+    &#125;
+&#125;
+</code></pre>
+
       </div>
       
         <div class="prev-or-next">
