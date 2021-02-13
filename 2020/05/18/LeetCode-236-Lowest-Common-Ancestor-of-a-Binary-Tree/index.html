@@ -194,6 +194,7 @@ Explanation: The LCA of nodes 5 and 1 is 3.
 <p>那么如何进行查找呢？这里有两种思路。一种是递归，另一种是stack + hashmap。</p>
 <p>第一种思路。对于某节点node，我们定义left，mid和right三个int变量，left变量表示在node的左节点上是否存在p或q节点(0不存在，1存在)，mid表示node节点本身是否存在p或q节点，right表示node的右子树上是否存在p或q节点。对于我们要找的目标节点target，left+mid+right一定是等于2的，而对于其他节点来说，left+mid+right最多为1，遍历整棵树，可得到目标节点。</p>
 <p>第二种思路。我们先存储p的所有祖先节点，然后q节点不断向上找父节点，直到找到某个节点也在p的祖先节点列表中。我们用map来存储&lt;node, father&gt;键值对，进行遍历，直至map中的key包含了p和q。然后，将p一级级向上查找父节点，直至为null，存储到一个set中；随后对q进行同样操作，直至q包含在set中，此时，q记为所求。</p>
+<p>注意，这里一层层遍历时，只能选择前序遍历或者BFS，不能选择中序遍历或者后续遍历，因为有”map.containsKey(p) &amp;&amp; map.containsKey(q)”作为终止条件，后面两种遍历方式有可能导致ancestors的关系记录不完全！！！！有反例。</p>
 <p><font color=Red>Corner Cases:</font><br>注意lowestAncestor是p或q本身的情况。</p>
 <h2 id="3-解法"><a href="#3-解法" class="headerlink" title="3. 解法"></a>3. 解法</h2><ol>
 <li>递归</li>

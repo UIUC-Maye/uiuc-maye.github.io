@@ -181,74 +181,11 @@ Output: true
 </code></pre>
 <h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><h3 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a>Binary Search</h3><p>这道题的矩阵其实是一个完全有序的矩阵，有两种做法：第一种是先找行数，在找列数；第二种做法是只做一次二分查找，l = 0，r = m * n - 1，然后通过算式来计算middle的横纵坐标来进行下一步计算。</p>
 <h2 id="3-解法"><a href="#3-解法" class="headerlink" title="3. 解法"></a>3. 解法</h2><p><strong>1.分别计算横纵坐标</strong>：需要注意的是第一次查找完以后，如果发现这个数比全局最小都小，也就是l = 0，则直接返回-1.</p>
-<pre><code class="java">class Solution &#123;
-    public boolean searchMatrix(int[][] matrix, int target) &#123;
-        // 两次二分，先确定行，再确定列
-        
-        int m = matrix.length, n = matrix[0].length, row = 0, col = 0;
-        
-        if (matrix[0][0] &gt; target || matrix[m - 1][n - 1] &lt; target) &#123;
-            return false;
-        &#125;
-        
-        // 确定行，这里是要找右边界，也就是小于等于target的最大的那个队首。
-        int l = 0, r = m - 1;
-        while (l &lt; r) &#123;
-            int mid = (l + r + 1) / 2;
-            if (matrix[mid][0] &lt;= target) &#123;
-                l = mid;
-            &#125; else &#123;
-                r = mid - 1;
-            &#125;
-        &#125;
-        
-        row = l;
-        
-        // 确定列，这里是找出最准确的那个数，左右边界无所谓
-        l = 0;
-        r = n - 1;
-        while (l &lt; r) &#123;
-            int mid = (l + r) / 2;
-            if (matrix[row][mid] == target) &#123;
-                return true;
-            &#125; else if (matrix[row][mid] &gt; target) &#123;
-                r = mid - 1;
-            &#125; else &#123;
-                l = mid + 1;
-            &#125;
-        &#125;
-        
-        return matrix[row][l] == target;
-        
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">searchMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 两次二分，先确定行，再确定列</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> m = matrix.length, n = matrix[<span class="number">0</span>].length, row = <span class="number">0</span>, col = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (matrix[<span class="number">0</span>][<span class="number">0</span>] &gt; target || matrix[m - <span class="number">1</span>][n - <span class="number">1</span>] &lt; target) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 确定行，这里是要找右边界，也就是小于等于target的最大的那个队首。</span></span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = m - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (matrix[mid][<span class="number">0</span>] &lt;= target) &#123;</span><br><span class="line">                l = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                r = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        row = l;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 确定列，这里是找出最准确的那个数，左右边界无所谓</span></span><br><span class="line">        l = <span class="number">0</span>;</span><br><span class="line">        r = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (matrix[row][mid] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (matrix[row][mid] &gt; target) &#123;</span><br><span class="line">                r = mid - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> matrix[row][l] == target;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>一次计算二分搜索</li>
 </ol>
-<pre><code class="java">class Solution &#123;
-  public boolean searchMatrix(int[][] matrix, int target) &#123;
-    int m = matrix.length;
-    if (m == 0) return false;
-    int n = matrix[0].length;
-
-    // binary search
-    int left = 0, right = m * n - 1;
-    int pivotIdx, pivotElement;
-    while (left &lt;= right) &#123;
-      pivotIdx = (left + right) / 2;
-      pivotElement = matrix[pivotIdx / n][pivotIdx % n];
-      if (target == pivotElement) return true;
-      else &#123;
-        if (target &lt; pivotElement) right = pivotIdx - 1;
-        else left = pivotIdx + 1;
-      &#125;
-    &#125;
-    return false;
-  &#125;
-&#125;
-</code></pre>
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">searchMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = matrix.length;</span><br><span class="line">    <span class="keyword">if</span> (m == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">int</span> n = matrix[<span class="number">0</span>].length;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// binary search</span></span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = m * n - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> pivotIdx, pivotElement;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">      pivotIdx = (left + right) / <span class="number">2</span>;</span><br><span class="line">      pivotElement = matrix[pivotIdx / n][pivotIdx % n];</span><br><span class="line">      <span class="keyword">if</span> (target == pivotElement) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (target &lt; pivotElement) right = pivotIdx - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> left = pivotIdx + <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       </div>
       
         <div class="prev-or-next">
