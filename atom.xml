@@ -6,7 +6,7 @@
   <link href="https://maye.dev/atom.xml" rel="self"/>
   
   <link href="https://maye.dev/"/>
-  <updated>2021-02-12T12:06:31.763Z</updated>
+  <updated>2021-02-19T01:37:02.208Z</updated>
   <id>https://maye.dev/</id>
   
   <author>
@@ -15,6 +15,124 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 295. Find Median from Data Stream</title>
+    <link href="https://maye.dev/2021/02/19/LeetCode-295-Find-Median-from-Data-Stream/"/>
+    <id>https://maye.dev/2021/02/19/LeetCode-295-Find-Median-from-Data-Stream/</id>
+    <published>2021-02-18T16:32:25.000Z</published>
+    <updated>2021-02-19T01:37:02.208Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;两道题是基本一致的，只不过一个是nums[i] &amp;gt; nums[j]，另一个是nums[i]</summary>
+        
+      
+    
+    
+    
+    <category term="leetcode" scheme="https://maye.dev/categories/leetcode/"/>
+    
+    <category term="core problems" scheme="https://maye.dev/categories/core-problems/"/>
+    
+    <category term="剑指offer" scheme="https://maye.dev/categories/%E5%89%91%E6%8C%87offer/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 493. Reverse Pairs</title>
+    <link href="https://maye.dev/2021/02/18/LeetCode-493-Reverse-Pairs/"/>
+    <id>https://maye.dev/2021/02/18/LeetCode-493-Reverse-Pairs/</id>
+    <published>2021-02-18T15:40:39.000Z</published>
+    <updated>2021-02-18T16:13:51.661Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt; Problem&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/&quot;&gt;剑指 Offer 51. 数组中的逆序对&lt;/a&gt;&lt;/p&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="leetcode" scheme="https://maye.dev/categories/leetcode/"/>
+    
+    <category term="core problems" scheme="https://maye.dev/categories/core-problems/"/>
+    
+    <category term="剑指offer" scheme="https://maye.dev/categories/%E5%89%91%E6%8C%87offer/"/>
+    
+    
+    <category term="divide and conquer" scheme="https://maye.dev/tags/divide-and-conquer/"/>
+    
+    <category term="binary indexed tree" scheme="https://maye.dev/tags/binary-indexed-tree/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java各种类型转换</title>
+    <link href="https://maye.dev/2021/02/16/Java%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"/>
+    <id>https://maye.dev/2021/02/16/Java%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</id>
+    <published>2021-02-16T12:58:23.000Z</published>
+    <updated>2021-02-18T14:15:37.709Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;String相关&quot;&gt;&lt;a href=&quot;#String相关&quot; class=&quot;headerlink&quot; title=&quot;String相关&quot;&gt;&lt;/a&gt;String相关&lt;/h2&gt;&lt;h3 id=&quot;各种类型转String&quot;&gt;&lt;a href=&quot;#各种类型转String&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="总结" scheme="https://maye.dev/categories/%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Java" scheme="https://maye.dev/categories/Java/"/>
+    
+    
+    <category term="summary" scheme="https://maye.dev/tags/summary/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 22. Generate Parentheses</title>
+    <link href="https://maye.dev/2021/02/13/LeetCode-22-Generate-Parentheses/"/>
+    <id>https://maye.dev/2021/02/13/LeetCode-22-Generate-Parentheses/</id>
+    <published>2021-02-13T05:52:32.000Z</published>
+    <updated>2021-02-13T05:57:29.665Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+
+&lt;h1 id=&quot;Problem&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="leetcode" scheme="https://maye.dev/categories/leetcode/"/>
+    
+    <category term="core problems" scheme="https://maye.dev/categories/core-problems/"/>
+    
+    <category term="medium" scheme="https://maye.dev/categories/medium/"/>
+    
+    
+    <category term="backtracking" scheme="https://maye.dev/tags/backtracking/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode 475. Heaters</title>
@@ -166,7 +284,7 @@
     <link href="https://maye.dev/2021/02/04/LeetCode-162-Find-Peak-Element/"/>
     <id>https://maye.dev/2021/02/04/LeetCode-162-Find-Peak-Element/</id>
     <published>2021-02-03T16:18:46.000Z</published>
-    <updated>2021-02-03T16:24:38.972Z</updated>
+    <updated>2021-02-13T06:04:18.044Z</updated>
     
     
       
@@ -376,7 +494,7 @@
     <link href="https://maye.dev/2020/07/20/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/"/>
     <id>https://maye.dev/2020/07/20/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/</id>
     <published>2020-07-20T06:50:02.000Z</published>
-    <updated>2021-02-03T15:34:52.149Z</updated>
+    <updated>2021-02-18T08:19:13.694Z</updated>
     
     
       
@@ -439,58 +557,6 @@
     <id>https://maye.dev/2020/07/02/LeetCode-77-Combinations/</id>
     <published>2020-07-02T13:36:03.000Z</published>
     <updated>2020-07-02T13:36:03.425Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 30. Substring with Concatenation of All Words</title>
-    <link href="https://maye.dev/2020/07/02/LeetCode-30-Substring-with-Concatenation-of-All-Words/"/>
-    <id>https://maye.dev/2020/07/02/LeetCode-30-Substring-with-Concatenation-of-All-Words/</id>
-    <published>2020-07-02T13:09:57.000Z</published>
-    <updated>2020-07-02T13:09:57.223Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 76. Minimum Window Substring</title>
-    <link href="https://maye.dev/2020/07/02/LeetCode-76-Minimum-Window-Substring/"/>
-    <id>https://maye.dev/2020/07/02/LeetCode-76-Minimum-Window-Substring/</id>
-    <published>2020-07-02T13:04:57.000Z</published>
-    <updated>2020-07-02T13:04:57.284Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 75. Sort Colors</title>
-    <link href="https://maye.dev/2020/07/02/LeetCode-75-Sort-Colors/"/>
-    <id>https://maye.dev/2020/07/02/LeetCode-75-Sort-Colors/</id>
-    <published>2020-07-02T13:01:46.000Z</published>
-    <updated>2020-07-02T13:01:46.547Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 73. Set Matrix Zeroes</title>
-    <link href="https://maye.dev/2020/07/02/LeetCode-73-Set-Matrix-Zeroes/"/>
-    <id>https://maye.dev/2020/07/02/LeetCode-73-Set-Matrix-Zeroes/</id>
-    <published>2020-07-02T12:41:30.000Z</published>
-    <updated>2020-07-02T12:41:31.004Z</updated>
     
     
     
