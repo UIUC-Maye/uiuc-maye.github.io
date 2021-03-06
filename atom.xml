@@ -6,7 +6,7 @@
   <link href="https://maye.dev/atom.xml" rel="self"/>
   
   <link href="https://maye.dev/"/>
-  <updated>2021-03-05T13:13:55.818Z</updated>
+  <updated>2021-03-06T14:06:16.824Z</updated>
   <id>https://maye.dev/</id>
   
   <author>
@@ -15,19 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>C++指南</title>
-    <link href="https://maye.dev/2021/03/05/C-%E6%8C%87%E5%8D%97/"/>
-    <id>https://maye.dev/2021/03/05/C-%E6%8C%87%E5%8D%97/</id>
-    <published>2021-03-05T13:13:55.000Z</published>
-    <updated>2021-03-05T13:13:55.818Z</updated>
-    
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>hexo搭建个人blog及使用指南</title>
@@ -492,6 +479,35 @@
     <category term="leetcode" scheme="https://maye.dev/categories/leetcode/"/>
     
     <category term="core problems" scheme="https://maye.dev/categories/core-problems/"/>
+    
+    
+    <category term="tree" scheme="https://maye.dev/tags/tree/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 331. Verify Preorder Serialization of a Binary Tree</title>
+    <link href="https://maye.dev/2021/02/08/LeetCode-331-Verify-Preorder-Serialization-of-a-Binary-Tree/"/>
+    <id>https://maye.dev/2021/02/08/LeetCode-331-Verify-Preorder-Serialization-of-a-Binary-Tree/</id>
+    <published>2021-02-08T09:49:52.000Z</published>
+    <updated>2021-02-09T14:11:11.979Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+
+&lt;h1 id=&quot;Problem&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="leetcode" scheme="https://maye.dev/categories/leetcode/"/>
+    
+    <category term="medium" scheme="https://maye.dev/categories/medium/"/>
     
     
     <category term="tree" scheme="https://maye.dev/tags/tree/"/>
