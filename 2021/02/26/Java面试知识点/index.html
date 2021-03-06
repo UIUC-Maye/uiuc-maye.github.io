@@ -176,7 +176,7 @@ MathJax = {
 <li>情况 2:类覆盖了 equals() 方法。一般，我们都覆盖 equals() 方法来比􏰃两个对象的内容是 否相等;若它们的内容相等，则返回 true (即，认为这两个对象相等)。</li>
 </ol>
 <h3 id="hashCode-与-equals"><a href="#hashCode-与-equals" class="headerlink" title="hashCode 与 equals"></a>hashCode 与 equals</h3><p>hashCode() 的作用是获取哈希码，也称为散列码;它实际上是返回一个 int 整数。这个哈希码的作用 是确定该对象在哈希表中的索引位置。hashCode() 定义在 JDK 的 Object.java 中，这就意味着 Java 中的任何类都包含有 hashCode() 函数。</p>
-<p>我们先以“HashSet 如何检查重复”为例子来说明为什么要有 hashCode: 当你把对象加入 HashSet 时，HashSet 会先计算对象的 hashcode 值来判断对象加入的位置，同时也会与该位置其他已经加入的对象的 hashcode 值作比较，如果没有相符的 hashcode，HashSet 会假设对象没有重复出现。但是如 果发现有相同 hashcode 值的对象，这时会调用 equals() 方法来检查 hashcode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作成功。如果不同的话，就会重新散列到其他位置。这样我们就大大减少了 equals 的次 数，相应就大大提高了执行速度。</p>
+<p>我们先以“HashSet 如何检查重复”为例子来说明为什么要有 hashCode: 当你把对象加入 HashSet 时，HashSet 会先计算对象的 hashcode 值来判断对象加入的位置，同时也会与该位置其他已经加入的对象的 hashcode 值作比较，如果没有相符的 hashcode，HashSet 会假设对象没有重复出现。但是如 果发现有相同 hashcode 值的对象，这时会调用 equals() 方法来检查 hashcode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作成功。如果不同的话，就会重新散列到其他位置。这样我们就大大减少了 equals 的次数，相应就大大提高了执行速度。</p>
 <h3 id="synchronized和ReentrantLock-的区别"><a href="#synchronized和ReentrantLock-的区别" class="headerlink" title="synchronized和ReentrantLock 的区别"></a>synchronized和ReentrantLock 的区别</h3><p><strong>相同点：</strong>两者都是可重入锁，“可重入锁”概念是:自己可以再次获取自己的内部锁。比如一个线程获得了某个对 象的锁，此时这个对象锁还没有释放，当其再次想要获取这个对象的锁的时候还是可以获取的，如果不 可锁重入的话，就会造成死锁。同一个线程每次获取可重入锁，锁的计数器都自增1，所以要等到锁的计数器 下降为0时才能释放锁。</p>
 <p><strong>不同点</strong>：</p>
 <ol>
