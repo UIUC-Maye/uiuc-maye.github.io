@@ -174,22 +174,13 @@ s只有小写字母
 <p>我们发现，如果s[i] == s[j]，那么在最优解的时候，打印i的时候一定可以把j也附带着打印出来，反正中间的部分可以再被覆盖嘛，无所谓的。所以我们令dp[i][j]表示s[i, j]的打印最优解，此时dp[i][j] = dp[i][j - 1]。</p>
 <p>如果s[i] ≠ s[j]，那么也就是说s[i]和s[j]的打印一定是两次独立的打印，那么具体是什么时候，在哪打印呢？我们不清楚。所以对于s[i, j]这个字符串来说，遍历i到j之间所有的位置k作为“分割线”，通过dp[i][k] + dp[k + 1][j]的最小值，也就是整个s[i, j]的最小值（最优打印方法），至于具体怎么打印的，谁在前，谁在后，没有影响的。</p>
 <p>注意：在我们找到了某个s[i, j]的最优打印次数后，s[i][j]的最优打印方法已经确定了，但对于任意一个包含s[i, j]的字符串来说，并不表示s[i, j]的最优打印解，也是它们最优打印解的子集！！！还是要去进行dp计算的！！！</p>
-<p>首先，对于这种求最值的问题，第一反应就应该是DP，确实这道题是一个经典的斜着DP的题目。</p>
-<p>我们定义dp[i][j]表示从index为i到j的子字符串是否是回文序列。</p>
-<p>base case是当i == j时，dp[i][j] = true；对于其他的任意一对i和j，如果s[i]和s[j]相同，则只要dp[i + 1][j - 1]为true，dp[i][j]就为true，或者 j - i &lt;= 2 也可满足要求，若 j-i == 1，则是两个相邻的字符，类似于“aa”；如果j - i == 2，则有可能是“aba”这种类型的字符串，也是回文字符串。故有如下递推式</p>
-<p>\begin{equation}<br>dp[i][j] = dp[i + 1][j - 1] || j - i \leq 2 \text{  if } s[i] = s[j]<br>\end{equation}</p>
-<p>\begin{equation}<br>dp[i][j] = false \text{  if } s[i] \neq s[j]<br>\end{equation}</p>
-<p>遍历顺序根据自身喜好来，注意j是要大于i的，所以整张dp表只有一半会被遍历到。而且要注意，当计算dp[i][j]的时候，dp[i + 1][j - 1]必须是已经计算完毕的了，因此建议i从后向前计算，也就是从n - 1开始，到0。然后每次j从i + 1到n - 1.</p>
-<p>时间复杂度为O(n ^ 2)，空间复杂度也是O(n ^ 2)</p>
-<h3 id="中心扩散法"><a href="#中心扩散法" class="headerlink" title="中心扩散法"></a>中心扩散法</h3><p>对于每个回文序列来说，它的特性是镜像对称的，也就是说它存在一个中心点（长度为奇数）或者中轴（长度为偶数）。</p>
-<p>对于0到n - 1中任意一个字符i，它可能是中心点，也可能是在某中轴的左右侧。如果他是中心点，那么从i分别向左右扩散，会找到以i为中心的回文子串，直到两端或者不匹配；如果中轴刚好在它的右侧，那么从i向左和i+1向右出发（包括i和i+1），逐渐找到回文字符串。</p>
 <h2 id="3-解法"><a href="#3-解法" class="headerlink" title="3. 解法"></a>3. 解法</h2><h3 id="Dynamic-Programming-bottom-up"><a href="#Dynamic-Programming-bottom-up" class="headerlink" title="Dynamic Programming bottom-up"></a><strong>Dynamic Programming bottom-up</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">strangePrinter</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2021/05/14/LeetCode-84-Largest-Rectangle-in-Histogram/" target="_self">
+              <a href="/2021/04/27/LeetCode-174-Dungeon-Game/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -226,11 +217,6 @@ s只有小写字母
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2021/05/29/LeetCode-52-N-Queens-II/" target="_self">
-                <span>Next</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
-            
           </div>
         </div>
       
@@ -239,7 +225,7 @@ s只有小写字母
   <div class="post-catalog" id="catalog">
     <div class="title">Contents</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Problem"><span class="toc-text">Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A2%98%E7%9B%AE%E7%AE%80%E8%BF%B0"><span class="toc-text">1. 题目简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF"><span class="toc-text">2. 算法思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dynamic-Programming"><span class="toc-text">Dynamic Programming</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83%E6%89%A9%E6%95%A3%E6%B3%95"><span class="toc-text">中心扩散法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%A7%A3%E6%B3%95"><span class="toc-text">3. 解法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dynamic-Programming-bottom-up"><span class="toc-text">Dynamic Programming bottom-up</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Problem"><span class="toc-text">Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A2%98%E7%9B%AE%E7%AE%80%E8%BF%B0"><span class="toc-text">1. 题目简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF"><span class="toc-text">2. 算法思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dynamic-Programming"><span class="toc-text">Dynamic Programming</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%A7%A3%E6%B3%95"><span class="toc-text">3. 解法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dynamic-Programming-bottom-up"><span class="toc-text">Dynamic Programming bottom-up</span></a></li></ol></li></ol></li></ol>
     </div>
   </div>
 

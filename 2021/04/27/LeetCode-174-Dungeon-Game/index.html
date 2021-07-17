@@ -198,11 +198,7 @@ MathJax = {
 <td>-5(终点)</td>
 </tr>
 </tbody></table>
-<h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><h3 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a>Binary Search</h3><p>这道题目也属于二分搜索的经典题目，与之一起的还有<a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/">LeetCode 154. Find Minimum in Rotated Sorted Array II</a>。</p>
-<p>其实这里就是普通的二分法查找，但是难点是在于check的条件，究竟是大于还是大于等于！！！</p>
-<h2 id="3-解法"><a href="#3-解法" class="headerlink" title="3. 解法"></a>3. 解法</h2><pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[nums.length - <span class="number">1</span>] &gt;= nums[<span class="number">0</span>]) &#123;</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> split = nums[<span class="number">0</span>], l = <span class="number">0</span>, r = nums.length - <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 这里需要注意的点在于是大于还是大于等于，乍一看数字是unique的，但是实际上，有等于的可能性。比如[2,1]这个反例，nums[mid] == split。这里要注意。</span></span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &gt;= split) &#123;</span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                r = mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> nums[l];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</code></pre>
-
+<h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3>
       </div>
       
         <div class="prev-or-next">
@@ -251,7 +247,7 @@ MathJax = {
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2021/05/14/LeetCode-84-Largest-Rectangle-in-Histogram/" target="_self">
+              <a href="/2021/05/25/LeetCode-664-Strange-Printer/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -264,7 +260,7 @@ MathJax = {
   <div class="post-catalog" id="catalog">
     <div class="title">Contents</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Problem"><span class="toc-text">Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A2%98%E7%9B%AE%E7%AE%80%E8%BF%B0"><span class="toc-text">1. 题目简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF"><span class="toc-text">2. 算法思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Binary-Search"><span class="toc-text">Binary Search</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%A7%A3%E6%B3%95"><span class="toc-text">3. 解法</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Problem"><span class="toc-text">Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A2%98%E7%9B%AE%E7%AE%80%E8%BF%B0"><span class="toc-text">1. 题目简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF"><span class="toc-text">2. 算法思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DP"><span class="toc-text">DP</span></a></li></ol></li></ol></li></ol>
     </div>
   </div>
 
