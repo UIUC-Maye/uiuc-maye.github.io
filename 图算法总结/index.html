@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="maye, software engineering, java, system design, data structures" />
+  <meta name="author" content="maye" />
+  <meta name="description" content="Personal blog about engineering, system design, data structures, and life reflections." />
+  
+  
+  <title>
+    
+      图算法总结 
+      
+      
+      |
+    
+     Maye&#39;s Life
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Maye's Life" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Maye</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">图算法总结</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2020-05-28 19:01:43
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/leetcode/" title="leetcode">
+                    <b>#</b> leetcode
+                  </a>
+                </span>
+                
+                <span class="span--category">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" title="算法">
+                    <b>#</b> 算法
+                  </a>
+                </span>
+                
+                <span class="span--category">
+                  <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结">
+                    <b>#</b> 总结
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/graph/" title="graph">
+                    <b>#</b> graph
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="图的基本概念"><a href="#图的基本概念" class="headerlink" title="图的基本概念"></a>图的基本概念</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>顶点</li>
+<li>顶点的度</li>
+<li>边</li>
+<li>相邻</li>
+<li>环</li>
+<li>完全图: 所有顶都相邻</li>
+<li>二分图: 对于一个图G, V(G)=X∪Y, X∩Y=∅, X中, Y 中任两顶不相邻</li>
+<li>路径</li>
+<li>圈</li>
+</ul>
+<h2 id="图的表示方式"><a href="#图的表示方式" class="headerlink" title="图的表示方式"></a>图的表示方式</h2><p>两种，紧接矩阵和邻接表，如下。</p>
+<h3 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h3><h3 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h3><h1 id="图的相关问题"><a href="#图的相关问题" class="headerlink" title="图的相关问题"></a>图的相关问题</h1><p>其实对于很多非图的问题，也是可以把其看做图的，使用图遍历的方式其进行遍历。例如 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/copy-list-with-random-pointer/">LeetCode 138. Copy List with Random Pointer</a>，以图遍历的方式遍历链表；又或者是jump game III，将数组用图遍历的方式展现出来。</p>
+<h2 id="图的搜索"><a href="#图的搜索" class="headerlink" title="图的搜索"></a>图的搜索</h2><h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>用Queue来遍历吧，先写个样例，以邻接表为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模拟一下，假设给出所有的边，然后重新construct一个图，进行bfs，例如[2,3]就表示2和3之间存在一条边。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> 注意！！！ 这里的BFS是考虑连通图的情况下，如果是非连通图，则在while循环外面再套一层for循环。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bfs</span> <span class="params">(<span class="keyword">int</span>[][] edges, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 将边构建成邻接表，用arrayList数组存储</span></span><br><span class="line">    ArrayList&lt;Integer&gt;[] graph = <span class="keyword">new</span> ArrayList[n + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">        graph[i] = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span>[] edge : edges) &#123;</span><br><span class="line">        graph[edge[<span class="number">0</span>]].add(edge[<span class="number">1</span>]);</span><br><span class="line">        graph[edge[<span class="number">1</span>]].add(edge[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// BFS遍历</span></span><br><span class="line">    <span class="keyword">boolean</span>[] visited = <span class="keyword">new</span> <span class="keyword">boolean</span>[n + <span class="number">1</span>];</span><br><span class="line">    Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList();</span><br><span class="line">    queue.add(<span class="number">1</span>);</span><br><span class="line">    isVisited[<span class="number">1</span>] = <span class="keyword">true</span>; <span class="comment">// 将初始设为已经遍历</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> node = queue.pop();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph[node].size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!isVisited[graph[node].get(i)]) &#123;</span><br><span class="line">                doSomething();</span><br><span class="line">                isVisited[graph[node].get(i)] = <span class="keyword">true</span>;</span><br><span class="line">                queue.offer(graph[node.get[i]]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p>一般情况下是递归调用DFS较多。而且需要注意的是！！！</p>
+<p><font color=Red>Attention:</font> DFS遍历时也要注意preorder还是postorder遍历（有向图的情况下要注意），前者是先遍历当前节点，再去遍历neighbor；后者是先遍历neighbor，再遍历自身。为什么无向图不需要考虑postorder的可能呢？因为无向图都是双向的，如果一个无向图存在环，那么postorder就会引起无限循环，所以对于无向图，都是preorder。</p>
+<p>那么对于有向图的postorder遍历有什么区别呢？如果都是在遍历完neighbor以后才将其置为visited的话，那么一旦存在一个有向环，就会无限循环的，和postorder一个道理，跟无向图没有postorder遍历一个道理。因此，我们就需要设置三种状态，unvisited，visiting和visited，当遇到unvisited的时候，我们继续DFS；发现visiting节点，则说明存在环；发现visited节点，则返回，因为已经遍历过了。</p>
+<p>下面遍历方式都是对于无向图，有向图的遍历参考：LeetCode 207，最经典的就是拓扑排序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *这里用二维数组的邻接表来表示整个图，vertex即为顶点id，和数组的顺序一致，从0开始。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDFS</span><span class="params">(<span class="keyword">int</span>[][] graph)</span></span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span>[] isVisited = <span class="keyword">new</span> <span class="keyword">int</span>[graph.length];</span><br><span class="line">        Arrays.fill(isVisited, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这里有可能是非连通图，对于不同的节点都要尝试。</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (isVisited[i] == <span class="keyword">false</span>) &#123;</span><br><span class="line">                isVisited[i] = <span class="keyword">true</span>;</span><br><span class="line">                dfs(graph, i, isVisited);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] graph, <span class="keyword">int</span> vertex, <span class="keyword">boolean</span> isVisited)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph[i].length; i++) &#123;</span><br><span class="line">        <span class="comment">// 如果邻居未被访问，则遍历邻居节点</span></span><br><span class="line">        <span class="keyword">if</span> (isVisited[graph[vertex][i]] == <span class="keyword">false</span>) &#123;</span><br><span class="line">            isVisited[graph[vertex][i]] = <span class="keyword">true</span>;</span><br><span class="line">            dfs(graph, graph[vertex][i], isVisited);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isVisited[graph[vertex][i]] == <span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 遍历到一条路径的终点了，做点啥或者直接返回？</span></span><br><span class="line">            doSomething();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="二分图"><a href="#二分图" class="headerlink" title="二分图"></a>二分图</h2><p>二分图的问题本质上是相当于染色问题，有点像红黑树的感觉。如果能够顺利将整个图染成2种不同颜色，则是二分图，否则不是。实现可以用BFS或DFS均可，下面是三个例题链接。</p>
+<ol>
+<li><a href="/LeetCode-785-Is-Graph-Bipartite/" title="LeetCode-785-Is-Graph-Bipartite">LeetCode-785-Is-Graph-Bipartite</a></li>
+<li><a href="/LeetCode-886-Possible-Bipartition/" title="LeetCode 886. Possible Bipartition">LeetCode 886. Possible Bipartition</a></li>
+<li><a href="/LeetCode-1042-Flower-Planting-With-No-Adjacent/" title="LeetCode-1042-Flower-Planting-With-No-Adjacent">LeetCode-1042-Flower-Planting-With-No-Adjacent</a>
+
+</li>
+</ol>
+<h2 id="深拷贝图"><a href="#深拷贝图" class="headerlink" title="深拷贝图"></a>深拷贝图</h2><ol>
+<li><a href="/LeetCode-138-Copy-List-with-Random-Pointer/" title="LeetCode 138. Copy List with Random Pointer">LeetCode 138. Copy List with Random Pointer</a></li>
+<li><a href="/LeetCode-133-Clone-Graph/" title="LeetCode 133. Clone Graph">LeetCode 133. Clone Graph</a>
+
+</li>
+</ol>
+<h1 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h1><h1 id="判断环"><a href="#判断环" class="headerlink" title="判断环"></a>判断环</h1><h1 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h1><p><strong>最小生成树是无向图里的概念！！！</strong></p>
+<h2 id="Kruskal-Algorithm"><a href="#Kruskal-Algorithm" class="headerlink" title="Kruskal Algorithm"></a>Kruskal Algorithm</h2><p>其核心思想在于按边查找。</p>
+<ol>
+<li>首先将所有的边从小到大进行排序；</li>
+<li>依次从前到后遍历所有的边，如果该条边不会使得已有的边形成“环”，加入这条边到MST里；否则，跳过；</li>
+<li>直到有n-1条边被选出或者无边可选， MST生成。</li>
+</ol>
+<p>O(T) = O(ElogE)</p>
+<p>O(S) = O(V)</p>
+<p>例题：LeetCode 1584</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">UF</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size;</span><br><span class="line">        <span class="keyword">int</span>[] parent;</span><br><span class="line">        <span class="keyword">int</span>[] weight;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">UF</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">            size = n;</span><br><span class="line">            parent = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">            weight = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">                parent[i] = i;</span><br><span class="line">                weight[i] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (x == parent[x]) &#123;</span><br><span class="line">                <span class="keyword">return</span> x;</span><br><span class="line">            &#125;</span><br><span class="line">            parent[x] = find(parent[x]);</span><br><span class="line">            <span class="keyword">return</span> parent[x];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> rootX = find(x), rootY = find(y);</span><br><span class="line">            <span class="keyword">if</span> (rootX == rootY) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (weight[rootX] &lt;= weight[rootY]) &#123;</span><br><span class="line">                parent[rootX] = rootY;</span><br><span class="line">                weight[rootY] += weight[rootX];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                parent[rootY] = rootX;</span><br><span class="line">                weight[rootX] += weight[rootY];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            size--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Edge</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x, y, l;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Edge</span><span class="params">(<span class="keyword">int</span> _x, <span class="keyword">int</span> _y, <span class="keyword">int</span> _l)</span></span>&#123;</span><br><span class="line">            x = _x;</span><br><span class="line">            y = _y;</span><br><span class="line">            l = _l;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minCostConnectPoints</span><span class="params">(<span class="keyword">int</span>[][] points)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = points.length;</span><br><span class="line">        PriorityQueue&lt;Edge&gt; pq = <span class="keyword">new</span> PriorityQueue&lt;&gt;((a, b) -&gt; a.l - b.l);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">                Edge e = <span class="keyword">new</span> Edge(i, j, Math.abs(points[i][<span class="number">0</span>] - points[j][<span class="number">0</span>]) + Math.abs(points[i][<span class="number">1</span>] - points[j][<span class="number">1</span>]));</span><br><span class="line">                pq.add(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        UF uf = <span class="keyword">new</span> UF(n);</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (cnt &lt; n - <span class="number">1</span>) &#123;</span><br><span class="line">            Edge e = pq.poll();</span><br><span class="line">            <span class="keyword">if</span> (uf.find(e.x) == uf.find(e.y)) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            uf.union(e.x, e.y);</span><br><span class="line">            res += e.l;</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Prim-Algorithm"><a href="#Prim-Algorithm" class="headerlink" title="Prim Algorithm"></a>Prim Algorithm</h2><p>按顶点来进行查找。</p>
+<ol>
+<li>将顶点分为两个set，visited和unvisited；</li>
+<li>visited中初始化放入一个顶点，剩下的则放入unvisited中；</li>
+<li>每次找到一条从visited到unvisited的最短的边，将其加入MST，并将该顶点加入MST（该顶点一定在unvisited中，因为边是从visited到unvisited的）；</li>
+<li>重复3，知道全部顶点已经加入visited或者无边可加。</li>
+</ol>
+<h1 id="单源最短路径"><a href="#单源最短路径" class="headerlink" title="单源最短路径"></a>单源最短路径</h1><h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><p>LeetCode </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">networkDelayTime</span><span class="params">(<span class="keyword">int</span>[][] times, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 普通版本的dijkstra</span></span><br><span class="line">        <span class="keyword">int</span>[] dists = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        Arrays.fill(dists, Integer.MAX_VALUE);</span><br><span class="line">        Map&lt;Integer, List&lt;<span class="keyword">int</span>[]&gt;&gt; graph = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        dists[k] = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] edge : times) &#123;</span><br><span class="line">            graph.putIfAbsent(edge[<span class="number">0</span>], <span class="keyword">new</span> ArrayList&lt;<span class="keyword">int</span>[]&gt;());</span><br><span class="line">            graph.get(edge[<span class="number">0</span>]).add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;edge[<span class="number">1</span>], edge[<span class="number">2</span>]&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 定义一个visited数组表示该点是否有被遍历过</span></span><br><span class="line">        <span class="keyword">boolean</span>[] visited = <span class="keyword">new</span> <span class="keyword">boolean</span>[n + <span class="number">1</span>];</span><br><span class="line">        <span class="comment">// visited[k] = true;</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 遍历去找当前距离node k最近的点为candidate</span></span><br><span class="line">            <span class="keyword">int</span> candidateId = -<span class="number">1</span>, minD = Integer.MAX_VALUE;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!visited[i] &amp;&amp; dists[i] &lt; minD) &#123;</span><br><span class="line">                    candidateId = i;</span><br><span class="line">                    minD = dists[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果不存在，则跳出</span></span><br><span class="line">            <span class="keyword">if</span> (candidateId &lt; <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            visited[candidateId] = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 这里，注意要先判断一下图里有没有candidate，因为有的点只有入度没有出度。</span></span><br><span class="line">            <span class="keyword">if</span> (graph.containsKey(candidateId)) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span>[] nei : graph.get(candidateId)) &#123;</span><br><span class="line">                    dists[nei[<span class="number">0</span>]] = Math.min(dists[candidateId] + nei[<span class="number">1</span>], dists[nei[<span class="number">0</span>]]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (dists[i] == Integer.MAX_VALUE) &#123;</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res = Math.max(res, dists[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="堆优化版Dijkstra"><a href="#堆优化版Dijkstra" class="headerlink" title="堆优化版Dijkstra"></a>堆优化版Dijkstra</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">networkDelayTime</span><span class="params">(<span class="keyword">int</span>[][] times, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 堆优化版Dijkstra算法</span></span><br><span class="line">        Map&lt;Integer, List&lt;<span class="keyword">int</span>[]&gt;&gt; graph = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] edge : times) &#123;</span><br><span class="line">            graph.putIfAbsent(edge[<span class="number">0</span>], <span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">            graph.get(edge[<span class="number">0</span>]).add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;edge[<span class="number">1</span>], edge[<span class="number">2</span>]&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 初始化距离</span></span><br><span class="line">        <span class="keyword">int</span>[] dist = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        Arrays.fill(dist, Integer.MAX_VALUE);</span><br><span class="line">        dist[k] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">boolean</span>[] seen = <span class="keyword">new</span> <span class="keyword">boolean</span>[n + <span class="number">1</span>];</span><br><span class="line">        </span><br><span class="line">        PriorityQueue&lt;<span class="keyword">int</span>[]&gt; pq = <span class="keyword">new</span> PriorityQueue&lt;&gt;((a, b) -&gt; (a[<span class="number">1</span>] - b[<span class="number">1</span>]));</span><br><span class="line">        pq.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;k, <span class="number">0</span>&#125;);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (!pq.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">int</span>[] cand = pq.poll();</span><br><span class="line">            <span class="keyword">int</span> candidate = cand[<span class="number">0</span>], minD = cand[<span class="number">1</span>];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 根据candidate更新dist数组</span></span><br><span class="line">            <span class="keyword">if</span> (seen[candidate]) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            dist[candidate] = minD;</span><br><span class="line">            seen[candidate] = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">if</span> (graph.containsKey(candidate)) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span>[] nei : graph.get(candidate)) &#123;</span><br><span class="line">                    <span class="comment">// 这里加判断是为了减少已经找到最短路的顶点，减少heap处理的数据量大小</span></span><br><span class="line">                    <span class="keyword">if</span> (!seen[nei[<span class="number">0</span>]])</span><br><span class="line">                        pq.offer(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;nei[<span class="number">0</span>], nei[<span class="number">1</span>] + minD&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (dist[i] == Integer.MAX_VALUE) &#123;</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res = Math.max(dist[i], res);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="最短路径问题"><a href="#最短路径问题" class="headerlink" title="最短路径问题"></a>最短路径问题</h1><h1 id="欧拉路径"><a href="#欧拉路径" class="headerlink" title="欧拉路径"></a>欧拉路径</h1><h1 id="最大流"><a href="#最大流" class="headerlink" title="最大流"></a>最大流</h1>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/LeetCode-525-Contiguous-Array/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2020-05-28 19:01:43
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/leetcode/" title="leetcode">
+                        <b>#</b> leetcode
+                      </a>
+                    </span>
+                    
+                    <span class="span--category">
+                      <a href="/categories/%E7%AE%97%E6%B3%95/" title="算法">
+                        <b>#</b> 算法
+                      </a>
+                    </span>
+                    
+                    <span class="span--category">
+                      <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结">
+                        <b>#</b> 总结
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/graph/" title="graph">
+                        <b>#</b> graph
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/LeetCode-886-Possible-Bipartition/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">图的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E5%BC%8F"><span class="toc-text">图的表示方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="toc-text">邻接矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="toc-text">邻接表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="toc-text">图的相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E6%90%9C%E7%B4%A2"><span class="toc-text">图的搜索</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BFS"><span class="toc-text">BFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DFS"><span class="toc-text">DFS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE"><span class="toc-text">二分图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%9B%BE"><span class="toc-text">深拷贝图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="toc-text">拓扑排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%8E%AF"><span class="toc-text">判断环</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-text">最小生成树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Kruskal-Algorithm"><span class="toc-text">Kruskal Algorithm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prim-Algorithm"><span class="toc-text">Prim Algorithm</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="toc-text">单源最短路径</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dijkstra"><span class="toc-text">Dijkstra</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%86%E4%BC%98%E5%8C%96%E7%89%88Dijkstra"><span class="toc-text">堆优化版Dijkstra</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98"><span class="toc-text">最短路径问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E8%B7%AF%E5%BE%84"><span class="toc-text">欧拉路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E6%B5%81"><span class="toc-text">最大流</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/maye1996">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="sjtumaye@163.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="facebook" href="">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" href="">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="weibo" href="">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

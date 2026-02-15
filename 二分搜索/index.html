@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="maye, software engineering, java, system design, data structures" />
+  <meta name="author" content="maye" />
+  <meta name="description" content="Personal blog about engineering, system design, data structures, and life reflections." />
+  
+  
+  <title>
+    
+      二分搜索 
+      
+      
+      |
+    
+     Maye&#39;s Life
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Maye's Life" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Maye</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">二分搜索</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2020-05-27 18:52:12
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/leetcode/" title="leetcode">
+                    <b>#</b> leetcode
+                  </a>
+                </span>
+                
+                <span class="span--category">
+                  <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结">
+                    <b>#</b> 总结
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/binary-search/" title="binary search">
+                    <b>#</b> binary search
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<h1 id="二分搜索"><a href="#二分搜索" class="headerlink" title="二分搜索"></a>二分搜索</h1><p>这里有一篇总结二分搜索非常好的Blog，链接贴在这，一定要看！！</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/6854825.html">传送门</a></p>
+<h2 id="一-二分搜索基本应用场景"><a href="#一-二分搜索基本应用场景" class="headerlink" title="一. 二分搜索基本应用场景"></a>一. 二分搜索基本应用场景</h2><p>当一道题目出现了“有序N维数组中查找某个东西或最接近的值”时，大概率用二分搜索；或者输入的数字特别大，达到2^31 - 1左右的这种，也很有可能使用二分搜索。</p>
+<p>其核心思想就是每次找一半，然后舍弃另一半，其中最恶心的莫过于有重复数字的二分搜索，太难顶了。例如：<a target="_blank" rel="noopener" href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/">LeetCode 81</a>的“Search in Rotated Sorted Array II”，到现在也不懂，真的难受，先记录着，等以后能搞懂了再回来看。</p>
+<h2 id="二-二分搜索模板"><a href="#二-二分搜索模板" class="headerlink" title="二. 二分搜索模板"></a>二. 二分搜索模板</h2><h3 id="基本模板"><a href="#基本模板" class="headerlink" title="基本模板"></a>基本模板</h3><p>关于查找区间的问题，究竟是“左闭右开”还是“左右闭区间”，我在这里直接就用左右全闭区间的方法了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">    m = l + (r - l) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">if</span> <span class="title">g</span><span class="params">(m)</span> </span>== target :</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="function"><span class="keyword">if</span> <span class="title">g</span><span class="params">(m)</span> &gt; target :</span></span><br><span class="line"><span class="function">        r </span>= m - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="function"><span class="keyword">if</span> <span class="title">g</span><span class="params">(m)</span> &lt; target :</span></span><br><span class="line"><span class="function">        l </span>= m + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>最终返回的时候，l一定是r右面的那个数，这是由while的循环条件决定的，二者最后只能差1。最后看情况是需要l还是r。</p>
+<h3 id="左边界-amp-右边界"><a href="#左边界-amp-右边界" class="headerlink" title="左边界 &amp; 右边界"></a>左边界 &amp; 右边界</h3><p>参考题目：下面例题 3.4 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">LeetCode 34. Find First and Last Position of Element in Sorted Array</a></p>
+<p>关于左边界和右边界的问题只要简单说一下就懂了，举个例子，我们有一个数组nums：[1, 2, 6, 6, 10, 13, 17]，我们想要找出数字6所在的位置，那么我们返回2还是返回3呢？虽然值是不同，但是对于实际应用的时候有很大不同。</p>
+<p>比如说对于查找的时候，可能需要查找大于某个数的最小值，或者小于某个数的最大值，前者就是要找右边界，后者就是要找左边界(这里不敢保证写的绝对对啊，只是个人理解，有可能是错的)。</p>
+<p>对于左右边界的处理其实不同点就在于等于的情况下，是更新left还是right。</p>
+<p>左边界 -&gt; 等于的时候更新右边界</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">    m = l + (r - l) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">if</span> <span class="title">g</span><span class="params">(m)</span> &gt;</span>= target :</span><br><span class="line">        r = m - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="function"><span class="keyword">if</span> <span class="title">g</span><span class="params">(m)</span> &lt; target :</span></span><br><span class="line"><span class="function">        l </span>= m + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>右边界 -&gt; 等于的时候更新左边界</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">    m = l + (r - l) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">if</span> <span class="title">g</span><span class="params">(m)</span> &gt; target :</span></span><br><span class="line"><span class="function">        r </span>= m - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="function"><span class="keyword">if</span> <span class="title">g</span><span class="params">(m)</span> &lt;</span>= target :</span><br><span class="line">        l = m + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="返回l？返回r？"><a href="#返回l？返回r？" class="headerlink" title="返回l？返回r？"></a>返回l？返回r？</h3><p>我们需要care的一点就是到底是返回l还是返回r呢？结论是：就题论题，九成以上返回l，但是不排除返回r的可能，例如上面的数组[1, 2, 6, 6, 10, 13, 17]，找出比6小的最大值，自己写一下代码，很容易发现返回的是r，而不是l，因此如果不确定的话，最好的办法是找个例子尝试一下。</p>
+<h2 id="三-二分搜索简单题目"><a href="#三-二分搜索简单题目" class="headerlink" title="三. 二分搜索简单题目"></a>三. 二分搜索简单题目</h2><p>其实二分搜索，难的是真滴难，简单的也有很多坑，慢慢积累经验吧，有时候边界条件搞不懂就特别烦。</p>
+<h3 id="3-1-LeetCode-69-Sqrt-x"><a href="#3-1-LeetCode-69-Sqrt-x" class="headerlink" title="3.1 LeetCode 69. Sqrt(x)"></a>3.1 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/sqrtx/">LeetCode 69. Sqrt(x)</a></h3><p><strong>注意：</strong>需要注意的点就是输入的值可能会特别大，二分后的值，如果直接平方的话有可能会越界，所以可以考虑使用除法或者用long来实现。这里用除法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">mySqrt</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (x &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> x;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, m = <span class="number">0</span>, r = x;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">            m = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (m == x / m) &#123;</span><br><span class="line">                <span class="keyword">return</span> m;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (m &gt; x / m) &#123;</span><br><span class="line">                r = m - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (m &lt; x / m) &#123;</span><br><span class="line">                l = m + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> l - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-LeetCode-367-Valid-Perfect-Square"><a href="#3-2-LeetCode-367-Valid-Perfect-Square" class="headerlink" title="3.2 LeetCode 367. Valid Perfect Square"></a>3.2 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/valid-perfect-square/">LeetCode 367. Valid Perfect Square</a></h3><p><strong>注意：</strong>需要注意的是这里不能用除法，和69题不一样，因为除法会损失精度，导致计算错误，所以这里用long类型来辅助计算。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPerfectSquare</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">1</span>, end = num;</span><br><span class="line">        <span class="keyword">long</span> target = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (start &lt;= end) &#123;</span><br><span class="line">            target = (start + end) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (target * target &gt; num) &#123;</span><br><span class="line">                end = (<span class="keyword">int</span>)target - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (target * target &lt; num) &#123;</span><br><span class="line">                start = (<span class="keyword">int</span>)target + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-LeetCode-35-Search-Insert-Position"><a href="#3-3-LeetCode-35-Search-Insert-Position" class="headerlink" title="3.3 LeetCode 35. Search Insert Position"></a>3.3 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/search-insert-position/">LeetCode 35. Search Insert Position</a></h3><p><strong>注意：</strong>这道是最传统的二分搜索，基础中的基础。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">searchInsert</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, m = <span class="number">0</span>, r = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">            m = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[m] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> m;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[m] &lt; target) &#123;</span><br><span class="line">                l = m + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[m] &gt; target) &#123;</span><br><span class="line">                r = m - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-LeetCode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array"><a href="#3-4-LeetCode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array" class="headerlink" title="3.4 LeetCode 34. Find First and Last Position of Element in Sorted Array"></a>3.4 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">LeetCode 34. Find First and Last Position of Element in Sorted Array</a></h3><p><strong>注意：</strong>先找到一个pivot，再分别计算左右有多少。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] searchRange(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = nums.length - <span class="number">1</span>, m = <span class="number">0</span>, pivot = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">            m = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[m] &lt; target) &#123;</span><br><span class="line">                l = m + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[m] &gt;= target) &#123;</span><br><span class="line">                r = m - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (l == nums.length || nums[l] != target) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;-<span class="number">1</span>, -<span class="number">1</span>&#125;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这里l是第一个target的位置</span></span><br><span class="line">        res[<span class="number">0</span>] = l;</span><br><span class="line"></span><br><span class="line">        r = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">            m = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[m] &gt; target) &#123;</span><br><span class="line">                r = m - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                l = m + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        res[<span class="number">1</span>] = l - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="3-5-LeetCode-50-Pow-x-n"><a href="#3-5-LeetCode-50-Pow-x-n" class="headerlink" title="3.5 LeetCode 50. Pow(x, n)"></a>3.5 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/powx-n/">LeetCode 50. Pow(x, n)</a></h3><p><strong>注意：</strong>这道题要用二分法来减少运算，次数，而且负数除以2余数为-1，注意取反。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (x == <span class="number">0d</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">double</span> ret = myPow(x, n / <span class="number">2</span>);</span><br><span class="line">            <span class="keyword">if</span> (n % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> x * ret * ret;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> ret * ret;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">double</span> ret = myPow(x, n / <span class="number">2</span>);</span><br><span class="line">            <span class="keyword">if</span> ((<span class="number">0</span> - n) % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> ret * ret / x;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> ret * ret;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/LeetCode-1035-Uncrossed-Lines/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2020-05-27 18:52:12
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/leetcode/" title="leetcode">
+                        <b>#</b> leetcode
+                      </a>
+                    </span>
+                    
+                    <span class="span--category">
+                      <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结">
+                        <b>#</b> 总结
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/binary-search/" title="binary search">
+                        <b>#</b> binary search
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/LeetCode-74-Search-a-2D-Matrix/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2"><span class="toc-text">二分搜索</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">一. 二分搜索基本应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E6%A8%A1%E6%9D%BF"><span class="toc-text">二. 二分搜索模板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A8%A1%E6%9D%BF"><span class="toc-text">基本模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A6%E8%BE%B9%E7%95%8C-amp-%E5%8F%B3%E8%BE%B9%E7%95%8C"><span class="toc-text">左边界 &amp; 右边界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9El%EF%BC%9F%E8%BF%94%E5%9B%9Er%EF%BC%9F"><span class="toc-text">返回l？返回r？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E7%AE%80%E5%8D%95%E9%A2%98%E7%9B%AE"><span class="toc-text">三. 二分搜索简单题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-LeetCode-69-Sqrt-x"><span class="toc-text">3.1 LeetCode 69. Sqrt(x)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-LeetCode-367-Valid-Perfect-Square"><span class="toc-text">3.2 LeetCode 367. Valid Perfect Square</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-LeetCode-35-Search-Insert-Position"><span class="toc-text">3.3 LeetCode 35. Search Insert Position</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-LeetCode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array"><span class="toc-text">3.4 LeetCode 34. Find First and Last Position of Element in Sorted Array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-LeetCode-50-Pow-x-n"><span class="toc-text">3.5 LeetCode 50. Pow(x, n)</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/maye1996">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="sjtumaye@163.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="facebook" href="">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" href="">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="weibo" href="">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

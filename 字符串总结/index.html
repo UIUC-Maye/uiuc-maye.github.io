@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="maye, software engineering, java, system design, data structures" />
+  <meta name="author" content="maye" />
+  <meta name="description" content="Personal blog about engineering, system design, data structures, and life reflections." />
+  
+  
+  <title>
+    
+      字符串总结 
+      
+      
+      |
+    
+     Maye&#39;s Life
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Maye's Life" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Maye</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">字符串总结</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2020-05-29 11:29:47
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/leetcode/" title="leetcode">
+                    <b>#</b> leetcode
+                  </a>
+                </span>
+                
+                <span class="span--category">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" title="算法">
+                    <b>#</b> 算法
+                  </a>
+                </span>
+                
+                <span class="span--category">
+                  <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结">
+                    <b>#</b> 总结
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/string/" title="string">
+                    <b>#</b> string
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="String总结"><a href="#String总结" class="headerlink" title="String总结"></a>String总结</h1><h2 id="String常用api"><a href="#String常用api" class="headerlink" title="String常用api"></a>String常用api</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>String</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>增</td>
+<td><strong>String concat(String str):</strong> 将指定字符串连接到此字符串的结尾。（不建议使用）</td>
+</tr>
+<tr>
+<td>删</td>
+<td>字符串不能随便删，trim除外，放到下面部分了。</td>
+</tr>
+<tr>
+<td>改</td>
+<td><strong>char[] toCharArray()：</strong> 将此字符串转换为一个新的字符数组。<br><br><strong>String substring(int beginIndex)：</strong> 返回一个新的字符串，从beginIndex到结尾，它是此字符串的一个子字符串。<br><br><strong>String substring(int beginIndex, int endIndex)</strong>: 返回一个新的字符串，下标从beginIndex到endIndex - 1，是一个左闭右开的区间，它是此字符串的一个子字符串。<br><br><strong>String trim():</strong> 返回字符串的副本，忽略前导空白和尾部空白。<br><br><strong>String toUpperCase():</strong> 将此 String 中的所有字符都转换为大写。<br><br><strong>String toLowerCase():</strong> 将此 String 中的所有字符都转换为小写。<br><br><strong>String replace(char oldChar, char newChar)：</strong> 返回一个新的字符串，它是通过用 newChar 替换此字符串中出现的所有 oldChar 得到的。<br><br><strong>String replaceAll(String regex, String replacement)：</strong> 使用给定的 replacement 替换此字符串所有匹配给定的正则表达式的子字符串。<br><br><strong>String replaceFirst(String regex, String replacement)：</strong>使用给定的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串。</td>
+</tr>
+<tr>
+<td>查</td>
+<td><strong>int length():</strong> 返回此字符串的长度。int indexOf(int ch) <br><br> <strong>char charAt(int index)**：返回指定索引处的 char 值 <br> <br>**int indexOf(int ch, int fromIndex)</strong>: 返回在此字符串中第一次出现指定字符处的索引，从指定的索引开始搜索（包含），没有则返回-1。<br><br> <strong>int indexOf(String str):</strong>  返回指定子字符串在此字符串中第一次出现处的索引，没有则-1。<br><br> <strong>int indexOf(String str, int fromIndex):</strong> 返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始，没有则-1。<br><br><strong>int lastIndexOf(int ch):</strong> 返回指定子字符在此字符串中最右边出现处的索引，没有则-1。<br><br><strong>int lastIndexOf(int ch, int fromIndex):</strong> 返回指定字符在此字符串中最后一次出现处的索引，从指定的索引处开始进行反向搜索，没有则-1。 <br><br><strong>int lastIndexOf(String str):</strong> 返回指定子字符串在此字符串中最右边出现处的索引，没有则-1。<br><br><strong>int lastIndexOf(String str, int fromIndex):</strong>  返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始反向搜索，没有则-1。 <br><br><strong>boolean startsWith(String prefix, int toffset):</strong> 测试此字符串从指定索引开始的子字符串是否以指定前缀开始，offset是空出字符的数量，也是开始查找的index。<br><br><strong>boolean startsWith(String prefix):</strong>  测试此字符串是否以指定的前缀开始。</td>
+</tr>
+</tbody></table>
+<h2 id="String经典算法"><a href="#String经典算法" class="headerlink" title="String经典算法"></a>String经典算法</h2><h3 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h3><p>KMP算法是用于字符串匹配的经典算法，但是实现起来比较复杂，故不推荐使用而已，它的最坏时间复杂度是O(m + n)，m和n分别是待匹配字符串和目标字符串的长度。</p>
+<p>KMP算法解释起来很麻烦，可以结合以下资料来观看（因为懒得画图，这里需要很土图示来解释）：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uKr9qIZMtzw&list=PLLuMmzMTgVK5Hy1qcWYZcd7wVQQ1v0AjX&index=3&t=0s">花花酱的KMP算法视频</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.sengxian.com/algorithms/kmp">某大佬的blog</a></li>
+</ol>
+<p>其实它的核心思想就是对于某次错误的字符串匹配后，不要再进行重新从头匹配，而是跳转到某个合适的位置。例如：</p>
+<pre><code>s1: &quot;aaaabababba&quot;
+s2: &quot;ababb&quot;
+希望在s1中找到s2首次出现的位置
+</code></pre>
+<p>假设我们某次匹配到了s1字符串的子串，aaa<font color=Red>ababa</font>bba，和s2的(ababb)只差了一位，按照传统做法，我们这时候会将s1的指针右移一位，然后重新开始匹配。</p>
+<p>但是我们细心一点可以发现，s1红色的那个子串，最后不匹配的a的前面有ab，而ab又恰好是s2的开头两个字符，也就是说我们可以从s2的第三位开始比较起来，也就是说我们下一个希望比较的s1的子字符串是aaaab<font color=Red>ababb</font>a，我们可以发现刚好符合条件；如果使用老的方法则是将s1的pointer右移一位，比较babab和s2，KMP算法可以直接跨越这一步。这就是KMP算法的核心思想。</p>
+<p>KMP算法实现：</p>
+<a href="/LeetCode-28-Implement-strStr/" title="LeetCode 28. Implement strStr()">LeetCode 28. Implement strStr()</a>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="String经典题目汇总"><a href="#String经典题目汇总" class="headerlink" title="String经典题目汇总"></a>String经典题目汇总</h2><h3 id="回文系列"><a href="#回文系列" class="headerlink" title="回文系列"></a>回文系列</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode.com/problems/valid-palindrome/">125. Valid Palindrome(无解析)</a></li>
+<li><a href="/LeetCode-5-Longest-Palindromic-Substring/" title="最长回文子字符串">最长回文子字符串</a></li>
+<li><a href="/LeetCode-516-Longest-Palindromic-Subsequence/" title="“LeetCode 516 最长回文子序列”">“LeetCode 516 最长回文子序列”</a></li>
+<li><a href="/LeetCode-647-Palindromic-Substrings/" title="“LeetCode 647 回文子字符串数”">“LeetCode 647 回文子字符串数”</a> 
+
+</li>
+</ol>
+<h3 id="最长common前缀"><a href="#最长common前缀" class="headerlink" title="最长common前缀"></a>最长common前缀</h3><ol>
+<li><a href="/LeetCode-5-Longest-Palindromic-Substring/" title="LeetCode 14. Longest Common Prefix">LeetCode 14. Longest Common Prefix</a>
+
+</li>
+</ol>
+<h3 id="翻转字符串"><a href="#翻转字符串" class="headerlink" title="翻转字符串"></a>翻转字符串</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode.com/problems/reverse-string/">LeetCode 344. Reverse String(无解析)</a></li>
+</ol>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/LeetCode-338-Counting-Bits/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2020-05-29 11:29:47
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/leetcode/" title="leetcode">
+                        <b>#</b> leetcode
+                      </a>
+                    </span>
+                    
+                    <span class="span--category">
+                      <a href="/categories/%E7%AE%97%E6%B3%95/" title="算法">
+                        <b>#</b> 算法
+                      </a>
+                    </span>
+                    
+                    <span class="span--category">
+                      <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结">
+                        <b>#</b> 总结
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/string/" title="string">
+                        <b>#</b> string
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/LeetCode-5-Longest-Palindromic-Substring/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#String%E6%80%BB%E7%BB%93"><span class="toc-text">String总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#String%E5%B8%B8%E7%94%A8api"><span class="toc-text">String常用api</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95"><span class="toc-text">String经典算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP%E7%AE%97%E6%B3%95"><span class="toc-text">KMP算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String%E7%BB%8F%E5%85%B8%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB"><span class="toc-text">String经典题目汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E6%96%87%E7%B3%BB%E5%88%97"><span class="toc-text">回文系列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E9%95%BFcommon%E5%89%8D%E7%BC%80"><span class="toc-text">最长common前缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">翻转字符串</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/maye1996">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="sjtumaye@163.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="facebook" href="">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" href="">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="weibo" href="">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

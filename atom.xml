@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Maye&#39;s Life</title>
-  <icon>https://maye.dev/icon.png</icon>
   
+  <subtitle>Engineering · Thinking · Life</subtitle>
   <link href="https://maye.dev/atom.xml" rel="self"/>
   
   <link href="https://maye.dev/"/>
-  <updated>2021-07-03T09:44:09.917Z</updated>
+  <updated>2022-07-06T16:47:32.000Z</updated>
   <id>https://maye.dev/</id>
   
   <author>
@@ -17,21 +17,69 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>C++算法模板</title>
+    <link href="https://maye.dev/C++%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/"/>
+    <id>https://maye.dev/C++%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/</id>
+    <published>2022-07-06T16:47:32.000Z</published>
+    <updated>2022-07-06T16:47:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>个人不是很喜欢下面这种，写起来很难解释。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="keyword">int</span> q[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i = l - <span class="number">1</span>, j = r + <span class="number">1</span>, x = q[l + r &gt;&gt; <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">do</span> i ++ ; <span class="keyword">while</span> (q[i] &lt; x);</span><br><span class="line">        <span class="keyword">do</span> j -- ; <span class="keyword">while</span> (q[j] &gt; x);</span><br><span class="line">        <span class="keyword">if</span> (i &lt; j) swap(q[i], q[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    quick_sort(q, l, j), quick_sort(q, j + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>更倾向于下面这种：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] q, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt;= r) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i = l, j = r;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">        <span class="comment">// 注意，这里一定得是j在前，i在后</span></span><br><span class="line">        <span class="keyword">while</span> (i &lt; j &amp;&amp; q[j] &gt;= q[l]) j--;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j &amp;&amp; q[i] &lt;= q[l]) i++;</span><br><span class="line">        swap(q, i, j);</span><br><span class="line">    &#125;</span><br><span class="line">    swap(q, i, l);</span><br><span class="line">    quickSort(q, l, i - <span class="number">1</span>);</span><br><span class="line">    quickSort(q, i + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>70.74 </p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;排序&quot;&gt;&lt;a href=&quot;#排序&quot; class=&quot;headerlink&quot; title=&quot;排序&quot;&gt;&lt;/a&gt;排序&lt;/h1&gt;&lt;h2 id=&quot;快速排序&quot;&gt;&lt;a href=&quot;#快速排序&quot; class=&quot;headerlink&quot; title=&quot;快速排序&quot;&gt;&lt;/a&gt;快速排序&lt;/h</summary>
+      
+    
+    
+    
+    <category term="算法" scheme="https://maye.dev/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="总结" scheme="https://maye.dev/categories/%E6%80%BB%E7%BB%93/"/>
+    
+    
+    <category term="summary" scheme="https://maye.dev/tags/summary/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2021秋招英文面经</title>
+    <link href="https://maye.dev/2021%E7%A7%8B%E6%8B%9B%E8%8B%B1%E6%96%87%E9%9D%A2%E7%BB%8F/"/>
+    <id>https://maye.dev/2021%E7%A7%8B%E6%8B%9B%E8%8B%B1%E6%96%87%E9%9D%A2%E7%BB%8F/</id>
+    <published>2021-09-26T00:22:41.000Z</published>
+    <updated>2021-09-26T00:22:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>Hashcode() vs Equals()</li></ol><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">​​Java equals() and hashCode() methods are present in Object class. So every java class gets the default implementation of equals() and hashCode().</span><br><span class="line"></span><br><span class="line">equals() : This method checks if some other object passed to it as an argument is equal to the object in which this method is invoked. For the original Object.equals function, it returns true if o1 is the same object as o2, otherwise return false.</span><br><span class="line"></span><br><span class="line">hashCode(): This method returns a hashCode() value as an Integer and is supported for the benefit of hashing based Collection classes like Hashtable, HashMap, HashSet etc. If a class overrides the equals() method, it must implement the hashCode() method as well.</span><br><span class="line"></span><br><span class="line">In conclusion, if o1.equals(o2), o1.hashCode() == o2.hashCode(). But if o1.hashCode() == o2.hashCode(), o1.equals(o2) may return false.</span><br></pre></td></tr></table></figure><ol start="2"><li>Override vs Overwrite （存疑）</li></ol><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">In Java, there is no overwrite keyboard, or we can say override is the same conception as overrwrite. Therefore, this is a question for C++.</span><br><span class="line"></span><br><span class="line">For override, it means making a method with virtual keyboard in the base class and the base class allows to the child classes  to make a body of same</span><br><span class="line">method for itself.</span><br><span class="line"></span><br><span class="line">Overwrite means override without virtual keyboard.</span><br><span class="line"></span><br><span class="line">There is another keyboard which is overload. It means making multiple methods with different input parameters.</span><br></pre></td></tr></table></figure><ol start="3"><li>How to make code scalable?</li></ol><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">From the aspect of code, it should be humongous. </span><br><span class="line"></span><br><span class="line">First of all, it should be clear. To make a modification in the code, one has to first understand what is currently doing. So it&#x27;s quite important that &quot;the code should be easy to understand&quot;. There are some methods. For example, using single responsibility pinciple, breaking long methods into single function or simpler methods.</span><br><span class="line"></span><br><span class="line">Secondly, design detailedly before programming. It means &quot;one should not have to rewrite/refactor the old code to add a new feature&quot;. It increases the scope of testing because we need to test the functionality of the old code as we modified it.</span><br><span class="line"></span><br><span class="line">Lastly, the code should be efficient. It means one should be able to make the changes without any effort or without writing a duplicate code anywhere. If a piece of code is written somewhere, one should be able to re-use it instead of copying.</span><br></pre></td></tr></table></figure><ol start="4"><li>Testing tactics you often use in your daily work</li></ol><p>Black-box testing and white-box testing.<br>Black-box testing is also known as </p><ol start="5"><li> Garbage collection vs tradition memory management</li><li>Memory leak</li><li>CPU keep rising but ram maintain the same?</li><li>How to fix slow tests suite -<ul><li>Identify flaky test</li><li>Break the tests suite into several categories</li><li>Mock response/testing data if needed. Reduce the external dependency when it comes to<br> Testing</li><li>Create more unit tests instead of integration test. Reuse dataset for integration test</li></ul></li><li> Difference between inheritance vs composition</li><li>How do you speed up release cycle - Continuous deploymen</li><li>Dependency injection</li><li>What needs to be paying attention to when adding a new class into collection framework</li><li>What is race condition vs deadlock?</li><li>Given a function, when you keep divide by 10 to find out how many digits it has, what’s the time complexity of it? - log</li><li>When does O(nlogm) is faster than O(n+m) - it depends on the the value of m, if m is huge, then obviously the first one is better. Otherwise the second one.</li><li>How to handle thread pool exhaustion - Thread exhaustion happens when you create too many threads to handle requests, which eventually cause taking up too many<br>   Resources.</li><li>How to test web service QPS when it scale up?</li><li>Convert text to bytes and find the sentences between two new lines? What would be the problem?</li><li>Under what circumstance you should not use java garbage collection?</li><li> What are some pros and cons for predefined testing?</li><li> How do you select dataset for testing?</li><li> How do you test a shortest path?</li><li>How to scale up a service from 1 tps to 1000 tps?  Broad questions -<ol><li>Codewise - Find bottleneck and fix it.</li><li>Hardware wise</li></ol></li><li> There are 200 servers with distributed system. There are some random system that would be down during a specific time. Why?</li><li> What is same origin policy? How to overcome?</li><li>The graph is showing you fluctuate 500 errors - Why is that?</li><li>The graph is showing you fluctuate latency time - Why is that</li><li>What is the most important object oriented programming principle for complex system? - Separation of concerns - Make everything one module and start from there</li><li>Choose the most appropriate data structure for each problem type:</li></ol><ul><li>A hierarchical file system model = …………………………</li><li>An undo / redo history in an app = …………………………</li><li>Orders to be processed in-order and sequentially = …………………………</li><li>Boolean option flags in a memory constrained device = …………………………</li></ul><ol start="30"><li>What are some potential reasons that the query is slow?<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Deployment</span><br><span class="line"><span class="keyword">WHERE</span> Deployment.ApplicationId <span class="operator">=</span></span><br><span class="line">    (<span class="keyword">SELECT</span> ApplicationId</span><br><span class="line">     <span class="keyword">FROM</span> Applications</span><br><span class="line">     <span class="keyword">WHERE</span> Name <span class="operator">=</span> params.AppName)</span><br><span class="line">  <span class="keyword">AND</span> Deployment.Timestamp <span class="operator">&lt;</span> params.SinceTime</span><br></pre></td></tr></table></figure></li><li>Your team ‍‍‍‍‌‍‍‍‍‌‍‌‍‍‌‍‍‍‍is building a RESTful API of the following form, that returns the car history given the VIN number (which is a unique identifier of all registered vehicles).</li><li>How would you benchmark the performance and load capacity of this API<br>System design:</li><li>How to show a Facebook post to this person’s friend</li><li>If there are 100 servers running google doc, how do you utilize load balancer - Please talk about load balance strategy.</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ol&gt;
+&lt;li&gt;Hashcode() vs Equals()&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight text&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>LeetCode 664. Strange Printer</title>
-    <link href="https://maye.dev/2021/05/25/LeetCode-664-Strange-Printer/"/>
-    <id>https://maye.dev/2021/05/25/LeetCode-664-Strange-Printer/</id>
-    <published>2021-05-25T11:54:03.000Z</published>
-    <updated>2021-07-03T09:44:09.917Z</updated>
+    <link href="https://maye.dev/LeetCode-664-Strange-Printer/"/>
+    <id>https://maye.dev/LeetCode-664-Strange-Printer/</id>
+    <published>2021-05-26T02:54:03.000Z</published>
+    <updated>2021-05-26T02:54:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p><a href="https://leetcode-cn.com/problems/strange-printer/">LeetCode 664. Strange Printer</a></p><h2 id="1-题目简述"><a href="#1-题目简述" class="headerlink" title="1. 题目简述"></a>1. 题目简述</h2><p>有台奇怪的打印机有以下两个特殊要求：</p><p>打印机每次只能打印由 同一个字符 组成的序列。<br>每次可以在任意起始和结束位置打印新字符，并且会覆盖掉原来已有的字符。<br>给你一个字符串 s ，你的任务是计算这个打印机打印它需要的最少打印次数。</p><p>示例1:<br>    Input: s = “aaabbb”<br>    Output: 2<br>    Explanation: Print “aaa” first and then print “bbb”.</p><p>要求：</p><pre><code>1 &lt;= s.length &lt;= 100s只有小写字母</code></pre><h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><h3 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h3><p>这道题目个人认为比较特殊，它是一个求最小值的问题，有点像dp，但是好像又和dp没什么关系，难以找出表达式。因此需要多复习，想想其状态转移方程的表示方法。</p><p>我们可以注意一下，对于任意一个子字符串s[i, j]，它的最差的打印方式不外乎就是一个个字符去打印，那么，次数最多就是 j - i + 1 次。如何进行优化呢？</p><p>我们发现，如果s[i] == s[j]，那么在最优解的时候，打印i的时候一定可以把j也附带着打印出来，反正中间的部分可以再被覆盖嘛，无所谓的。所以我们令dp[i][j]表示s[i, j]的打印最优解，此时dp[i][j] = dp[i][j - 1]。</p><p>如果s[i] ≠ s[j]，那么也就是说s[i]和s[j]的打印一定是两次独立的打印，那么具体是什么时候，在哪打印呢？我们不清楚。所以对于s[i, j]这个字符串来说，遍历i到j之间所有的位置k作为“分割线”，通过dp[i][k] + dp[k + 1][j]的最小值，也就是整个s[i, j]的最小值（最优打印方法），至于具体怎么打印的，谁在前，谁在后，没有影响的。</p><p>注意：在我们找到了某个s[i, j]的最优打印次数后，s[i][j]的最优打印方法已经确定了，但对于任意一个包含s[i, j]的字符串来说，并不表示s[i, j]的最优打印解，也是它们最优打印解的子集！！！还是要去进行dp计算的！！！</p><h2 id="3-解法"><a href="#3-解法" class="headerlink" title="3. 解法"></a>3. 解法</h2><h3 id="Dynamic-Programming-bottom-up"><a href="#Dynamic-Programming-bottom-up" class="headerlink" title="Dynamic Programming bottom-up"></a><strong>Dynamic Programming bottom-up</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">strangePrinter</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
       
-        
-        
     <summary type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
 
-&lt;h1 id=&quot;Problem&quot;&gt;&lt;a</summary>
-        
+&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#P</summary>
       
     
     
@@ -45,18 +93,17 @@
   
   <entry>
     <title>LeetCode 174. Dungeon Game</title>
-    <link href="https://maye.dev/2021/04/27/LeetCode-174-Dungeon-Game/"/>
-    <id>https://maye.dev/2021/04/27/LeetCode-174-Dungeon-Game/</id>
-    <published>2021-04-27T05:14:24.000Z</published>
-    <updated>2021-06-21T02:26:06.574Z</updated>
+    <link href="https://maye.dev/LeetCode-174-Dungeon-Game/"/>
+    <id>https://maye.dev/LeetCode-174-Dungeon-Game/</id>
+    <published>2021-04-27T20:14:24.000Z</published>
+    <updated>2021-04-27T20:14:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p><a href="https://leetcode.com/problems/dungeon-game/">LeetCode 174. Dungeon Game</a></p><p><a href="https://leetcode-cn.com/problems/dungeon-game/">力扣174. 地下城游戏</a></p><h2 id="1-题目简述"><a href="#1-题目简述" class="headerlink" title="1. 题目简述"></a>1. 题目简述</h2><p>有一个m * n的矩阵，每个格子内有数字（有正有负）。勇士从矩阵的左上角出发，每次只能向右或者向下行动一步，目的地是矩阵右下角。如果要保证到达右下角时，勇士的血量大于0，那么勇士的初始血量最低为多少。</p><p>注:</p><ol><li>骑士的健康点数没有上限。</li><li>任何房间都可能对骑士的健康点数造成威胁，也可能增加骑士的健康点数，包括骑士进入的左上角房间以及公主被监禁的右下角房间。</li></ol><p>例如，考虑到如下布局的地下城，如果骑士遵循最佳路径 右 -&gt; 右 -&gt; 下 -&gt; 下，则骑士的初始健康点数至少为 7。</p><table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td>-2(起点)</td><td>-3</td><td>3</td></tr><tr><td>-5</td><td>-10</td><td>1</td></tr><tr><td>-10</td><td>30</td><td>-5(终点)</td></tr></tbody></table><h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
-        
+    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode.com/problems/dungeon-gam</summary>
       
     
     
@@ -72,10 +119,10 @@
   
   <entry>
     <title>常用语言泛型学习总结</title>
-    <link href="https://maye.dev/2021/04/10/%E5%B8%B8%E7%94%A8%E8%AF%AD%E8%A8%80%E6%B3%9B%E5%9E%8B%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
-    <id>https://maye.dev/2021/04/10/%E5%B8%B8%E7%94%A8%E8%AF%AD%E8%A8%80%E6%B3%9B%E5%9E%8B%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</id>
-    <published>2021-04-10T14:33:34.000Z</published>
-    <updated>2021-04-10T14:33:34.142Z</updated>
+    <link href="https://maye.dev/%E5%B8%B8%E7%94%A8%E8%AF%AD%E8%A8%80%E6%B3%9B%E5%9E%8B%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    <id>https://maye.dev/%E5%B8%B8%E7%94%A8%E8%AF%AD%E8%A8%80%E6%B3%9B%E5%9E%8B%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</id>
+    <published>2021-04-11T05:33:34.000Z</published>
+    <updated>2021-04-11T05:33:34.000Z</updated>
     
     
     
@@ -85,20 +132,19 @@
   
   <entry>
     <title>2021校招</title>
-    <link href="https://maye.dev/2021/03/30/2021%E6%A0%A1%E6%8B%9B/"/>
-    <id>https://maye.dev/2021/03/30/2021%E6%A0%A1%E6%8B%9B/</id>
-    <published>2021-03-30T03:18:41.000Z</published>
-    <updated>2021-06-21T13:50:58.801Z</updated>
+    <link href="https://maye.dev/2021%E6%A0%A1%E6%8B%9B/"/>
+    <id>https://maye.dev/2021%E6%A0%A1%E6%8B%9B/</id>
+    <published>2021-03-30T18:18:41.000Z</published>
+    <updated>2021-03-30T18:18:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><h1 id="国内实习"><a href="#国内实习" class="headerlink" title="国内实习"></a>国内实习</h1><p>由于个人原因，导致暑期可能无法在国内实习，所以就找了少数几个日常实习，暑期实习只面了一个微软。由于我是有全职经验再回学校读书的，所以可能面试内容倾向于项目经验多一点。</p><h2 id="微软-offer"><a href="#微软-offer" class="headerlink" title="微软(offer)"></a>微软(offer)</h2><p>岗位：C+AI Summer Intern</p><h3 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h3><p>面试官小哥人很好，基本上都在交流项目，全程45分钟，聊了37分钟的项目和经历，算法题是比较常规的，而且只描述了思路，并没有实际coding。</p><p>聊项目经验的事情就先pass了，算法题目是<a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">力扣84. 柱状图中最大的矩形</a>，这道题我还没有写题解，写完后会更新上来，这里先简要描述一下思路。</p><p>解法1： 以每个柱形为高，向左向右分别延伸，直到找到第一个比它矮的indexL和indexR，indexR-indexL即为“以当前柱形为高的最大矩形面积”，遍历所有柱形。时间复杂度为O(n^2)。</p><p>解法2：“左侧第一个更矮”和“右侧第一个更矮”，这个算法看起来很熟悉，这里我们可以使用单调栈来进行处理，从左到右过滤一次，从右到左过滤一次，找出每个位置左右第一个更矮的位置。这一步是O(n)的，然后从前至后再扫描一遍数组即可。整体复杂度O(n)。</p><h3 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h3><p>二面的面试官出了两道很有意思的题目，我都没有回答上来，这里记录一下。</p><ol><li>从一个数组中找出最大和最小两个数字，要求<strong>尽可能少的比较次数（不考虑空间问题）</strong>。提示：$\frac{3}{2}n$次。（加减常数也不要考虑了）</li></ol><p>解法：维持两个变量max 和min ，min 标记最小，max标记最大，每次比较相邻两个数，较大者与max比较，较小者与min比较，找出最大最小值，每2个元素比较了3次，总计比较次数为1.5N次。</p><ol start="2"><li>从一个数组中找出最小的两个数字，要求<strong>尽可能少的比较次数（不考虑空间问题）</strong>。提示：$n+log_2^n$次。（加减常数就不要考虑了）</li></ol><p>解法：将数字两两为一组进行比较，每一组筛选出较大的数字和较小的数字，然后将较小的那一组数字进行下一轮的比较，然后进行同样的操作，最终可以选出最小的那个数字，此时，我们总计比较了($1 + 2 + 4 + ….. + \frac{n}{2}$)次，也就是n次。然后第二小的数字，一定是和最小的那个数字比较过，<strong>从和最小的数字比较过的数字中找到最小的数字</strong>，即为第二小的数字。</p><p>算法题：传统的LCS。dp解法，这里就不展开讲了。</p><h3 id="Lead面"><a href="#Lead面" class="headerlink" title="Lead面"></a>Lead面</h3><p>目测是凉了，因为本人是Java选手，C++面经确实一点也没复习，痛了痛了。</p><ol><li>基础题：</li></ol><p>以下代码中二者有什么区别？ a[10]是从栈上分配内存，new是从堆上分配内存。大致明白想考的依图，这样可以聊到C++的内存结构，还有一系列的内容。但是奈何没复习，就直接pass了，不给自己挖坑了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span>* a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br></pre></td></tr></table></figure><ol start="2"><li>算法题：</li></ol><p>题目：给出一棵二叉树，给出其中的两个节点，计算两个节点之间的距离。</p><p>思路：先按照传统的LCA来找到p和q的Lowest Ancestor，再从LCA出发，找到p和q的depth，进行相加。special case就是p和q可能是LCA本身，这里做个判断即可。实现语言为Java。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode left;</span><br><span class="line">    TreeNode right;</span><br><span class="line">    TreeNode() &#123;&#125;;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> val) &#123;<span class="keyword">this</span>.val = val;&#125;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> val, TreeNode left, TreeNode right) &#123;</span><br><span class="line">        <span class="keyword">this</span>.val = val;</span><br><span class="line">        <span class="keyword">this</span>.left = left;</span><br><span class="line">        <span class="keyword">this</span>.righr = right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    TreeNode lowestAncestor = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">distance</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Find the LCA of p and q.</span></span><br><span class="line">        LCA(root, p, q);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Return the distance of these two nodes.</span></span><br><span class="line">        <span class="keyword">if</span> (lowestAncestor == p) &#123;</span><br><span class="line">            <span class="keyword">return</span> findDepth(p, q);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (lowestAncestor == q) &#123;</span><br><span class="line">            <span class="keyword">return</span> findDepth(q, p);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> findDepth(lowestAncestor, p) + findDepth(lowestAncestor, q);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">LCA</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (lowestAncestor != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> left = LCA(root.left, p, q) ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = LCA(root.right, p, q) ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = root == p || root == q ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (left + mid + right &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            lowestAncestor = root;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> (left + mid + right) &gt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">findDepth</span><span class="params">(TreeNode root, TreeNode node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (root == node) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> l = findDepth(root.left, node), r = findDepth(root.right, node);</span><br><span class="line">        <span class="keyword">return</span> Math.max(l, r) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>问：进一步，是否可以将TreeNode优化一下，变成支持子节点可以指向父节点的，可以有什么优化么？</p><p>答：可以用一个hashset记录p的所有ancestors，然后q依次向上去查找ancestor，直到找到第一个ancestor在p所记录的hashset中。</p><p>（算法题结束）</p><ol start="3"><li>设计题：</li></ol><p>这题是真没见过，记录一下给大家提个醒吧。</p><p>题目：给出a，b，c三个大小的水桶，给出一个正整数n，两个问题：（1）写程序判断是否能倒出n升水？（2）如果能倒出，怎么倒？</p><p>答：这是真没见过，见过一次就好了。这题应该用state machine来进行思考，每个水桶的初始状态是一个tuple(a,b,c)，目的是倒出n升水，每一个state都会有一些合法的transition，把这些transition依次遍历，然后递归进行遍历。这里需要用一个set来记录当前路径上的所有state，如果出现了state“回溯”，则也放弃这条分支。直到找到n升水的解决办法。</p><p>注意，这里的n升水，n一定是小于（a,b,c）三者中的最大值的，因为多余的那部分可以用最大的那个桶给直接倒出来，倒$/frac{n}{c}$次。</p><h2 id="字节（offer）"><a href="#字节（offer）" class="headerlink" title="字节（offer）"></a>字节（offer）</h2><h2 id="腾讯（offer）"><a href="#腾讯（offer）" class="headerlink" title="腾讯（offer）"></a>腾讯（offer）</h2>]]></content>
     
     
       
       
-        
-        
     <summary type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
 
-&lt;h1 id=&quot;国内实习&quot;&gt;&lt;a</summary>
-        
+&lt;h1 id=&quot;国内实习&quot;&gt;&lt;a href=&quot;#国内实习</summary>
       
     
     
@@ -114,18 +160,17 @@
   
   <entry>
     <title>hexo搭建个人blog及使用指南</title>
-    <link href="https://maye.dev/2021/03/05/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"/>
-    <id>https://maye.dev/2021/03/05/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</id>
-    <published>2021-03-05T13:07:54.000Z</published>
-    <updated>2021-03-06T14:06:16.824Z</updated>
+    <link href="https://maye.dev/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"/>
+    <id>https://maye.dev/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</id>
+    <published>2021-03-06T05:07:54.000Z</published>
+    <updated>2021-03-06T05:07:54.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Hexo使用过程踩坑记录"><a href="#Hexo使用过程踩坑记录" class="headerlink" title="Hexo使用过程踩坑记录"></a>Hexo使用过程踩坑记录</h2><h3 id="hexo-new-title-时title含有特殊字符无法识别"><a href="#hexo-new-title-时title含有特殊字符无法识别" class="headerlink" title="hexo new title 时title含有特殊字符无法识别"></a>hexo new title 时title含有特殊字符无法识别</h3><p>举个例子，我们想写一篇新的blog叫做”C++指南”的文章，”hexo new C++指南”会出现什么呢？如下：</p><p><img src="/images/hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3pic/hexo-1.jpg" alt="hexo example 1" title="hexo example 1"></p><p>那么如何解决这个问题呢？使用另一种new blog的方式：</p><pre><code>hexo new post &quot;C++指南&quot; -p &quot;C++指南.md&quot;</code></pre><p>完美解决。参考issue： <a href="https://github.com/hexojs/hexo/issues/4104">issue传送门</a></p><h3 id="记录markdown时插入HTML使文字变色"><a href="#记录markdown时插入HTML使文字变色" class="headerlink" title="记录markdown时插入HTML使文字变色"></a>记录markdown时插入HTML使文字变色</h3><pre><code>&lt;font color=12DBF1&gt;Note:&lt;br&gt;1 &lt;= piles.length &lt;= 10^4&lt;br&gt;piles.length &lt;= H &lt;= 10^9&lt;br&gt;1 &lt;= piles[i] &lt;= 10^9&lt;/font&gt;</code></pre><p>效果如下：</p><p><font color=12DBF1>Note:<br><br>1 &lt;= piles.length &lt;= 10^4<br><br>piles.length &lt;= H &lt;= 10^9<br><br>1 &lt;= piles[i] &lt;= 10^9<br></font></p><p>相关HTML颜色代码链接：<a href="https://htmlcolorcodes.com/zh/">颜色代码链接</a></p><p>相关HTML语法链接：<a href="https://www.w3school.com.cn/html/html_tables.asp">W3School HTML</a></p><h3 id="记录markdown时候的一些小语法"><a href="#记录markdown时候的一些小语法" class="headerlink" title="记录markdown时候的一些小语法"></a>记录markdown时候的一些小语法</h3><h4 id="插入另外一篇blog的link"><a href="#插入另外一篇blog的link" class="headerlink" title="插入另外一篇blog的link"></a>插入另外一篇blog的link</h4><p>语法：</p><pre><code>&#123;% post_link markdown的名称(不带.md后缀) 'link显示的名称'%&#125;i.e.: &#123;% post_link LeetCode-46-Permutations '力扣46题'%&#125;</code></pre><p>效果：</p><a href="/LeetCode-46-Permutations/" title="力扣46题">力扣46题</a><h4 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h4><p>语法：</p><pre><code>![Soduku Solution](/images/leetcode37-2.png  &quot;Soduku Solution&quot;)</code></pre><p>效果：</p><p><img src="/images/leetcode37-2.png" alt="Soduku Solution" title="Soduku Solution"></p><h4 id="使用latex公式"><a href="#使用latex公式" class="headerlink" title="使用latex公式"></a>使用latex公式</h4><p>在markdown的最前面加上以下代码：</p><pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;</code></pre><p>效果：$a_x + b = 3$</p>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h2 id=&quot;Hexo使用过程踩坑记录&quot;&gt;&lt;a href=&quot;#Hexo使用过程踩坑记录&quot; class=&quot;headerlink&quot; title=&quot;Hexo使用过程踩坑记录&quot;&gt;&lt;/a&gt;Hexo使用过程踩坑记录&lt;/h2&gt;&lt;h3</summary>
-        
+    <summary type="html">&lt;h2 id=&quot;Hexo使用过程踩坑记录&quot;&gt;&lt;a href=&quot;#Hexo使用过程踩坑记录&quot; class=&quot;headerlink&quot; title=&quot;Hexo使用过程踩坑记录&quot;&gt;&lt;/a&gt;Hexo使用过程踩坑记录&lt;/h2&gt;&lt;h3 id=&quot;hexo-new-title-时title含有特殊</summary>
       
     
     
@@ -139,17 +184,17 @@
   
   <entry>
     <title>C++常用api汇总</title>
-    <link href="https://maye.dev/2021/03/05/C++%E5%B8%B8%E7%94%A8api%E6%B1%87%E6%80%BB/"/>
-    <id>https://maye.dev/2021/03/05/C++%E5%B8%B8%E7%94%A8api%E6%B1%87%E6%80%BB/</id>
-    <published>2021-03-05T13:05:13.000Z</published>
-    <updated>2021-03-06T01:14:26.344Z</updated>
+    <link href="https://maye.dev/C++%E5%B8%B8%E7%94%A8api%E6%B1%87%E6%80%BB/"/>
+    <id>https://maye.dev/C++%E5%B8%B8%E7%94%A8api%E6%B1%87%E6%80%BB/</id>
+    <published>2021-03-06T05:05:13.000Z</published>
+    <updated>2021-03-06T05:05:13.000Z</updated>
     
     
     
-    
-    <category term="总结" scheme="https://maye.dev/categories/%E6%80%BB%E7%BB%93/"/>
     
     <category term="C++" scheme="https://maye.dev/categories/C/"/>
+    
+    <category term="总结" scheme="https://maye.dev/categories/%E6%80%BB%E7%BB%93/"/>
     
     
     <category term="summary" scheme="https://maye.dev/tags/summary/"/>
@@ -158,10 +203,10 @@
   
   <entry>
     <title>特殊算法题</title>
-    <link href="https://maye.dev/2021/02/26/%E7%89%B9%E6%AE%8A%E7%AE%97%E6%B3%95%E9%A2%98/"/>
-    <id>https://maye.dev/2021/02/26/%E7%89%B9%E6%AE%8A%E7%AE%97%E6%B3%95%E9%A2%98/</id>
-    <published>2021-02-26T05:50:18.000Z</published>
-    <updated>2021-02-26T05:50:18.558Z</updated>
+    <link href="https://maye.dev/%E7%89%B9%E6%AE%8A%E7%AE%97%E6%B3%95%E9%A2%98/"/>
+    <id>https://maye.dev/%E7%89%B9%E6%AE%8A%E7%AE%97%E6%B3%95%E9%A2%98/</id>
+    <published>2021-02-26T21:50:18.000Z</published>
+    <updated>2021-02-26T21:50:18.000Z</updated>
     
     
     
@@ -171,18 +216,17 @@
   
   <entry>
     <title>计算机网络面试知识点</title>
-    <link href="https://maye.dev/2021/02/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
-    <id>https://maye.dev/2021/02/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
-    <published>2021-02-26T05:33:50.000Z</published>
-    <updated>2021-02-27T16:03:14.400Z</updated>
+    <link href="https://maye.dev/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    <id>https://maye.dev/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
+    <published>2021-02-26T21:33:50.000Z</published>
+    <updated>2021-02-26T21:33:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="计算机网络面试知识点"><a href="#计算机网络面试知识点" class="headerlink" title="计算机网络面试知识点"></a>计算机网络面试知识点</h1><p>备注：应该把CS438的手写笔记重新整理一遍的。。。拖延症啊拖延症。</p><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>五层：应用层，传输层，网络层，链接层，物理层</p><p>问TCP/IP协议族就是问</p><h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><h3 id="HTTPS的CA证书认证过程"><a href="#HTTPS的CA证书认证过程" class="headerlink" title="HTTPS的CA证书认证过程"></a>HTTPS的CA证书认证过程</h3><p>大致过程：</p><ol><li>浏览器从服务器拿到证书。证书上有服务器的公钥和CA机构打上的数字签名。</li><li>拿到证书后验证其数字签名。具体就是，根据证书上写的CA签发机构，在浏览器内置的根证书里找到对应的公钥，用此公钥解开数字签名，得到摘要（digest,证书内容的hash值），据此验证证书的合法性。</li></ol><p>多说两句https接下来的加密过程：</p><ol><li>验证完合法性后，在证书里取出服务器的公钥。浏览器生成对称密钥。</li><li>使用服务器公钥对该对称密钥加密，发回给服务器。服务器使用私钥解密，得到对称密钥。</li><li>服务器使用该对称密钥加密后续http数据。使用对称密钥加密是因为比非对称加密高效。</li></ol><h3 id="HTTP和HTTPS的区别"><a href="#HTTP和HTTPS的区别" class="headerlink" title="HTTP和HTTPS的区别"></a>HTTP和HTTPS的区别</h3><ol><li><p>端口 :HTTP默认使用端口80，而HTTPS默认使用端口443。</p></li><li><p>安全性和资源消耗: HTTP协议运行在TCP之上，所有传输的内容都是明文，客户端和服务器端都 无法验证对方的身份。HTTPS是运行在SSL/TLS之上的HTTP协议，SSL/TLS 运行在TCP之上。所有 传输的内容都经过加密，加密采用对称加密，但对称加密的密钥用服务器方的证书进行了非对称 加密。所以说，HTTP 安全性没有 HTTPS高，但是 HTTPS 比HTTP耗费更多服务器资源。</p><p> 对称加密:密钥只有一个，加密解密为同一个密码，且加解密速度快，典型的对称加密 算法有DES、AES等; </p><p> 非对称加密:密钥成对出现(且根据公钥无法推知私钥，根据私钥也无法推知公钥)， 加密解密使用不同密钥(公钥加密需要私钥解密，私钥加密需要公钥解密)，相对对称 加密速度􏰃慢，典型的非对称加密算法有RSA、DSA等。</p></li></ol><h3 id="在浏览器中输入url地址-gt-gt-显示主⻚的过程"><a href="#在浏览器中输入url地址-gt-gt-显示主⻚的过程" class="headerlink" title="在浏览器中输入url地址 -&gt;&gt; 显示主⻚的过程"></a>在浏览器中输入url地址 -&gt;&gt; 显示主⻚的过程</h3><ol><li>DNS解析</li><li>TCP连接</li><li>发送HTTP请求</li><li>服务器处理请求并返回HTTP报文</li><li>浏览器解析渲染⻚面</li><li>连接结束</li></ol><h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><h3 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h3><ol><li>基于连接和无连接；</li><li>TCP是可靠，保证数据正确；UDP不可靠，不保证数据正确；</li><li>TCP保证数据顺序到达；UDP不保证数据顺序到达；</li><li>TCP速度慢，因为TCP必须创建连接；UDP速度较快，不需要建立连接；</li><li>因为上述开销，TCP是一个重量级协议；UDP是一个轻量级的协议；</li><li>一个TCP数据包报头的大小是20字节；一个UDP数据报报头是8个字节；</li><li>TCP有流量控制和拥塞控制；UDP不能进行流量控制；</li><li>TCP面向字节流；UDP面向报文；</li><li>应用场景不同，TCP适合对效率要求相对低，但对准确性要求相对高或者是有连接的场景，TCP一般用于文件传输（HTTP，HTTPS，FTP等协议），邮件（POP，SMTP等协议），远程登录等场景；UDP更适合对效率要求相对高，对准确性要求相对低的场景，UDP一般用于即时通信（QQ聊天），在线视频（rtsp流速度一定要快，偶尔丢包没关系），网络语音电话等场景；</li></ol><h3 id="TCP为什么不能有两次握手"><a href="#TCP为什么不能有两次握手" class="headerlink" title="TCP为什么不能有两次握手"></a>TCP为什么不能有两次握手</h3><p>因为需要同步好起始的seq number。注意这里关于序列号的问题，抽空自己总结一下。详见<a href="https://blog.csdn.net/lengxiao1993/article/details/82771768">传送门</a>。</p><h3 id="TCP为什么不能只有三次挥手"><a href="#TCP为什么不能只有三次挥手" class="headerlink" title="TCP为什么不能只有三次挥手"></a>TCP为什么不能只有三次挥手</h3><p>因TCP是全双工的，当FIN接收方收到时，还有可能继续发送信息，所以，中间的那两次不能合并。</p><h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p>网络层内容看这篇Blog就够了。<a href="https://manistein.github.io/blog/post/network/%E6%95%B0%E6%8D%AE%E5%8C%85%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%B1%82%E4%B8%AD%E7%9A%84%E4%BC%A0%E8%BE%93/">传送门</a></p><p>网络层呢，干的事情主要是有两个，一个是Routing，一个是Forwarding。相关协议有NAT协议，ICMP协议，BGP协议，RIP协议，OSPF协议。</p><h2 id="链接层（待完善，这里先写点大概）"><a href="#链接层（待完善，这里先写点大概）" class="headerlink" title="链接层（待完善，这里先写点大概）"></a>链接层（待完善，这里先写点大概）</h2><p>链接层主要做的事情就是把network层规划好的内容，具体实际应该是如何传输的。我们如何把一个packet传到下一站？</p><h3 id="IP层包的格式（datagram）"><a href="#IP层包的格式（datagram）" class="headerlink" title="IP层包的格式（datagram）"></a>IP层包的格式（datagram）</h3><h3 id="ARP协议（Address-Resolution-Protocol）"><a href="#ARP协议（Address-Resolution-Protocol）" class="headerlink" title="ARP协议（Address Resolution Protocol）"></a>ARP协议（Address Resolution Protocol）</h3><p>这个协议主要是把IP地址转化为MAC address，A维护一个ARP table，然后broadcast一个ARP query包，这个包包含了B的IP，如果把Dest MAC address设为FF-FF-FF-FF-FF-FF，那么所有的人都收到这个ARP包，如果B收到了ARP包以后，发现自己符合要求，就返回一个包含了自己MAC address的内容回去。（具体如何防止攻击这个没考虑过）</p><h3 id="MAC-Protocol"><a href="#MAC-Protocol" class="headerlink" title="MAC Protocol"></a>MAC Protocol</h3><p>这个就分为很多种了。</p><h4 id="Channel-Partitioning"><a href="#Channel-Partitioning" class="headerlink" title="Channel Partitioning"></a>Channel Partitioning</h4><p>FDMA，TDMA。分时复用或者分频复用。以及其他。</p><h4 id="Random-Partitioning"><a href="#Random-Partitioning" class="headerlink" title="Random Partitioning"></a>Random Partitioning</h4><p>比如ALOHA，slotted ALOHA，CSMA/CD算法，目的是找到碰撞，然后把包发出去。更加难的是wireless的情况下是如何发包的。CSMA/CD的那个状态转换图。</p><h4 id="Taking-Turns"><a href="#Taking-Turns" class="headerlink" title="Taking Turns"></a>Taking Turns</h4><p>大家用一个key去轮流发。</p>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h1 id=&quot;计算机网络面试知识点&quot;&gt;&lt;a href=&quot;#计算机网络面试知识点&quot; class=&quot;headerlink&quot;</summary>
-        
+    <summary type="html">&lt;h1 id=&quot;计算机网络面试知识点&quot;&gt;&lt;a href=&quot;#计算机网络面试知识点&quot; class=&quot;headerlink&quot; title=&quot;计算机网络面试知识点&quot;&gt;&lt;/a&gt;计算机网络面试知识点&lt;/h1&gt;&lt;p&gt;备注：应该把CS438的手写笔记重新整理一遍的。。。拖延症啊拖延症。&lt;/p&gt;</summary>
       
     
     
@@ -196,18 +240,17 @@
   
   <entry>
     <title>数据库面试知识点</title>
-    <link href="https://maye.dev/2021/02/26/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
-    <id>https://maye.dev/2021/02/26/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
-    <published>2021-02-26T05:33:34.000Z</published>
-    <updated>2021-02-27T10:35:13.405Z</updated>
+    <link href="https://maye.dev/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    <id>https://maye.dev/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
+    <published>2021-02-26T21:33:34.000Z</published>
+    <updated>2021-02-26T21:33:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="数据库面试知识点（未完待续）"><a href="#数据库面试知识点（未完待续）" class="headerlink" title="数据库面试知识点（未完待续）"></a>数据库面试知识点（未完待续）</h1><h2 id="通用基础"><a href="#通用基础" class="headerlink" title="通用基础"></a>通用基础</h2><h3 id="事务与隔离级别"><a href="#事务与隔离级别" class="headerlink" title="事务与隔离级别"></a>事务与隔离级别</h3><h4 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h4><p>ACID：原子性（要么做了，要么没做），一致性（多个事务对同一数据读出结果相同），隔离性（事务之间不会相互影响），持久性（事务被提交后，修改是永久的）。</p><h4 id="并发事务导致问题"><a href="#并发事务导致问题" class="headerlink" title="并发事务导致问题"></a>并发事务导致问题</h4><p><strong>脏读(Dirty read):</strong> 当一个事务正在访问数据并且对数据进行了修改，而这种修改还没有提交 到数据库中，这时另外一个事务也访问了这个数据，然后使用了这个数据。因为这个数据是还没 有提交的数据，那么另外一个事务读到的这个数据是“脏数据”，依据“脏数据”所做的操作可能是 不正确的。</p><p><strong>丢失修改(Lost to modify):</strong> 指在一个事务读取一个数据时，另外一个事务也访问了该数据， 那么在第一个事务中修改了这个数据后，第二个事务也修改了这个数据。这样第一个事务内的修 改结果就被丢失，因此称为丢失修改。 例如:事务1读取某表中的数据A=20，事务2也读取 A=20，事务1修改A=A-1，事务2也修改A=A-1，最终结果A=19，事务1的修改被丢失。 </p><p><strong>不可重复读(Unrepeatableread):</strong> 指在一个事务内多次读同一数据。在这个事务还没有结束 时，另一个事务也访问该数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修 改导致第一个事务两次读取的数据可能不太一样。这就发生了在一个事务内两次读到的数据是不 一样的情况，因此称为不可重复读。</p><p><strong>幻读(Phantom read):</strong> 幻读与不可重复读类似。它发生在一个事务(T1)读取了几行数据，接 着另一个并发事务(T2)插入了一些数据时。在随后的查询中，第一个事务(T1)就会发现多了 一些原本不存在的记录，就好像发生了幻觉一样，所以称为幻读。</p><p><strong>注意不可重复读和幻读区别:</strong> 不可重复读的重点是修改比如多次读取一条记录发现其中某些列的值被修改，幻读的重点在于新增或者 删除比如多次读取一条记录发现记录增多或减少了</p><h4 id="SQL事务四大隔离级别"><a href="#SQL事务四大隔离级别" class="headerlink" title="SQL事务四大隔离级别"></a>SQL事务四大隔离级别</h4><ol><li>READ-UNCOMMITTED(读取未提交): 最低的隔离级别，允许读取尚未提交的数据变更，可能会导 致脏读、幻读或不可重复读。</li><li>READ-COMMITTED(读取已提交): 允许读取并发事务已经提交的数据，可以阻止脏读，但是幻读 或不可重复读仍有可能发生。</li><li>REPEATABLE-READ(可重复读): <strong>对同一字段的多次读取结果都是一致的</strong>，除非数据是被本身事务 自己所修改，<strong>可以阻止脏读和不可重复读，但幻读仍有可能发生</strong>。</li><li>SERIALIZABLE(可串行化): 最高的隔离级别，完全服从ACID的隔离级别。所有的事务依次逐个 执行，这样事务之间就完全不可能产生干扰，也就是说，该级别可以防止脏读、不可重复读以及 幻读。</li></ol><h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>关于锁的内容，可以参见这篇Blog：<a href="https://blog.csdn.net/qq_34337272/article/details/80611486">传送门</a></p><h4 id="锁的分类"><a href="#锁的分类" class="headerlink" title="锁的分类"></a>锁的分类</h4><p>表级锁，行级锁，页级锁。</p><p>页级锁： MySQL中锁定粒度介于行级锁和表级锁中间的一种锁。表级锁速度快，但冲突多，行级冲突少，但速度慢。页级进行了折衷，一次锁定相邻的一组记录。开销和加锁时间界于表锁和行锁之间，会出现死锁。锁定粒度介于表锁和行锁之间，并发度一般。</p><p>MyISAM采用表级锁(table-level locking)。 InnoDB支持行级锁(row-level locking)和表级锁,默认为行级锁。</p><p>InnoDB实现行级锁的的三种方式：</p><ol><li>Record Lock: 对索引项加锁，锁定符合条件的行。其他事务不能修改和删除加锁项；</li><li>Gap Lock: 对索引项之间的“间隙”加锁，锁定记录的范围（对第一条记录前的间隙或最后一条将记录后的间隙加锁），不包含索引项本身。其他事务不能在锁范围内插入数据，这样就防止了别的事务新增幻影行（<strong>但不能阻止减少</strong>）。</li><li>Next-key Lock： 锁定索引项本身和索引范围。即Record Lock和Gap Lock的结合。可解决幻读问题。</li></ol><p>备注：InnoDB的行级锁是基于索引实现的，如果查询语句为命中任何索引，那么InnoDB会使用表级锁. 此外，InnoDB的行级锁是针对索引加的锁，不针对数据记录，因此即使访问不同行的记录，如果使用了相同的索引键仍然会出现锁冲突，</p><h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>其实关于索引的内容有很多，包括二级索引，辅助索引等，这篇文章洗的十分全面，有时间详细研读一下。关于索引的详解：<a href="https://blog.csdn.net/universsky2015/article/details/102712058">索引详解</a></p><ol><li>聚簇索引：将数据存储与索引放到了一块，找到索引也就找到了数据</li><li>非聚簇索引：数据存储和索引分开放，索引结构的叶子节点指向了数据的对应行，myisam通过 key_buffer 把索引先缓存到内存中，当需要访问数据时（通过索引访问数据），在内存中直接搜索索引，然后通过索引找到磁盘相应数据，这也就是为什么索引不在 key buffer 命中时，速度慢的原因（磁盘 IO）。</li></ol><h4 id="InnoDB的索引"><a href="#InnoDB的索引" class="headerlink" title="InnoDB的索引"></a>InnoDB的索引</h4><p>InnoDB使用的是聚簇索引，将主键组织到一棵B+树中，而行数据就储存在叶子节点上，若使用”where id = 14”这样的条件查找主键，则按照B+树的检索算法即可查找到对应的叶节点，之后获得行数据。</p><p>若对Name列进行条件搜索，则需要两个步骤：<strong>第一步在辅助索引B+树中检索Name，到达其叶子节点获取对应的主键。第二步使用主键在主索引B+树种再执行一次B+树检索操作，最终到达叶子节点即可获取整行数据。（重点在于通过其他键需要建立辅助索引）</strong>。</p><p>聚簇索引默认是主键，如果表中没有定义主键，InnoDB 会选择一个唯一的非空索引代替。如果没有这样的索引，InnoDB 会隐式定义一个主键来作为聚簇索引。InnoDB 只聚集在同一个页面中的记录。包含相邻健值的页面可能相距甚远。</p><h4 id="MyISM的索引"><a href="#MyISM的索引" class="headerlink" title="MyISM的索引"></a>MyISM的索引</h4><p>MyISM使用的是非聚簇索引，非聚簇索引的两棵B+树看上去没什么不同，节点的结构完全一致只是存储的内容不同而已，主键索引B+树的节点存储了主键，辅助键索引B+树存储了辅助键。表数据存储在独立的地方，这两颗B+树的叶子节点都使用一个地址指向真正的表数据，对于表数据来说，这两个键没有任何差别。由于索引树是独立的，通过辅助键检索无需访问主键的索引树。</p><h4 id="索引采用B-树的原因"><a href="#索引采用B-树的原因" class="headerlink" title="索引采用B+树的原因"></a>索引采用B+树的原因</h4><p>B+树只有叶节点存放数据，其余节点用来索引，而B-树是每个索引节点都会有Data域。所以从Mysql（Inoodb）的角度来看，B+树是用来充当索引的，一般来说索引非常大，尤其是关系性数据库这种数据量大的索引能达到亿级别，所以为了减少内存的占用，索引也会被存储在磁盘上。</p><p>那么Mysql如何衡量查询效率呢？– 磁盘IO次数。 B-树/B+树 的特点就是每层节点数目非常多，层数很少，目的就是为了就少磁盘IO次数，但是B-树的每个节点都有data域（指针），这无疑增大了节点大小，说白了增加了磁盘IO次数（磁盘IO一次读出的数据量大小是固定的，单个数据变大，每次读出的就少，IO次数增多，一次IO多耗时），而B+树除了叶子节点其它节点并不存储数据，节点小，磁盘IO次数就少。这是优点之一。</p><p>另一个优点是： B+树所有的Data域在叶子节点，一般来说都会进行一个优化，就是将所有的叶子节点用指针串起来。这样遍历叶子节点就能获得全部数据，这样就能进行区间访问啦。在数据库中基于范围的查询是非常频繁的，而B树不支持这样的遍历操作。</p><p>AVL 树和红黑树基本都是存储在内存中才会使用的数据结构。在大规模数据存储的时候，红黑树往往出现由于树的深度过大而造成磁盘IO读写过于频繁，进而导致效率低下的情况。</p><h4 id="补充面试题"><a href="#补充面试题" class="headerlink" title="补充面试题"></a>补充面试题</h4><ol><li>怎么样确定使用到了索引？通过Explain语句查看是否使用到了索引。</li></ol>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h1 id=&quot;数据库面试知识点（未完待续）&quot;&gt;&lt;a href=&quot;#数据库面试知识点（未完待续）&quot; class=&quot;headerlink&quot; title=&quot;数据库面试知识点（未完待续）&quot;&gt;&lt;/a&gt;数据库面试知识点（未完待续）&lt;/h1&gt;&lt;h2 id=&quot;通用基础&quot;&gt;&lt;a</summary>
-        
+    <summary type="html">&lt;h1 id=&quot;数据库面试知识点（未完待续）&quot;&gt;&lt;a href=&quot;#数据库面试知识点（未完待续）&quot; class=&quot;headerlink&quot; title=&quot;数据库面试知识点（未完待续）&quot;&gt;&lt;/a&gt;数据库面试知识点（未完待续）&lt;/h1&gt;&lt;h2 id=&quot;通用基础&quot;&gt;&lt;a href=&quot;#通</summary>
       
     
     
@@ -221,18 +264,17 @@
   
   <entry>
     <title>操作系统面试知识点</title>
-    <link href="https://maye.dev/2021/02/26/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
-    <id>https://maye.dev/2021/02/26/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
-    <published>2021-02-26T05:33:27.000Z</published>
-    <updated>2021-02-27T15:05:30.612Z</updated>
+    <link href="https://maye.dev/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    <id>https://maye.dev/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
+    <published>2021-02-26T21:33:27.000Z</published>
+    <updated>2021-02-26T21:33:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="操作系统知识点总结"><a href="#操作系统知识点总结" class="headerlink" title="操作系统知识点总结"></a>操作系统知识点总结</h1><h2 id="进程线程"><a href="#进程线程" class="headerlink" title="进程线程"></a>进程线程</h2><h3 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h3>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h1 id=&quot;操作系统知识点总结&quot;&gt;&lt;a href=&quot;#操作系统知识点总结&quot; class=&quot;headerlink&quot; title=&quot;操作系统知识点总结&quot;&gt;&lt;/a&gt;操作系统知识点总结&lt;/h1&gt;&lt;h2 id=&quot;进程线程&quot;&gt;&lt;a href=&quot;#进程线程&quot;</summary>
-        
+    <summary type="html">&lt;h1 id=&quot;操作系统知识点总结&quot;&gt;&lt;a href=&quot;#操作系统知识点总结&quot; class=&quot;headerlink&quot; title=&quot;操作系统知识点总结&quot;&gt;&lt;/a&gt;操作系统知识点总结&lt;/h1&gt;&lt;h2 id=&quot;进程线程&quot;&gt;&lt;a href=&quot;#进程线程&quot; class=&quot;headerli</summary>
       
     
     
@@ -246,18 +288,17 @@
   
   <entry>
     <title>Java面试知识点</title>
-    <link href="https://maye.dev/2021/02/26/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
-    <id>https://maye.dev/2021/02/26/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
-    <published>2021-02-26T05:33:05.000Z</published>
-    <updated>2021-03-02T06:02:11.763Z</updated>
+    <link href="https://maye.dev/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    <id>https://maye.dev/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
+    <published>2021-02-26T21:33:05.000Z</published>
+    <updated>2021-02-26T21:33:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Java面试知识点总结"><a href="#Java面试知识点总结" class="headerlink" title="Java面试知识点总结"></a>Java面试知识点总结</h1><p>参考：<a href="https://github.com/Snailclimb/JavaGuide">JavaGuide</a></p><h2 id="JVM相关"><a href="#JVM相关" class="headerlink" title="JVM相关"></a>JVM相关</h2><h3 id="JVM的内存分布"><a href="#JVM的内存分布" class="headerlink" title="JVM的内存分布"></a>JVM的内存分布</h3><p>JVM 内存区域主要分为线程私有区域【程序计数器、虚拟机栈、本地方法区】、线程共享区域【JAVA 堆、方法区】、直接内存。</p><h3 id="JVM-GC相关"><a href="#JVM-GC相关" class="headerlink" title="JVM GC相关"></a>JVM GC相关</h3><h3 id="Java类加载机制"><a href="#Java类加载机制" class="headerlink" title="Java类加载机制"></a>Java类加载机制</h3><h4 id="Java类加载过程"><a href="#Java类加载过程" class="headerlink" title="Java类加载过程"></a>Java类加载过程</h4><h4 id="Java类加载模型——双亲委派模型"><a href="#Java类加载模型——双亲委派模型" class="headerlink" title="Java类加载模型——双亲委派模型"></a>Java类加载模型——双亲委派模型</h4><p>当一个类收到了类加载请求，他首先不会尝试自己去加载这个类，而是把这个请求委派给父类去完成，每一个层次类加载器都是如此，因此所有的加载请求都应该传送到启动类加载其中，只有当父类加载器反馈自己无法完成这个请求的时候(在它的加载路径下没有找到所需加载的Class)，子类加载器才会尝试自己去加载。</p><p>采用双亲委派的一个好处是比如加载位于 rt.jar 包中的类 java.lang.Object，不管是哪个加载器加载这个类，最终都是委托给顶层的启动类加载器进行加载，这样就保证了使用不同的类加载器最终得到的都是同样一个 Object 对象。</p><h2 id="关键字相关"><a href="#关键字相关" class="headerlink" title="关键字相关"></a>关键字相关</h2><h3 id="关于-final-关键字的一些总结"><a href="#关于-final-关键字的一些总结" class="headerlink" title="关于 final 关键字的一些总结"></a>关于 final 关键字的一些总结</h3><p>final 关键字主要用在三个地方:变量、方法、类。</p><ol><li>对于一个 final 变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改; 如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。</li><li>当用 final 修饰一个类时，表明这个类不能被继承。final 类中的所有成员方法都会被隐式地 指定为 final 方法。</li><li>使用 final 方法的原因有两个。第一个原因是把方法锁定，以防任何继承类修改它的含义;第 二个原因是效率。在早期的 Java 实现版本中，会将 final 方法转为内嵌调用。但是如果方法 过于庞大，可能看不到内嵌调用带来的任何性能提升(现在的 Java 版本已经不需要使用 final 方法进行这些优化了)。类中所有的 private 方法都隐式地指定为 final。</li></ol><h3 id="与-equals"><a href="#与-equals" class="headerlink" title="== 与 equals"></a>== 与 equals</h3><p>==: 它的作用是判断两个对象的地址是不是相等。即，判断两个对象是不是同一个对象(基本数据类型比较的是值，引用数据类型比较的是内存地址)。</p><p>equals() : 它的作用也是判断两个对象是否相等。但它一般有两种使用情况:</p><ol><li>情况 1:类没有覆盖 equals() 方法。则通过 equals() 比􏰃该类的两个对象时，等价于通过 “WX”比􏰃这两个对象。</li><li>情况 2:类覆盖了 equals() 方法。一般，我们都覆盖 equals() 方法来比􏰃两个对象的内容是 否相等;若它们的内容相等，则返回 true (即，认为这两个对象相等)。</li></ol><h3 id="hashCode-与-equals"><a href="#hashCode-与-equals" class="headerlink" title="hashCode 与 equals"></a>hashCode 与 equals</h3><p><a href="https://stackoverflow.com/questions/1894377/understanding-the-workings-of-equals-and-hashcode-in-a-hashmap">超强总结（附源码）</a></p><p>hashCode() 的作用是获取哈希码，也称为散列码;它实际上是返回一个 int 整数。这个哈希码的作用 是确定该对象在哈希表中的索引位置。hashCode() 定义在 JDK 的 Object.java 中，这就意味着 Java 中的任何类都包含有 hashCode() 函数。</p><p>我们先以“HashSet 如何检查重复”为例子来说明为什么要有 hashCode: 当你把对象加入 HashSet 时，HashSet 会先计算对象的 hashcode 值来判断对象加入的位置，同时也会与该位置其他已经加入的对象的 hashcode 值作比较，如果没有相符的 hashcode，HashSet 会假设对象没有重复出现。但是如 果发现有相同 hashcode 值的对象，这时会调用 equals() 方法来检查 hashcode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作成功。如果不同的话，就会重新散列到其他位置。这样我们就大大减少了 equals 的次数，相应就大大提高了执行速度。</p><h3 id="synchronized和ReentrantLock-的区别"><a href="#synchronized和ReentrantLock-的区别" class="headerlink" title="synchronized和ReentrantLock 的区别"></a>synchronized和ReentrantLock 的区别</h3><p><strong>相同点：</strong>两者都是可重入锁，“可重入锁”概念是:自己可以再次获取自己的内部锁。比如一个线程获得了某个对 象的锁，此时这个对象锁还没有释放，当其再次想要获取这个对象的锁的时候还是可以获取的，如果不 可锁重入的话，就会造成死锁。同一个线程每次获取可重入锁，锁的计数器都自增1，所以要等到锁的计数器 下降为0时才能释放锁。</p><p><strong>不同点</strong>：</p><ol><li><strong>synchronized 依赖于 JVM 而 ReentrantLock 依赖于 API。</strong> 准确来说，synchronized是一个关键字，是从JVM层面来支持的；但是ReentrantLock是一个类，是一个API，通过lock和unlock来实现的。</li><li><strong>ReentrantLock 比 synchronized 增加了一些高级功能</strong> 。<br> ReentrantLock提供了一种能够中断等待锁的线程的机制。通过lock.lockInterruptibly()来实现这个机制。也就是说正在等待的线程可以选择放弃等待，改为处理其他事情。<br> ReentrantLock可以指定是公平锁还是非公平锁。而synchronized只能是非公平锁。所谓的公平 锁就是先等待的线程先获得锁。<br> 选择性通知。自己没写过，不再详细赘述。</li></ol><h3 id="CAS（Compare-and-Swap）和synchronize有什么区别-都用synchronize不行么"><a href="#CAS（Compare-and-Swap）和synchronize有什么区别-都用synchronize不行么" class="headerlink" title="CAS（Compare and Swap）和synchronize有什么区别?都用synchronize不行么?"></a>CAS（Compare and Swap）和synchronize有什么区别?都用synchronize不行么?</h3><p>CAS是乐观锁，不需要阻塞，硬件级 别实现的原子性;synchronize会阻塞，JVM级别实现的原子性。使用场景不同，线程冲突严重时 CAS会造成CPU压力过大，导致吞吐量下降，synchronize的原理是先自旋然后阻塞，线程冲突严 重仍然有􏰃高的吞吐量，因为线程都被阻塞了，不会占用CPU。</p><h2 id="Java类相关"><a href="#Java类相关" class="headerlink" title="Java类相关"></a>Java类相关</h2><h3 id="String-StringBuffer-和-StringBuilder-的区别是什么"><a href="#String-StringBuffer-和-StringBuilder-的区别是什么" class="headerlink" title="String StringBuffer 和 StringBuilder 的区别是什么?"></a>String StringBuffer 和 StringBuilder 的区别是什么?</h3><p><strong>线程安全性：</strong><br>String 中的对象是不可变的，也就可以理解为常量，线程安全。AbstractStringBuilder 是 StringBuilder 与 StringBuffer 的公共父类，定义了一些字符串的基本操作，如 expandCapacity、 append、insert、indexOf 等公共方法。StringBuffer 对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder 并没有对方法进行加同步锁，所以是非线程安全的。</p><p><strong>性能：</strong><br>每次对 String 类型进行改变的时候，都会生成一个新的 String 对象，然后将指针指向新的 String 对象。StringBuffer 每次都会对 StringBuffer 对象本身进行操作，而不是生成新的对象并改变对象 引用。相同情况下使用 StringBuilder 相比使用 StringBuffer 仅能获得 10%~15% 左右的性能提升， 但却要冒多线程不安全的⻛险。</p><h3 id="（重点）HashMap，HashTable和ConcurrentHashMap"><a href="#（重点）HashMap，HashTable和ConcurrentHashMap" class="headerlink" title="（重点）HashMap，HashTable和ConcurrentHashMap"></a>（重点）HashMap，HashTable和ConcurrentHashMap</h3><h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p><strong>特性:</strong> 非线程安全，支持NULL为key，扩容每次都是double（和hash算法有关），负载因子是0.75.</p><ol><li>Java 7实现方式： 数组+链表</li><li>Java 8实现方式： 最大的不同就是利用了红黑树，所以其由 数组+链表+红黑树 组成。根据 Java7 HashMap 的介绍，我们知道，查找的时候，根据 hash 值我们能够快速定位到数组的具体下标，但是之后的话，需要顺着链表一个个比较下去才能找到我们需要的，时间复杂度取决于链表的长度，为 O(n)。为了降低这部分的开销，在 Java8 中，当链表中的元素超过了 8 个以后，会将链表转换为红黑树，在这些位置进行查找的时候可以降低时间复杂度为 O(logN)。</li></ol><h4 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h4><p>Hashtable 是遗留类，很多映射的常用功能与 HashMap 类似，不同的是它承自 Dictionary 类，并且是线程安全的，任一时间只有一个线程能写 Hashtable，并发性不如 ConcurrentHashMap，因为 ConcurrentHashMap 引入了分段锁。Hashtable 不建议在新代码中使用，不需要线程安全的场合可以用 HashMap 替换，需要线程安全的场合可以用 ConcurrentHashMap 替换。</p><h4 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h4><p>涉及知识点：可重入锁，自旋锁……(To be continued)</p><p><strong>特性</strong>：线程安全，ConcurrentHashMap是一个 Segment 数组，Segment 通过继承 ReentrantLock 来进行加锁，所以每次需要加锁的操作锁住的是一个 segment，这样只要保证每 个 Segment 是线程安全的，也就实现了全局的线程安全。Segment默认为16.</p><ol><li>Java 7实现方式： 数组+链表</li><li>Java 8实现方式： 与HashMap类似引入红黑树。且是使用synchronized+CAS，取消了ReentrantLock。</li></ol><p>补充：</p><pre><code>1. get需要加锁么，为什么? (不用，volatile关键字)</code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="BIO-NIO-AIO-有什么区别"><a href="#BIO-NIO-AIO-有什么区别" class="headerlink" title="BIO,NIO,AIO 有什么区别?"></a>BIO,NIO,AIO 有什么区别?</h3><p>相关知识点：select， poll， epoll</p><ol><li><strong>BIO (Blocking I/O):</strong> 同步阻塞 I/O 模式。最传统的一种 IO 模型，即在读写数据过程中会发生阻塞现象。当用户线程发出 IO 请求之后，内核会去查看数据是否就绪，如果没有就绪就会等待数据就绪，而用户线程就会处于阻塞状态，用 户线程交出 CPU。当数据就绪之后，内核会将数据拷贝到用户线程，并返回结果给用户线程，用户线程才解除 block 状态。典型的阻塞 IO 模型的例子为:data = socket.read();如果数据没有就绪，就会一直阻塞在 read 方法。</li><li><strong>NIO (Non-blocking/New I/O):</strong> NIO 是一种同步非阻塞的 I/O 模型。当用户线程发起一个 read 操作后，并不需要等待，而是马上就得到了一个结果。如果结果是一个 error 时，它就知道数据还没有准备好，于是它可以再次发送 read 操作。一旦内核中的数据准备 好了，并且又再次收到了用户线程的请求，那么它马上就将数据拷贝到了用户线程，然后返回。 所以事实上，在非阻塞 IO 模型中，用户线程需要不断地询问内核数据是否就绪，也就说非阻塞 IO 不会交出 CPU，而会一直占用 CPU。</li><li><strong>多路复用 IO 模型：</strong>是目前使用得比较多的模型。Java NIO 实际上就是多路复用 IO。在多路复用 IO 模型中，会有一个线程不断去轮询多个 socket 的状态，只有当 socket 真正有读写事件时，才真 正调用实际的 IO 读写操作。因为在多路复用 IO 模型中，只需要使用一个线程就可以管理多个 socket，系统不需要建立新的进程或者线程，也不必维护这些线程和进程，并且只有在真正有 socket 读写事件进行时，才会使用 IO 资源，所以它大大减少了资源占用。在 Java NIO 中，是通 过 selector.select()去查询每个通道是否有到达事件，如果没有事件，则一直阻塞在那里，因此这 种方式会导致用户线程的阻塞。多路复用 IO 模式，通过一个线程就可以管理多个 socket，只有当 socket 真正有读写事件发生才会占用资源来进行实际的读写操作。因此，多路复用 IO 比较适合连接数比较多的情况。<strong>另外多路复用 IO 为何比非阻塞 IO 模型的效率高是因为在非阻塞 IO 中，不断地询问 socket 状态时通过用户线程去进行的，而在多路复用 IO 中，轮询每个 socket 状态是内核在进行的，这个效 率要比用户线程要高的多。</strong></li><li><strong>AIO (Asynchronous I/O):</strong> AIO 也就是 NIO 2。在 Java 7 中引入了 NIO 的改进版 NIO 2,它是异步非阻塞的 IO 模型。异步 IO 模型才是最理想的 IO 模型，在异步 IO 模型中，当用户线程发起 read 操作之后，立刻就 可以开始去做其它的事。而另一方面，从内核的角度，当它受到一个 asynchronous read 之后， 它会立刻返回，说明 read 请求已经成功发起了，因此不会对用户线程产生任何 block。然后，内 核会等待数据准备完成，然后将数据拷贝到用户线程，当这一切都完成之后，内核会给用户线程 发送一个信号，告诉它 read 操作完成了。<strong>也就说用户线程完全不需要实际的整个 IO 操作是如何进行的，只需要先发起一个请求，当接收内核返回的成功信号时表示 IO 操作已经完成，可以直接去使用数据了</strong>。</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">List&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="keyword">int</span>[] dx = &#123;-<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] dy = &#123;<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">List&lt;String&gt; <span class="title">findWords</span><span class="params">(<span class="keyword">char</span>[][] m, String[] ws)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (String word : ws) &#123;</span><br><span class="line">        find(m, word);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">find</span><span class="params">(<span class="keyword">char</span>[][] m, String word)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l1 = m.length, l2 = m[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">boolean</span>[][] isVisited = <span class="keyword">new</span> <span class="keyword">boolean</span>[l1][l2];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; l1; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; l2; j++) &#123;</span><br><span class="line">            dfs(m, isVisited, i, j, word, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span> (res.contains(word)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// isVisited记录是否dfs到，i为当前横坐标，j为纵坐标，word为待查找单词，length为当前查找的word里的index，</span></span><br><span class="line"><span class="comment">// 终止条件为length和word.length()相等</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] m, <span class="keyword">boolean</span>[][] isVisited, <span class="keyword">int</span> i, <span class="keyword">int</span> j, String word, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (length == word.length()) &#123;</span><br><span class="line">        res.add(word);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// i和j的坐标越界</span></span><br><span class="line">    <span class="keyword">if</span> (i &lt; <span class="number">0</span> || i &gt;= m.length || j &lt; <span class="number">0</span> || j &gt;= m[<span class="number">0</span>].length || isVisited[i][j]) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 当前位置符合下一个元素要求</span></span><br><span class="line">    <span class="keyword">if</span> (m[i][j] == word.charAt(length)) &#123;</span><br><span class="line">        isVisited[i][j] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">4</span>; x++) &#123;</span><br><span class="line">            dfs(m, isVisited, i + dx[x], j + dy[x], word, length+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        isVisited[i][j] = <span class="keyword">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 当前位置不符合条件，直接return</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Java面试知识点总结&quot;&gt;&lt;a href=&quot;#Java面试知识点总结&quot; class=&quot;headerlink&quot; title=&quot;Java面试知识点总结&quot;&gt;&lt;/a&gt;Java面试知识点总结&lt;/h1&gt;&lt;p&gt;参考：&lt;a</summary>
-        
+    <summary type="html">&lt;h1 id=&quot;Java面试知识点总结&quot;&gt;&lt;a href=&quot;#Java面试知识点总结&quot; class=&quot;headerlink&quot; title=&quot;Java面试知识点总结&quot;&gt;&lt;/a&gt;Java面试知识点总结&lt;/h1&gt;&lt;p&gt;参考：&lt;a href=&quot;https://github.com/Sna</summary>
       
     
     
@@ -271,18 +312,17 @@
   
   <entry>
     <title>LeetCode 61. 旋转链表</title>
-    <link href="https://maye.dev/2021/02/19/LeetCode-61-%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/"/>
-    <id>https://maye.dev/2021/02/19/LeetCode-61-%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/</id>
-    <published>2021-02-19T11:25:10.000Z</published>
-    <updated>2021-04-21T05:17:48.641Z</updated>
+    <link href="https://maye.dev/LeetCode-61-%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/"/>
+    <id>https://maye.dev/LeetCode-61-%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/</id>
+    <published>2021-02-20T03:25:10.000Z</published>
+    <updated>2021-02-20T03:25:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p><a href="https://leetcode-cn.com/problems/rotate-list/">LeetCode 61. 旋转链表</a></p><h2 id="1-题目简述"><a href="#1-题目简述" class="headerlink" title="1. 题目简述"></a>1. 题目简述</h2><p>给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。</p><pre><code>Example 1:输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, k = 2输出: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL解释:向右旋转 1 步: 5-&gt;1-&gt;2-&gt;3-&gt;4-&gt;NULL向右旋转 2 步: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULLExample 2：输入: 0-&gt;1-&gt;2-&gt;NULL, k = 4输出: 2-&gt;0-&gt;1-&gt;NULL解释:向右旋转 1 步: 2-&gt;0-&gt;1-&gt;NULL向右旋转 2 步: 1-&gt;2-&gt;0-&gt;NULL向右旋转 3 步: 0-&gt;1-&gt;2-&gt;NULL向右旋转 4 步: 2-&gt;0-&gt;1-&gt;NULL</code></pre><h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><p>链表的经典题目之一。</p>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
-        
+    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/rotate-l</summary>
       
     
     
@@ -298,18 +338,17 @@
   
   <entry>
     <title>LeetCode 343. Integer Break</title>
-    <link href="https://maye.dev/2021/02/19/LeetCode-343-Integer-Break/"/>
-    <id>https://maye.dev/2021/02/19/LeetCode-343-Integer-Break/</id>
-    <published>2021-02-19T01:49:28.000Z</published>
-    <updated>2021-02-19T02:43:16.244Z</updated>
+    <link href="https://maye.dev/LeetCode-343-Integer-Break/"/>
+    <id>https://maye.dev/LeetCode-343-Integer-Break/</id>
+    <published>2021-02-19T17:49:28.000Z</published>
+    <updated>2021-02-19T17:49:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p><a href="https://leetcode-cn.com/problems/jian-sheng-zi-lcof/">剑指 Offer 14- I. 剪绳子 I</a><br><a href="https://leetcode.com/problems/integer-break/">LeetCode 343. Integer Break</a></p><h2 id="1-题目简述"><a href="#1-题目简述" class="headerlink" title="1. 题目简述"></a>1. 题目简述</h2><p>给出一个正整数数字n。将其分割为至少两个正整数，使其加和为n。要求分割后的数字乘积最大。返回乘积。</p><pre><code>Example 1:输入: 10输出: 36解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36</code></pre><p>2 &lt;= n &lt;= 58</p><h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>dp[n]表示对于组正整数n，其切分后的最大乘积。我们可以得到递推式：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span> [<span class="number">1</span>, n/<span class="number">2</span>]:</span><br><span class="line">    dp[n] = <span class="built_in">max</span>(dp[n], <span class="built_in">max</span>(j, dp[j]) * <span class="built_in">max</span>(n - j, dp[n - j]));</span><br></pre></td></tr></table></figure><p>其含义为我们依次取可能的最后一段切分j，那么最大值就等于前后两段分别的最大值乘积。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">cuttingRope</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i / <span class="number">2</span>; j++) &#123;</span><br><span class="line">                dp[i] = Math.max(dp[i], Math.max(j, dp[j]) * Math.max(i - j, dp[i - j]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="数学方法（贪心法）"><a href="#数学方法（贪心法）" class="headerlink" title="数学方法（贪心法）"></a>数学方法（贪心法）</h3><p>证明参考: <a href="https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/solution/mian-shi-ti-14-ii-jian-sheng-zi-iitan-xin-er-fen-f/">Krahets的题解</a></p><p>通过数学证明，我们可以算出，如果想找最大值，当长度大于4时，每次至以3为大小进行切分，直到长度小于等于4，然后相乘。这道题的进阶版是需要对结果取模。这里要用到取余的性质，同见数学证明，以下的解法是包含了取余，对应题目: <a href="https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/">剑指 Offer 14- II. 剪绳子 II</a></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">cuttingRope</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> res = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (n &gt; <span class="number">4</span>) &#123;</span><br><span class="line">            n -= <span class="number">3</span>;</span><br><span class="line">            res = <span class="number">3</span> * res;</span><br><span class="line">            res = res  % <span class="number">1000000007</span>;</span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)(res * n % <span class="number">1000000007</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
-        
+    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/jian-she</summary>
       
     
     
@@ -325,18 +364,17 @@
   
   <entry>
     <title>剑指 Offer 20. 表示数值的字符串</title>
-    <link href="https://maye.dev/2021/02/19/%E5%89%91%E6%8C%87-Offer-20-%E8%A1%A8%E7%A4%BA%E6%95%B0%E5%80%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    <id>https://maye.dev/2021/02/19/%E5%89%91%E6%8C%87-Offer-20-%E8%A1%A8%E7%A4%BA%E6%95%B0%E5%80%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</id>
-    <published>2021-02-19T01:39:47.000Z</published>
-    <updated>2021-02-19T01:46:01.638Z</updated>
+    <link href="https://maye.dev/%E5%89%91%E6%8C%87-Offer-20-%E8%A1%A8%E7%A4%BA%E6%95%B0%E5%80%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    <id>https://maye.dev/%E5%89%91%E6%8C%87-Offer-20-%E8%A1%A8%E7%A4%BA%E6%95%B0%E5%80%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</id>
+    <published>2021-02-19T17:39:47.000Z</published>
+    <updated>2021-02-19T17:39:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p><a href="https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/">剑指 Offer 20. 表示数值的字符串</a></p><h2 id="1-题目简述"><a href="#1-题目简述" class="headerlink" title="1. 题目简述"></a>1. 题目简述</h2><p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”、”5e2”、”-123”、”3.1416”、”-1E-16”、”0123”都表示数值，但”12e”、”1a3.14”、”1.2.3”、”+-5”及”12e+5.4”都不是。</p><h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><p>这道题是最经典的那种大烂题，基本上可以归类于if else类型，根据没通过的test case编程。不过这种逻辑也和工程中的业务代码很相似，比较繁琐。从算法题的角度来说，这道题是比较辣鸡的。此题的逻辑卸载注释中，不再赘述。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isNumber</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s == <span class="keyword">null</span> || s.length() == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//标记是否遇到相应情况</span></span><br><span class="line">        <span class="keyword">boolean</span> numSeen = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">boolean</span> dotSeen = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">boolean</span> eSeen = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">char</span>[] str = s.trim().toCharArray();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; str.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(str[i] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; str[i] &lt;= <span class="string">&#x27;9&#x27;</span>)&#123;</span><br><span class="line">                numSeen = <span class="keyword">true</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(str[i] == <span class="string">&#x27;.&#x27;</span>)&#123;</span><br><span class="line">                <span class="comment">//.之前不能出现.或者e</span></span><br><span class="line">                <span class="keyword">if</span>(dotSeen || eSeen)&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                dotSeen = <span class="keyword">true</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(str[i] == <span class="string">&#x27;e&#x27;</span> || str[i] == <span class="string">&#x27;E&#x27;</span>)&#123;</span><br><span class="line">                <span class="comment">//e之前不能出现e，必须出现数</span></span><br><span class="line">                <span class="keyword">if</span>(eSeen || !numSeen)&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                eSeen = <span class="keyword">true</span>;</span><br><span class="line">                numSeen = <span class="keyword">false</span>;<span class="comment">//重置numSeen，排除123e或者123e+的情况,确保e之后也出现数</span></span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(str[i] == <span class="string">&#x27;-&#x27;</span> || str[i] == <span class="string">&#x27;+&#x27;</span>)&#123;</span><br><span class="line">                <span class="comment">//+-出现在0位置或者e/E的后面第一个位置才是合法的</span></span><br><span class="line">                <span class="keyword">if</span>(i != <span class="number">0</span> &amp;&amp; str[i-<span class="number">1</span>] != <span class="string">&#x27;e&#x27;</span> &amp;&amp; str[i-<span class="number">1</span>] != <span class="string">&#x27;E&#x27;</span>)&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;<span class="comment">//其他不合法字符</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numSeen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
-        
+    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/biao-shi</summary>
       
     
     
@@ -350,18 +388,17 @@
   
   <entry>
     <title>LeetCode 295. Find Median from Data Stream</title>
-    <link href="https://maye.dev/2021/02/19/LeetCode-295-Find-Median-from-Data-Stream/"/>
-    <id>https://maye.dev/2021/02/19/LeetCode-295-Find-Median-from-Data-Stream/</id>
-    <published>2021-02-18T16:32:25.000Z</published>
-    <updated>2021-02-19T01:42:16.770Z</updated>
+    <link href="https://maye.dev/LeetCode-295-Find-Median-from-Data-Stream/"/>
+    <id>https://maye.dev/LeetCode-295-Find-Median-from-Data-Stream/</id>
+    <published>2021-02-19T08:32:25.000Z</published>
+    <updated>2021-02-19T08:32:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p>两道题是基本一致的，只不过一个是nums[i] &gt; nums[j]，另一个是nums[i] &gt; 2 * nums[j]，这里以剑指offer为例。</p><p><a href="https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/">剑指 Offer 41. 数据流中的中位数</a></p><h2 id="1-题目简述"><a href="#1-题目简述" class="headerlink" title="1. 题目简述"></a>1. 题目简述</h2><p>如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。</p><p>例如，</p><p>[2,3,4] 的中位数是 3</p><p>[2,3] 的中位数是 (2 + 3) / 2 = 2.5</p><p>设计一个支持以下两种操作的数据结构：</p><p>void addNum(int num) - 从数据流中添加一个整数到数据结构中。<br>double findMedian() - 返回目前所有元素的中位数。</p><pre><code>Example 1：输入：[&quot;MedianFinder&quot;,&quot;addNum&quot;,&quot;addNum&quot;,&quot;findMedian&quot;,&quot;addNum&quot;,&quot;findMedian&quot;][[],[1],[2],[],[3],[]]输出：[null,null,null,1.50000,null,2.00000]</code></pre><h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><p>这道题也算是经典题目之一了，其设计思路基本上背过就行了。核心思想是维护两个栈，一个大顶堆，一个小顶堆。<strong>这里要注意的是小顶堆存的是比较大的那一半的数字，大顶堆存的是比较小的那一半数字</strong>。另外，每次当我们插入的时候，我们要<strong>保证小顶堆的大小是大于等于大顶堆的大小的（反之也OK），且相差不能超过1</strong>。如果两个堆的大小相同，则各取堆顶求均值，否则返回小顶堆的堆顶（我们前面保证了小顶堆大小更大）。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用两个heap，一个大顶堆一个小顶堆。</span></span><br><span class="line">    PriorityQueue&lt;Integer&gt; minHeap, maxHeap;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MedianFinder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        minHeap = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</span><br><span class="line">        maxHeap = <span class="keyword">new</span> PriorityQueue&lt;Integer&gt;(<span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer o1, Integer o2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> o2 - o1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (minHeap.size() == <span class="number">0</span> || num &gt;= minHeap.peek()) &#123;</span><br><span class="line">            minHeap.add(num);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            maxHeap.add(num);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (minHeap.size() - maxHeap.size() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            maxHeap.add(minHeap.poll());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (maxHeap.size() - minHeap.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            minHeap.add(maxHeap.poll());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">findMedian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (minHeap.size() == maxHeap.size()) &#123;</span><br><span class="line">            <span class="keyword">return</span> (minHeap.peek() + maxHeap.peek()) / <span class="number">2.0f</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minHeap.peek();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your MedianFinder object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * MedianFinder obj = new MedianFinder();</span></span><br><span class="line"><span class="comment"> * obj.addNum(num);</span></span><br><span class="line"><span class="comment"> * double param_2 = obj.findMedian();</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;两道题是基本一致的，只不过一个是nums[i] &amp;gt; nums[j]，另一个是nums[i]</summary>
-        
+    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;两道题是基本一致的，只不过一个是nums[i] &amp;gt; nums[j]，另一个是nums[i] &amp;</summary>
       
     
     
@@ -379,20 +416,19 @@
   
   <entry>
     <title>LeetCode 493. Reverse Pairs</title>
-    <link href="https://maye.dev/2021/02/18/LeetCode-493-Reverse-Pairs/"/>
-    <id>https://maye.dev/2021/02/18/LeetCode-493-Reverse-Pairs/</id>
-    <published>2021-02-18T15:40:39.000Z</published>
-    <updated>2021-02-18T16:13:51.661Z</updated>
+    <link href="https://maye.dev/LeetCode-493-Reverse-Pairs/"/>
+    <id>https://maye.dev/LeetCode-493-Reverse-Pairs/</id>
+    <published>2021-02-19T07:40:39.000Z</published>
+    <updated>2021-02-19T07:40:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<p> Problem</p><p><a href="https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/">剑指 Offer 51. 数组中的逆序对</a></p><h2 id="1-题目简述"><a href="#1-题目简述" class="headerlink" title="1. 题目简述"></a>1. 题目简述</h2><p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。</p><pre><code>Example 1: 输入: [7,5,6,4]输出: 5限制：0 &lt;= 数组长度 &lt;= 50000</code></pre><h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><p>这道题有两种做法，一种是分治法，或者说归并排序；另一种是树状数组。这里只写第一种做法，第二种工作法待更新。</p><h3 id="分治法（归并排序）"><a href="#分治法（归并排序）" class="headerlink" title="分治法（归并排序）"></a>分治法（归并排序）</h3><p>对于一个数组，我们先将其分为两段，也就是两个数组，l和r，然后分别进行排序。排好序后，我们进行遍历，两个指针和j，一开始指向l[0]和r[0]，然后r指针不断向后移动，直到r[j] &gt;= r[i]，此时，从mid+1到j之间的所有数字和l[0]构成逆序对！然后i也向后移，直到mid。这样一层层分下去，和归并算法的思路一致。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">reversePairs</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mergeSort(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l &gt;= r) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>, res = <span class="number">0</span>;</span><br><span class="line">        res += mergeSort(nums, l, mid) + mergeSort(nums, mid+<span class="number">1</span>, r);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 此时，左右两侧数组已经有序</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = l, j = mid + <span class="number">1</span>; i &lt;= mid; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &lt;= r &amp;&amp; nums[i] &gt; nums[j]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            res += j - mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 开始归并排序</span></span><br><span class="line">        <span class="keyword">int</span>[] temp = <span class="keyword">new</span> <span class="keyword">int</span>[r - l + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">0</span>, i = l, j  = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= r) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &lt;= nums[j]) &#123;</span><br><span class="line">                temp[k++] = nums[i++];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                temp[k++] = nums[j++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (i &lt;= mid) &#123;</span><br><span class="line">            temp[k++] = nums[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (j &lt;= r) &#123;</span><br><span class="line">            temp[k++] = nums[j++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span>, n = l; m &lt; temp.length; m++, n++) &#123;</span><br><span class="line">            nums[n] = temp[m];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
       
-        
-        
     <summary type="html">&lt;p&gt; Problem&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/&quot;&gt;剑指 Offer 51. 数组中的逆序对&lt;/a&gt;&lt;/p&gt;
-&lt;h2</summary>
-        
+&lt;h2 id=&quot;1-题目简述&quot;&gt;&lt;</summary>
       
     
     
@@ -412,25 +448,24 @@
   
   <entry>
     <title>Java各种类型转换</title>
-    <link href="https://maye.dev/2021/02/16/Java%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"/>
-    <id>https://maye.dev/2021/02/16/Java%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</id>
-    <published>2021-02-16T12:58:23.000Z</published>
-    <updated>2021-03-04T13:56:52.249Z</updated>
+    <link href="https://maye.dev/Java%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"/>
+    <id>https://maye.dev/Java%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</id>
+    <published>2021-02-17T04:58:23.000Z</published>
+    <updated>2021-02-17T04:58:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="String相关"><a href="#String相关" class="headerlink" title="String相关"></a>String相关</h2><h3 id="各种类型转String"><a href="#各种类型转String" class="headerlink" title="各种类型转String"></a>各种类型转String</h3><ol><li><p>valueOf(boolean b): 返回 boolean 参数的字符串表示形式。.</p></li><li><p>valueOf(char c): 返回 char 参数的字符串表示形式。</p></li><li><p>valueOf(char[] data): 返回 char 数组参数的字符串表示形式。</p></li><li><p>valueOf(char[] data, int offset, int count): 返回 char 数组参数的特定子数组的字符串表示形式。</p></li><li><p>valueOf(double d): 返回 double 参数的字符串表示形式。</p></li><li><p>valueOf(float f): 返回 float 参数的字符串表示形式。</p></li><li><p>valueOf(int i): 返回 int 参数的字符串表示形式。</p></li><li><p>valueOf(long l): 返回 long 参数的字符串表示形式。</p></li><li><p>valueOf(Object obj): 返回 Object 参数的字符串表示形式。</p></li></ol><h2 id="List相关"><a href="#List相关" class="headerlink" title="List相关"></a>List相关</h2><h3 id="List转array"><a href="#List转array" class="headerlink" title="List转array"></a>List转array</h3><p>注意，Integer的List只能一个个添加转为int数组</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String[] array = list.toArray(<span class="keyword">new</span> String[list.size()])</span><br></pre></td></tr></table></figure><p>其次，对于list.toArray方法来说，如果传入的数组的大小足够，则使用该数组，否则另外创建一个数组。这里举一个特殊的例子，题目见<a href="https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/">剑指 Offer 57 - II. 和为s的连续正数序列</a>。这里的list存的是int[]，然后将其转为二维数组，这里是这么写的。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;<span class="keyword">int</span>[]&gt; list = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">int</span>[]&gt;();</span><br><span class="line">... </span><br><span class="line"><span class="keyword">return</span> list.toArray(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>][<span class="number">0</span>]);</span><br></pre></td></tr></table></figure><h3 id="array转list"><a href="#array转list" class="headerlink" title="array转list"></a>array转list</h3><p>注意，这里对于int类型，除非使用Java8的stream方式，否则也没有shortcut，只能一个个加到List&lt;Integer&gt;里。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;(Arrays.asList(array));</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h2 id=&quot;String相关&quot;&gt;&lt;a href=&quot;#String相关&quot; class=&quot;headerlink&quot; title=&quot;String相关&quot;&gt;&lt;/a&gt;String相关&lt;/h2&gt;&lt;h3 id=&quot;各种类型转String&quot;&gt;&lt;a href=&quot;#各种类型转String&quot;</summary>
-        
+    <summary type="html">&lt;h2 id=&quot;String相关&quot;&gt;&lt;a href=&quot;#String相关&quot; class=&quot;headerlink&quot; title=&quot;String相关&quot;&gt;&lt;/a&gt;String相关&lt;/h2&gt;&lt;h3 id=&quot;各种类型转String&quot;&gt;&lt;a href=&quot;#各种类型转String&quot; class</summary>
       
     
     
-    
-    <category term="总结" scheme="https://maye.dev/categories/%E6%80%BB%E7%BB%93/"/>
     
     <category term="Java" scheme="https://maye.dev/categories/Java/"/>
+    
+    <category term="总结" scheme="https://maye.dev/categories/%E6%80%BB%E7%BB%93/"/>
     
     
     <category term="summary" scheme="https://maye.dev/tags/summary/"/>
@@ -439,20 +474,19 @@
   
   <entry>
     <title>LeetCode 22. Generate Parentheses</title>
-    <link href="https://maye.dev/2021/02/13/LeetCode-22-Generate-Parentheses/"/>
-    <id>https://maye.dev/2021/02/13/LeetCode-22-Generate-Parentheses/</id>
-    <published>2021-02-13T05:52:32.000Z</published>
-    <updated>2021-02-13T05:57:29.665Z</updated>
+    <link href="https://maye.dev/LeetCode-22-Generate-Parentheses/"/>
+    <id>https://maye.dev/LeetCode-22-Generate-Parentheses/</id>
+    <published>2021-02-13T21:52:32.000Z</published>
+    <updated>2021-02-13T21:52:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p><a href="https://leetcode.com/problems/generate-parentheses/">LeetCode 22. Generate Parentheses</a></p><h2 id="1-题目简述"><a href="#1-题目简述" class="headerlink" title="1. 题目简述"></a>1. 题目简述</h2><p>给出一个数字n，找出所有可能的括号排列形式。</p><pre><code>Example 1:Input: n = 3Output: [&quot;((()))&quot;,&quot;(()())&quot;,&quot;(())()&quot;,&quot;()(())&quot;,&quot;()()()&quot;]Example 2:Input: n = 1Output: [&quot;()&quot;]</code></pre><h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><p>相关问题：</p><ol><li><a href="/2020-06-26/" title="LeetCode 52. N-Queens II">LeetCode 52. N-Queens II</a></li></ol><p>极其经典的”八皇后问题“，用回溯法。跟数独问题基本上是一样的，但是要稍微简单些。</p><h3 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h3><p>典型的回溯法，终结条件为<strong>左括号少于右括号或者括号数量多余给定数字n</strong>。代码如下，这里需要注意的是删除最后一个字符的写法。</p><pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">generateParenthesis</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        List&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        backtrack(sb, res, <span class="number">0</span>, <span class="number">0</span>, n);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(StringBuilder sb, List&lt;String&gt; res, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (right &gt; left || left &gt; n || right &gt; n) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (right == n &amp;&amp; left == n) &#123;</span><br><span class="line">            res.add(sb.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// add a left parenthesis</span></span><br><span class="line">        sb.append(<span class="string">&quot;(&quot;</span>);</span><br><span class="line">        backtrack(sb, res, left + <span class="number">1</span>, right, n);</span><br><span class="line">        sb.setLength(sb.length() - <span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// add a right parenthesis</span></span><br><span class="line">        sb.append(<span class="string">&quot;)&quot;</span>);</span><br><span class="line">        backtrack(sb, res, left, right + <span class="number">1</span>, n);</span><br><span class="line">        sb.setLength(sb.length() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>]]></content>
     
     
       
       
-        
-        
     <summary type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
 
-&lt;h1 id=&quot;Problem&quot;&gt;&lt;a</summary>
-        
+&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#P</summary>
       
     
     
@@ -465,64 +499,6 @@
     
     
     <category term="backtracking" scheme="https://maye.dev/tags/backtracking/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 475. Heaters</title>
-    <link href="https://maye.dev/2021/02/12/LeetCode-475-Heaters/"/>
-    <id>https://maye.dev/2021/02/12/LeetCode-475-Heaters/</id>
-    <published>2021-02-12T11:46:40.000Z</published>
-    <updated>2021-02-12T12:06:31.763Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
-
-&lt;h1 id=&quot;Problem&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="leetcode" scheme="https://maye.dev/categories/leetcode/"/>
-    
-    <category term="medium" scheme="https://maye.dev/categories/medium/"/>
-    
-    
-    <category term="binary search" scheme="https://maye.dev/tags/binary-search/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 653. Two Sum IV - Input is a BST</title>
-    <link href="https://maye.dev/2021/02/09/LeetCode-653-Two-Sum-IV-Input-is-a-BST/"/>
-    <id>https://maye.dev/2021/02/09/LeetCode-653-Two-Sum-IV-Input-is-a-BST/</id>
-    <published>2021-02-09T15:00:59.000Z</published>
-    <updated>2021-02-09T15:10:55.179Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="leetcode" scheme="https://maye.dev/categories/leetcode/"/>
-    
-    <category term="easy" scheme="https://maye.dev/categories/easy/"/>
-    
-    
-    <category term="tree" scheme="https://maye.dev/tags/tree/"/>
-    
-    <category term="hashset" scheme="https://maye.dev/tags/hashset/"/>
     
   </entry>
   
