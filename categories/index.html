@@ -11,7 +11,7 @@
   
   <title>
     
-      LeetCode 1042. Flower Planting With No Adjacent 
+      Category 
       
       
       |
@@ -119,146 +119,19 @@ MathJax = {
 
 
   
-
-  
-
-  
-
-  
-  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
-  <div class="container post-details" id="post-details">
-    <div class="post-content">
-      <div class="post-title">LeetCode 1042. Flower Planting With No Adjacent</div>
-      <div class="post-attach">
-        <span class="post-pubtime">
-          <i class="iconfont icon-updatetime" title="Update time"></i>
-          2020-05-28 20:11:09
-        </span>
-        
-              <span class="post-categories">
-                <i class="iconfont icon-bookmark" title="Categories"></i>
-                
-                <span class="span--category">
-                  <a href="/categories/leetcode/" title="leetcode">
-                    <b>#</b> leetcode
-                  </a>
-                </span>
-                
-              </span>
-          
-              <span class="post-tags">
-                <i class="iconfont icon-tags" title="Tags"></i>
-                
-                <span class="span--tag">
-                  <a href="/tags/graph/" title="graph">
-                    <b>#</b> graph
-                  </a>
-                </span>
-                
-                <span class="span--tag">
-                  <a href="/tags/greedy/" title="greedy">
-                    <b>#</b> greedy
-                  </a>
-                </span>
-                
-              </span>
-          
-      </div>
-      <div class="markdown-body">
-        <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/flower-planting-with-no-adjacent/">LeetCode 1042. Flower Planting With No Adjacent</a></p>
-<h2 id="1-题目简述"><a href="#1-题目简述" class="headerlink" title="1. 题目简述"></a>1. 题目简述</h2><p>给出N个花园(1…N)，给出花园中的路径paths，每个花园最多有三条连通路径。一共可以种四种花(1, 2, 3, 4)，每条路径两段的花的种类不能一致，给出一种符合条件的解。</p>
-<pre><code>Input: N = 3, paths = [[1,2],[2,3],[3,1]]
-Output: [1,2,3]
-</code></pre>
-<p>条件限制：</p>
-<pre><code>1 &lt;= N &lt;= 10000
-0 &lt;= paths.size &lt;= 20000
-No garden has 4 or more paths coming into or leaving it.
-It is guaranteed an answer exists.
-</code></pre>
-<h2 id="2-算法思路"><a href="#2-算法思路" class="headerlink" title="2. 算法思路"></a>2. 算法思路</h2><p>这道题很多人点了不喜欢，一开始我也没做出来，看了解析之后才发现是自己想复杂了。</p>
-<p>和二分图不同，这里像是四分图，且保证一定有解，这里不是非黑即白的选择，例如和1连通的有2，3，和4，我们假设四种颜色为红黄蓝白，1为红色，2、3、4可选的颜色种类太多了，如果都为黄色，那么遍历到[2, 3]这条路径的时候，我们又发现不行，不能都为黄色，又需要调整，容易陷入怪圈。</p>
-<p>我们细心点可以发现这里有一个条件是每个花园<strong>最多有三条路径</strong>相连，也就是说每个花园一定能够被赋予某种颜色，而不会有冲突，一定存在解，所以现在的问题就在于如何找这种解法。</p>
-<h3 id="贪心法"><a href="#贪心法" class="headerlink" title="贪心法"></a>贪心法</h3><p>稍微再想一想，我们完全没必要关心邻居究竟是怎么样的颜色分布，只要当前节点的颜色符合规定不就Ok了嘛，题中都保证一定有解了。</p>
-<p>对于此题，我们需要先将整个图给遍历出来，然后，对于每个顶点，我们遍历其neighbors，找到其邻居的所有染色，然后随便选一种尚未出现的颜色对当前节点上色即可。</p>
-<p>因此这是一种保证当前节点和之前节点最优解的方法，可以认为是贪心法。</p>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>这里同样要注意ArrayList数组的初始化方法，不能使用List[]作为数组，因为List是抽象接口，不能这么做，需要用ArrayList。</p>
-<h2 id="3-解法"><a href="#3-解法" class="headerlink" title="3. 解法"></a>3. 解法</h2><p><strong>Greedy</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] gardenNoAdj(<span class="keyword">int</span> N, <span class="keyword">int</span>[][] paths) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        Arrays.fill(res, <span class="number">0</span>);</span><br><span class="line">        ArrayList&lt;Integer&gt;[] graph = <span class="keyword">new</span> ArrayList[N];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            graph[i] = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] path : paths) &#123;</span><br><span class="line">            graph[path[<span class="number">0</span>] - <span class="number">1</span>].add(path[<span class="number">1</span>] - <span class="number">1</span>);</span><br><span class="line">            graph[path[<span class="number">1</span>] - <span class="number">1</span>].add(path[<span class="number">0</span>] - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span>[] color = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> neighbor : graph[i]) &#123;</span><br><span class="line">                color[res[neighbor]] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; <span class="number">5</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (color[j] != <span class="number">1</span>) &#123;</span><br><span class="line">                    res[i] = j;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      </div>
-      
-        <div class="prev-or-next">
-          <div class="post-foot-next">
-            
-              <a href="/LeetCode-785-Is-Graph-Bipartite/" target="_self">
-                <i class="iconfont icon-chevronleft"></i>
-                <span>Prev</span>
-              </a>
-            
-          </div>
-          <div class="post-attach">
-            <span class="post-pubtime">
-              <i class="iconfont icon-updatetime" title="Update time"></i>
-              2020-05-28 20:11:09
-            </span>
-            
-                  <span class="post-categories">
-                    <i class="iconfont icon-bookmark" title="Categories"></i>
-                    
-                    <span class="span--category">
-                      <a href="/categories/leetcode/" title="leetcode">
-                        <b>#</b> leetcode
-                      </a>
-                    </span>
-                    
-                  </span>
-              
-                  <span class="post-tags">
-                    <i class="iconfont icon-tags" title="Tags"></i>
-                    
-                    <span class="span--tag">
-                      <a href="/tags/graph/" title="graph">
-                        <b>#</b> graph
-                      </a>
-                    </span>
-                    
-                    <span class="span--tag">
-                      <a href="/tags/greedy/" title="greedy">
-                        <b>#</b> greedy
-                      </a>
-                    </span>
-                    
-                  </span>
-              
-          </div>
-          <div class="post-foot-prev">
-            
-              <a href="/LeetCode-133-Clone-Graph/" target="_self">
-                <span>Next</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-    </div>
-    
-  <div class="post-catalog" id="catalog">
-    <div class="title">Contents</div>
-    <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Problem"><span class="toc-text">Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A2%98%E7%9B%AE%E7%AE%80%E8%BF%B0"><span class="toc-text">1. 题目简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF"><span class="toc-text">2. 算法思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%AA%E5%BF%83%E6%B3%95"><span class="toc-text">贪心法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%A7%A3%E6%B3%95"><span class="toc-text">3. 解法</span></a></li></ol></li></ol>
+  <!-- 分类页 url形式：https://yoursite/categories/ -->
+  <div class="container category-index">
+    <div>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a><span class="category-list-count">145</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/core-problems/">core problems</a><span class="category-list-count">61</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%BB%E7%BB%93/">总结</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/medium/">medium</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hard/">hard</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/daily-diary/">daily diary</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A0%A1%E6%8B%9B/">校招</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/easy/">easy</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">知识点总结</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
+  
 
   
-<script src="/js/catalog.js"></script>
 
+  
 
-
-
-    
-  </div>
-
+  
 
         <div class="footer">
   <div class="social">
