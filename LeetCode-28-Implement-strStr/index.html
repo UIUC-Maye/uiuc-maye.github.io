@@ -1,166 +1,106 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>LeetCode 28. Implement strStr() | Maye's Life</title><meta name="author" content="maye"><meta name="copyright" content="maye"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ProblemLeetCode 28. Implement strStr() 1. 题目简述给出两个字符串haystack和needle，找出needle在haystack中出现的首次位置，如果没有出现则返回-1。needle为空的时候返回0，例如： Example 1:  Input: haystack &#x3D; &quot;hello&quot;, needle &#x3D; &quot;ll&quot; O">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>LeetCode 28. Implement strStr() | Maye&#39;s Life</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="ProblemLeetCode 28. Implement strStr() 1. 题目简述给出两个字符串haystack和needle，找出needle在haystack中出现的首次位置，如果没有出现则返回-1。needle为空的时候返回0，例如： Example 1:  Input: haystack &#x3D; &quot;hello&quot;, needle &#x3D; &quot;ll&quot; O">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode 28. Implement strStr()">
 <meta property="og:url" content="https://maye.dev/LeetCode-28-Implement-strStr/">
 <meta property="og:site_name" content="Maye&#39;s Life">
 <meta property="og:description" content="ProblemLeetCode 28. Implement strStr() 1. 题目简述给出两个字符串haystack和needle，找出needle在haystack中出现的首次位置，如果没有出现则返回-1。needle为空的时候返回0，例如： Example 1:  Input: haystack &#x3D; &quot;hello&quot;, needle &#x3D; &quot;ll&quot; O">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://maye.dev/img/butterfly-icon.png">
 <meta property="article:published_time" content="2020-05-30T15:09:44.000Z">
 <meta property="article:author" content="maye">
 <meta property="article:tag" content="string">
 <meta property="article:tag" content="two pointers">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://maye.dev/img/butterfly-icon.png"><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "LeetCode 28. Implement strStr()",
-  "url": "https://maye.dev/LeetCode-28-Implement-strStr/",
-  "image": "https://maye.dev/img/butterfly-icon.png",
-  "datePublished": "2020-05-30T15:09:44.000Z",
-  "dateModified": "2020-05-30T15:09:44.000Z",
-  "author": [
-    {
-      "@type": "Person",
-      "name": "maye",
-      "url": "https://maye.dev"
-    }
-  ]
-}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://maye.dev/LeetCode-28-Implement-strStr/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
-    (() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
-
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
   
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
+    <link rel="alternate" href="/atom.xml" title="Maye's Life" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
-
-      const theme = saveToLocal.get('theme')
+  
     
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Maye&#39;s Life</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Engineering · Thinking · Life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
         
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://maye.dev"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LeetCode-28-Implement-strStr" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/LeetCode-28-Implement-strStr/" class="article-date">
+  <time class="dt-published" datetime="2020-05-30T15:09:44.000Z" itemprop="datePublished">2020-05-30</time>
+</a>
     
-      
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    })()
-  </script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
-  copy: {
-    success: 'Copy Successful',
-    error: 'Copy Failed',
-    noSupport: 'Browser Not Supported'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: 'Just now',
-    min: 'minutes ago',
-    hour: 'hours ago',
-    day: 'days ago',
-    month: 'months ago'
-  },
-  copyright: undefined,
-  lightbox: 'null',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
-    buttonText: 'Load More'
-  },
-  isPhotoFigcaption: false,
-  islazyloadPlugin: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'LeetCode 28. Implement strStr()',
-  isHighlightShrink: false,
-  isToc: true,
-  pageType: 'post'
-}</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Maye's Life" type="application/atom+xml">
-</head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Maye's Life</span></a><a class="nav-page-title" href="/"><span class="site-name">LeetCode 28. Implement strStr()</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">LeetCode 28. Implement strStr()</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-05-30T15:09:44.000Z" title="Created 2020-05-30 08:09">2020-05-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-04-24T18:51:39.752Z" title="Updated 2026-04-24 11:51">2026-04-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/leetcode/">leetcode</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1>Problem</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/implement-strstr/">LeetCode 28. Implement strStr()</a></p>
+    <h1 class="p-name article-title" itemprop="headline name">
+      LeetCode 28. Implement strStr()
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1>Problem</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/implement-strstr/">LeetCode 28. Implement strStr()</a></p>
 <h2>1. 题目简述</h2><p>给出两个字符串haystack和needle，找出needle在haystack中出现的首次位置，如果没有出现则返回-1。needle为空的时候返回0，例如：</p>
 <pre><code>Example 1:
 
@@ -248,9 +188,163 @@ Output: -1
         <span class="token keyword">return</span> next<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://maye.dev">maye</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://maye.dev/LeetCode-28-Implement-strStr/">https://maye.dev/LeetCode-28-Implement-strStr/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/string/">string</a><a class="post-meta__tags" href="/tags/two-pointers/">two pointers</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/LeetCode-14-Longest-Common-Prefix/" title="LeetCode 14. Longest Common Prefix"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">LeetCode 14. Longest Common Prefix</div></div><div class="info-2"><div class="info-item-1">ProblemLeetCode 14. Longest Common Prefix 1. 题目简述给出一组字符串，找出这些字符串的最长common前缀。 2. 算法思路水平比较首先，最容易想到的思路就是从前往后，一个个进行比较找common suffix，直到找到最后一个字符串。 这种方法时间复杂度为O(S)，S是所有字符串的字符数总和，最坏情况就是所有字符串相等，一直比较下去。 垂直比较垂直的意思是从第一位开始比较，比较所有的字符串的第一位，如果相同，则比较下一位；如果不同或者到达某字符串的最大长度，则返回当前的suffix。 这种方法时间复杂度为O(S)，S是所有字符串的字符数总和，最坏情况就是所有字符串相等，一直比较下去。 分治法可以将原本的数组不断拆分成子数组，然后获取子数组的最长公共前缀，然后再进行合并。 时间复杂度为O(S),空间复杂度为O(m * logn)。空间复杂度是因为我们需要调用函数logn词，每次空间为m。 3. 解法水平比较 public class Solution &#123;     public String longestCommonPrefi...</div></div></div></a><a class="pagination-related" href="/LeetCode-647-Palindromic-Substrings/" title="LeetCode 647. Palindromic Substrings"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">LeetCode 647. Palindromic Substrings</div></div><div class="info-2"><div class="info-item-1">ProblemLeetCode 647. Palindromic Substrings 1. 题目简述找出一个字符串的所有回文子字符串数量。例如： Input: &quot;aaa&quot; Output: 6 Explanation: Six palindromic strings: &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;aa&quot;, &quot;aa&quot;, &quot;aaa&quot;.  2. 算法思路思路和LeetCode 5是一样的，都是找回文子字符串，只不过5是找最长的回文子字符串，这里是找所有回文子字符串的数量。 其实就是相当于每次找到回文字符串的时候count++就OK了，记得在dp[i][i]赋值的时候+1。 Dynamic Programming和“LeetCode 5”是一样的解析，这里不多做解释了。 中心扩散法这里同理，注意count++的时机。 3. 解法Dynamic Programming bottom-up public class Solution &#123;  ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/LeetCode-438-Find-All-Anagrams-in-a-String/" title="LeetCode 438. Find All Anagrams in a String"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-17</div><div class="info-item-2">LeetCode 438. Find All Anagrams in a String</div></div><div class="info-2"><div class="info-item-1">  ProblemLeetCode 438. Find All Anagrams in a String 1. 题目简述给出两个字符串s和p，p非空，找出s中所有p的同字母异序词的索引。例如： Input: s: &quot;cbaebabacd&quot; p: &quot;abc&quot;  Output: [0, 6]  Explanation: The substring with start index = 0 is &quot;cba&quot;, which is an anagram of &quot;abc&quot;. The substring with start index = 6 is &quot;bac&quot;, which is an anagram of &quot;abc&quot;.  2. 算法思路sliding window首先我们能想到的肯定是暴力破解，找出所有的长度和p相等的子串，然后判断是否和p的组成字符一致。可以AC，但是耗时过长，620ms，不太可取，因此尝试别的思路。 如何优化呢？其实我们每次去移动这个子串的时候，其实只...</div></div></div></a><a class="pagination-related" href="/LeetCode-142-Linked-List-Cycle-II/" title="LeetCode 142. Linked List Cycle II"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-03</div><div class="info-item-2">LeetCode 142. Linked List Cycle II</div></div><div class="info-2"><div class="info-item-1">ProblemLeetCode 142. Linked List Cycle II 1. 题目简述给出一个链表，判断链表是否存在环，如果有环，找出入环点，如果没有环，则返回null。例如：  Input: head = [3,2,0,-4], pos = 1 Output: tail connects to node index 1 Explanation: There is a cycle in the linked list, where tail connects to the second node.  2. 算法思路极其经典的老题目，类似题目：LeetCode 141. Linked List Cycle 依然采用双指针做法，但是需要一些数学推导，由于markdown中不方便编辑公式，直接在纸上写以图片的形式说明算法。 双指针两个指针，一个slow，一个fast，slow每次走一步，fast每次走两步，如果fast先到达null值，则说明无环；如果slow和fast相遇，则说明有环，我们记录相遇点。   时间复杂度:O(n).  空间复杂度:O(1)，只有fast和sl...</div></div></div></a><a class="pagination-related" href="/LeetCode-76-Minimum-Window-Substring/" title="LeetCode 76. Minimum Window Substring"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-02</div><div class="info-item-2">LeetCode 76. Minimum Window Substring</div></div><div class="info-2"><div class="info-item-1">ProblemLeetCode 76. Minimum Window Substring 1. 题目简述给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 “” 。 注意：如果 s 中存在这样的子串，我们保证它是唯一的答案。  Note:  1 &lt;&#x3D; s.length, t.length &lt;&#x3D; 105 s 和 t 由英文字母组成 2. 算法思路相关问题：  力扣30题  所有的思路都在code的注释里了，参考30题。 滑动窗口class Solution &#123;     public String minWindow(String s, String t) &#123;         // 初始化目标词典表         String res = "";         int n = t.length();         Map&lt;Character, Integer> total = new HashMap();         for (...</div></div></div></a><a class="pagination-related" href="/LeetCode-30-Substring-with-Concatenation-of-All-Words/" title="LeetCode 30. Substring with Concatenation of All Words"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-02</div><div class="info-item-2">LeetCode 30. Substring with Concatenation of All Words</div></div><div class="info-2"><div class="info-item-1">Problem30. Substring with Concatenation of All Words 1. 题目简述给定一个字符串 s 和一些长度相同的单词 words。找出 s 中恰好可以由 words 中所有单词串联形成的子串的起始位置。 注意子串要与 words 中的单词完全匹配，中间不能有其他字符，但不需要考虑 words 中单词串联的顺序。 示例 1： 输入： s = &quot;barfoothefoobarman&quot;, words = [&quot;foo&quot;,&quot;bar&quot;] 输出：[0,9] 解释： 从索引 0 和 9 开始的子串分别是 &quot;barfoo&quot; 和 &quot;foobar&quot; 。 输出的顺序不重要, [9,0] 也是有效答案。  示例 2： 输入： s = &quot;wordgoodgoodgoodbestword&quot;, words = [&quot;word&quot;,&quot;good&quot;,&quot;best&quot;,&quot;word&quot;] 输...</div></div></div></a><a class="pagination-related" href="/%E5%89%91%E6%8C%87-Offer-20-%E8%A1%A8%E7%A4%BA%E6%95%B0%E5%80%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="剑指 Offer 20. 表示数值的字符串"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-19</div><div class="info-item-2">剑指 Offer 20. 表示数值的字符串</div></div><div class="info-2"><div class="info-item-1">Problem剑指 Offer 20. 表示数值的字符串 1. 题目简述请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”、”5e2”、”-123”、”3.1416”、”-1E-16”、”0123”都表示数值，但”12e”、”1a3.14”、”1.2.3”、”+-5”及”12e+5.4”都不是。 2. 算法思路这道题是最经典的那种大烂题，基本上可以归类于if else类型，根据没通过的test case编程。不过这种逻辑也和工程中的业务代码很相似，比较繁琐。从算法题的角度来说，这道题是比较辣鸡的。此题的逻辑卸载注释中，不再赘述。 class Solution &#123;     public boolean isNumber(String s) &#123;         if(s == null || s.length() == 0)&#123;             return false;         &#125;         //标记是否遇到相应情况         boolean numSeen = false;    ...</div></div></div></a><a class="pagination-related" href="/LeetCode-49-Group-Anagrams/" title="LeetCode 49. Group Anagrams"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-25</div><div class="info-item-2">LeetCode 49. Group Anagrams</div></div><div class="info-2"><div class="info-item-1">  ProblemLeetCode 49. Group Anagrams 1. 题目简述给出一组字符串（全部由小写字母组成），将由相同字母组成的字符串按组进行返回。例如： Example:  Input: [&quot;eat&quot;, &quot;tea&quot;, &quot;tan&quot;, &quot;ate&quot;, &quot;nat&quot;, &quot;bat&quot;], Output: [ [&quot;ate&quot;,&quot;eat&quot;,&quot;tea&quot;], [&quot;nat&quot;,&quot;tan&quot;], [&quot;bat&quot;] ]  2. 算法思路其实这道题是很直接的一道题，问题就在于统计anagram，如何才能判断两个字符串啊anagram。这里我们用一个很巧妙的hash方法，记录每个字符串组成字母的哈希值。如下： hashtableclass Solution &#123;     public List&lt;List&lt;String>> groupAnagram...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">maye</div><div class="author-info-description">Personal blog about engineering, system design, data structures, and life reflections.</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">162</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">46</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">1. 题目简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">2. 算法思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">2 pointers暴力搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">KMP算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">3. 解法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.1.</span> <span class="toc-text">2 pointers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.2.</span> <span class="toc-text">KMP字符型匹配算法</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/C++%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/" title="C++算法模板">C++算法模板</a><time datetime="2022-07-06T16:47:32.000Z" title="Created 2022-07-06 09:47">2022-07-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021%E7%A7%8B%E6%8B%9B%E8%8B%B1%E6%96%87%E9%9D%A2%E7%BB%8F/" title="2021秋招英文面经">2021秋招英文面经</a><time datetime="2021-09-26T00:22:41.000Z" title="Created 2021-09-25 17:22">2021-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/LeetCode-664-Strange-Printer/" title="LeetCode 664. Strange Printer">LeetCode 664. Strange Printer</a><time datetime="2021-05-26T02:54:03.000Z" title="Created 2021-05-25 19:54">2021-05-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/LeetCode-174-Dungeon-Game/" title="LeetCode 174. Dungeon Game">LeetCode 174. Dungeon Game</a><time datetime="2021-04-27T20:14:24.000Z" title="Created 2021-04-27 13:14">2021-04-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%B8%B8%E7%94%A8%E8%AF%AD%E8%A8%80%E6%B3%9B%E5%9E%8B%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" title="常用语言泛型学习总结">常用语言泛型学习总结</a><time datetime="2021-04-11T05:33:34.000Z" title="Created 2021-04-10 22:33">2021-04-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By maye</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5-b1"></script><script src="/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maye.dev/LeetCode-28-Implement-strStr/" data-id="cmod9t9xq005jaf9kbtyldykh" data-title="LeetCode 28. Implement strStr()" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/string/" rel="tag">string</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/two-pointers/" rel="tag">two pointers</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/LeetCode-14-Longest-Common-Prefix/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          LeetCode 14. Longest Common Prefix
+        
+      </div>
+    </a>
+  
+  
+    <a href="/LeetCode-647-Palindromic-Substrings/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LeetCode 647. Palindromic Substrings</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/core-problems/">core problems</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/daily-diary/">daily diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/easy/">easy</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hard/">hard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/medium/">medium</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%BB%E7%BB%93/">总结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A0%A1%E6%8B%9B/">校招</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">知识点总结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/" rel="tag">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/back-tracking/" rel="tag">back tracking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backtracking/" rel="tag">backtracking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfs/" rel="tag">bfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/binary-indexed-tree/" rel="tag">binary indexed tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/binary-search/" rel="tag">binary search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bit-manipulation/" rel="tag">bit manipulation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design/" rel="tag">design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/" rel="tag">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/divide-and-conquer/" rel="tag">divide and conquer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-programing/" rel="tag">dynamic programing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-programming/" rel="tag">dynamic programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/engineering/" rel="tag">engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graph/" rel="tag">graph</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/" rel="tag">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash-table/" rel="tag">hash table</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashmap/" rel="tag">hashmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashset/" rel="tag">hashset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heap/" rel="tag">heap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jump-game/" rel="tag">jump game</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/knapsack-problem/" rel="tag">knapsack problem</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode-diary/" rel="tag">leetcode diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linked-list/" rel="tag">linked list</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedlist/" rel="tag">linkedlist</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/list/" rel="tag">list</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/map/" rel="tag">map</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monotonous-queue/" rel="tag">monotonous queue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monotonous-stack/" rel="tag">monotonous stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/path-sum/" rel="tag">path sum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/" rel="tag">queue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recursion/" rel="tag">recursion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set/" rel="tag">set</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sliding-window/" rel="tag">sliding window</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/" rel="tag">sort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/" rel="tag">stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/" rel="tag">string</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/summary/" rel="tag">summary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/topological-sort/" rel="tag">topological sort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tree/" rel="tag">tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-pointers/" rel="tag">two pointers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/union-find/" rel="tag">union find</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/union-find/" rel="tag">union-find</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E5%BA%A6%E8%AE%B0%E5%BD%95/" rel="tag">进度记录</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/array/" style="font-size: 18px;">array</a> <a href="/tags/back-tracking/" style="font-size: 14px;">back tracking</a> <a href="/tags/backtracking/" style="font-size: 12px;">backtracking</a> <a href="/tags/bfs/" style="font-size: 13.33px;">bfs</a> <a href="/tags/binary-indexed-tree/" style="font-size: 10px;">binary indexed tree</a> <a href="/tags/binary-search/" style="font-size: 16.67px;">binary search</a> <a href="/tags/bit-manipulation/" style="font-size: 10px;">bit manipulation</a> <a href="/tags/design/" style="font-size: 10.67px;">design</a> <a href="/tags/dfs/" style="font-size: 18.67px;">dfs</a> <a href="/tags/divide-and-conquer/" style="font-size: 12px;">divide and conquer</a> <a href="/tags/dynamic-programing/" style="font-size: 10px;">dynamic programing</a> <a href="/tags/dynamic-programming/" style="font-size: 20px;">dynamic programming</a> <a href="/tags/engineering/" style="font-size: 10px;">engineering</a> <a href="/tags/graph/" style="font-size: 16px;">graph</a> <a href="/tags/greedy/" style="font-size: 13.33px;">greedy</a> <a href="/tags/hash-table/" style="font-size: 13.33px;">hash table</a> <a href="/tags/hashmap/" style="font-size: 11.33px;">hashmap</a> <a href="/tags/hashset/" style="font-size: 10px;">hashset</a> <a href="/tags/heap/" style="font-size: 12.67px;">heap</a> <a href="/tags/jump-game/" style="font-size: 11.33px;">jump game</a> <a href="/tags/knapsack-problem/" style="font-size: 10px;">knapsack problem</a> <a href="/tags/leetcode/" style="font-size: 11.33px;">leetcode</a> <a href="/tags/leetcode-diary/" style="font-size: 12px;">leetcode diary</a> <a href="/tags/linked-list/" style="font-size: 15.33px;">linked list</a> <a href="/tags/linkedlist/" style="font-size: 10px;">linkedlist</a> <a href="/tags/list/" style="font-size: 10px;">list</a> <a href="/tags/map/" style="font-size: 10px;">map</a> <a href="/tags/math/" style="font-size: 12px;">math</a> <a href="/tags/monotonous-queue/" style="font-size: 10px;">monotonous queue</a> <a href="/tags/monotonous-stack/" style="font-size: 12px;">monotonous stack</a> <a href="/tags/path-sum/" style="font-size: 12px;">path sum</a> <a href="/tags/queue/" style="font-size: 10px;">queue</a> <a href="/tags/recursion/" style="font-size: 10.67px;">recursion</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/sliding-window/" style="font-size: 12px;">sliding window</a> <a href="/tags/sort/" style="font-size: 10px;">sort</a> <a href="/tags/stack/" style="font-size: 15.33px;">stack</a> <a href="/tags/string/" style="font-size: 17.33px;">string</a> <a href="/tags/summary/" style="font-size: 14.67px;">summary</a> <a href="/tags/topological-sort/" style="font-size: 10.67px;">topological sort</a> <a href="/tags/tree/" style="font-size: 19.33px;">tree</a> <a href="/tags/two-pointers/" style="font-size: 13.33px;">two pointers</a> <a href="/tags/union-find/" style="font-size: 10px;">union find</a> <a href="/tags/union-find/" style="font-size: 10px;">union-find</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E8%BF%9B%E5%BA%A6%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">进度记录</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/C++%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">C++算法模板</a>
+          </li>
+        
+          <li>
+            <a href="/2021%E7%A7%8B%E6%8B%9B%E8%8B%B1%E6%96%87%E9%9D%A2%E7%BB%8F/">2021秋招英文面经</a>
+          </li>
+        
+          <li>
+            <a href="/LeetCode-664-Strange-Printer/">LeetCode 664. Strange Printer</a>
+          </li>
+        
+          <li>
+            <a href="/LeetCode-174-Dungeon-Game/">LeetCode 174. Dungeon Game</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%B8%B8%E7%94%A8%E8%AF%AD%E8%A8%80%E6%B3%9B%E5%9E%8B%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">常用语言泛型学习总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 maye<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+<script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body></html>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

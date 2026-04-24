@@ -1,165 +1,105 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>图算法总结 | Maye's Life</title><meta name="author" content="maye"><meta name="copyright" content="maye"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="图的基本概念基本概念 顶点 顶点的度 边 相邻 环 完全图: 所有顶都相邻 二分图: 对于一个图G, V(G)&#x3D;X∪Y, X∩Y&#x3D;∅, X中, Y 中任两顶不相邻 路径 圈  图的表示方式两种，紧接矩阵和邻接表，如下。 邻接矩阵邻接表图的相关问题其实对于很多非图的问题，也是可以把其看做图的，使用图遍历的方式其进行遍历。例如 LeetCode 138. Copy List wit">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>图算法总结 | Maye&#39;s Life</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="图的基本概念基本概念 顶点 顶点的度 边 相邻 环 完全图: 所有顶都相邻 二分图: 对于一个图G, V(G)&#x3D;X∪Y, X∩Y&#x3D;∅, X中, Y 中任两顶不相邻 路径 圈  图的表示方式两种，紧接矩阵和邻接表，如下。 邻接矩阵邻接表图的相关问题其实对于很多非图的问题，也是可以把其看做图的，使用图遍历的方式其进行遍历。例如 LeetCode 138. Copy List wit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图算法总结">
 <meta property="og:url" content="https://maye.dev/%E5%9B%BE%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
 <meta property="og:site_name" content="Maye&#39;s Life">
 <meta property="og:description" content="图的基本概念基本概念 顶点 顶点的度 边 相邻 环 完全图: 所有顶都相邻 二分图: 对于一个图G, V(G)&#x3D;X∪Y, X∩Y&#x3D;∅, X中, Y 中任两顶不相邻 路径 圈  图的表示方式两种，紧接矩阵和邻接表，如下。 邻接矩阵邻接表图的相关问题其实对于很多非图的问题，也是可以把其看做图的，使用图遍历的方式其进行遍历。例如 LeetCode 138. Copy List wit">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://maye.dev/img/butterfly-icon.png">
 <meta property="article:published_time" content="2020-05-29T02:01:43.000Z">
 <meta property="article:author" content="maye">
 <meta property="article:tag" content="graph">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://maye.dev/img/butterfly-icon.png"><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "图算法总结",
-  "url": "https://maye.dev/%E5%9B%BE%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/",
-  "image": "https://maye.dev/img/butterfly-icon.png",
-  "datePublished": "2020-05-29T02:01:43.000Z",
-  "dateModified": "2020-05-29T02:01:43.000Z",
-  "author": [
-    {
-      "@type": "Person",
-      "name": "maye",
-      "url": "https://maye.dev"
-    }
-  ]
-}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://maye.dev/%E5%9B%BE%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
-    (() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
-
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
   
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
+    <link rel="alternate" href="/atom.xml" title="Maye's Life" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
-
-      const theme = saveToLocal.get('theme')
+  
     
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Maye&#39;s Life</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Engineering · Thinking · Life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
         
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://maye.dev"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-图算法总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/%E5%9B%BE%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2020-05-29T02:01:43.000Z" itemprop="datePublished">2020-05-28</time>
+</a>
     
-      
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/leetcode/">leetcode</a>►<a class="article-category-link" href="/categories/%E6%80%BB%E7%BB%93/">总结</a>►<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    })()
-  </script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
-  copy: {
-    success: 'Copy Successful',
-    error: 'Copy Failed',
-    noSupport: 'Browser Not Supported'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: 'Just now',
-    min: 'minutes ago',
-    hour: 'hours ago',
-    day: 'days ago',
-    month: 'months ago'
-  },
-  copyright: undefined,
-  lightbox: 'null',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
-    buttonText: 'Load More'
-  },
-  isPhotoFigcaption: false,
-  islazyloadPlugin: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '图算法总结',
-  isHighlightShrink: false,
-  isToc: true,
-  pageType: 'post'
-}</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Maye's Life" type="application/atom+xml">
-</head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Maye's Life</span></a><a class="nav-page-title" href="/"><span class="site-name">图算法总结</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">图算法总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-05-29T02:01:43.000Z" title="Created 2020-05-28 19:01">2020-05-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-04-24T18:51:39.738Z" title="Updated 2026-04-24 11:51">2026-04-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/leetcode/">leetcode</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1>图的基本概念</h1><h2>基本概念</h2><ul>
+    <h1 class="p-name article-title" itemprop="headline name">
+      图算法总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1>图的基本概念</h1><h2>基本概念</h2><ul>
 <li>顶点</li>
 <li>顶点的度</li>
 <li>边</li>
@@ -449,9 +389,163 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1>最短路径问题</h1><h1>欧拉路径</h1><h1>最大流</h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://maye.dev">maye</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://maye.dev/%E5%9B%BE%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">https://maye.dev/%E5%9B%BE%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/graph/">graph</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/LeetCode-886-Possible-Bipartition/" title="LeetCode 886. Possible Bipartition"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">LeetCode 886. Possible Bipartition</div></div><div class="info-2"><div class="info-item-1">ProblemLeetCode 886. Possible Bipartition 1. 题目简述给出n个人，编号从(1…n)，我们可以将他们分成任意大小的两组，但是他们之间会有讨厌某些人的关系，那么他们就不用管被分到同一个组里。 用公式化的形式来讲，就是如果dislikes[i] &#x3D; [a, b]，那么a和b就不会被分到同一个组里。我们需要判断能否做到合适的分组，满足所有dislike条件。 Input: N = 4, dislikes = [[1,2],[1,3],[2,4]] Output: true Explanation: group1 [1,4], group2 [2,3]  2. 算法思路经典的二分图算法，和785是一样的，只不过本题需要先把整张dislike图给construct出来。染色，然后判断是否ok。 DFSBFS注意首先将整张dislike图build出来，因为我们并不知道每个人究竟有多少个dislike的对象，所以可以用ArrayList的数组来存储。这里需要注意ArrayList数组的初始化问题！！！ArrayList数组应该这样初始化，注...</div></div></div></a><a class="pagination-related" href="/LeetCode-525-Contiguous-Array/" title="LeetCode 525. Contiguous Array"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">LeetCode 525. Contiguous Array</div></div><div class="info-2"><div class="info-item-1">  ProblemLeetCode 525. Contiguous Array 1. 题目简述给出一个二进制数组，由0和1组成，找出最长的子数组，使得里面的0和1的数量相等。例如： Example 1: Input: [0,1] Output: 2 Explanation: [0, 1] is the longest contiguous subarray with equal number of 0 and 1.  2. 算法思路这道题的思路很特别，我们需要记录一下。在这里将1看做是1，0看做是-1，然后我们记录前缀和（prefix sum），将每次前缀和都记录下来，如果发现有重复的前缀和，那么上一次出现的前缀和的位置到当前位置中0和1的数量应该是相等的，且我们只需要记录第一次出现的前缀和即可。 Hash Tableclass Solution &#123;     public int findMaxLength(int[] nums) &#123;         int res = 0, sum = 0;         Map&lt;Integer, Integer> ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/LeetCode-785-Is-Graph-Bipartite/" title="LeetCode 785. Is Graph Bipartite?"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-28</div><div class="info-item-2">LeetCode 785. Is Graph Bipartite?</div></div><div class="info-2"><div class="info-item-1">ProblemLeetCode 785. Is Graph Bipartite? 1. 题目简述给出一个图，判断这个图是否为二分图。 Example 2: Input: [[1,2,3], [0,2], [0,1,3], [0,2]] Output: false Explanation:  The graph looks like this: 0----1 | \  | |  \ | 3----2 We cannot find a way to divide the set of nodes into two independent subsets.  2. 算法思路基础的染色二分图问题，但是要注意，对于整张图而言，它可能不是连通图，而是分为多个子图的，所以不能只遍历一种。 DFSBFS3. 解法DFS：  class Solution &#123;     public boolean isBipartite(int[][] graph) &#123;         int[] color = new int[graph.length];         // -1是未染色，...</div></div></div></a><a class="pagination-related" href="/LeetCode-399-Evaluate-Division/" title="LeetCode 399. Evaluate Division"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-07</div><div class="info-item-2">LeetCode 399. Evaluate Division</div></div><div class="info-2"><div class="info-item-1">ProblemLeetCode 399. Evaluate Division 1. 题目简述给出一系列等式，例如”A &#x2F; B &#x3D; k”，A和B都是字符串形式的字母，k是一个double数字。然后给出一些要求计算的等式，如果能根据已知的等式求出来，则计算，不能则返回-1.0。例如： Example: Given a / b = 2.0, b / c = 3.0. queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ? . return [6.0, 0.5, -1.0, 1.0, -1.0 ].  上面的例子给出的输入是如下所示： equations = [ [&quot;a&quot;, &quot;b&quot;], [&quot;b&quot;, &quot;c&quot;] ], values = [2.0, 3.0], queries = [ [&quot;a&quot;, &quot;c&quot;], [&quot;b&quot;, &quot;a&quot;], [&qu...</div></div></div></a><a class="pagination-related" href="/LeetCode-210-Course-Schedule-II/" title="LeetCode 210. Course Schedule II"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-31</div><div class="info-item-2">LeetCode 210. Course Schedule II</div></div><div class="info-2"><div class="info-item-1">Problem207. Course Schedule 1. 题目简述一共有n门课程需要修，分别是从0到n-1。有些课程需要进行先修课程，我们以数组的形式给出，例如：[0, 1]，就是说如果要修课，必须要上过1课。 现在给出numCourses门课程，和一个prerequisites数组，求给出一种拓扑排序的方式。 2. 算法思路参考解法：花花酱LeetCode 和LeetCode 207. Course Schedule类似，基本一致，这里不再赘述，直接上解析。 BFSclass Solution &#123;     public int[] findOrder(int numCourses, int[][] prerequisites) &#123;         // BFS         int[] inDegree = new int[numCourses];         Stack&lt;Integer> zeroDegreeVertex = new Stack();         int res[] = new int[numCourses];     ...</div></div></div></a><a class="pagination-related" href="/LeetCode-886-Possible-Bipartition/" title="LeetCode 886. Possible Bipartition"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-28</div><div class="info-item-2">LeetCode 886. Possible Bipartition</div></div><div class="info-2"><div class="info-item-1">ProblemLeetCode 886. Possible Bipartition 1. 题目简述给出n个人，编号从(1…n)，我们可以将他们分成任意大小的两组，但是他们之间会有讨厌某些人的关系，那么他们就不用管被分到同一个组里。 用公式化的形式来讲，就是如果dislikes[i] &#x3D; [a, b]，那么a和b就不会被分到同一个组里。我们需要判断能否做到合适的分组，满足所有dislike条件。 Input: N = 4, dislikes = [[1,2],[1,3],[2,4]] Output: true Explanation: group1 [1,4], group2 [2,3]  2. 算法思路经典的二分图算法，和785是一样的，只不过本题需要先把整张dislike图给construct出来。染色，然后判断是否ok。 DFSBFS注意首先将整张dislike图build出来，因为我们并不知道每个人究竟有多少个dislike的对象，所以可以用ArrayList的数组来存储。这里需要注意ArrayList数组的初始化问题！！！ArrayList数组应该这样初始化，注...</div></div></div></a><a class="pagination-related" href="/LeetCode-1042-Flower-Planting-With-No-Adjacent/" title="LeetCode 1042. Flower Planting With No Adjacent"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-28</div><div class="info-item-2">LeetCode 1042. Flower Planting With No Adjacent</div></div><div class="info-2"><div class="info-item-1">ProblemLeetCode 1042. Flower Planting With No Adjacent 1. 题目简述给出N个花园(1…N)，给出花园中的路径paths，每个花园最多有三条连通路径。一共可以种四种花(1, 2, 3, 4)，每条路径两段的花的种类不能一致，给出一种符合条件的解。 Input: N = 3, paths = [[1,2],[2,3],[3,1]] Output: [1,2,3]  条件限制： 1 &lt;= N &lt;= 10000 0 &lt;= paths.size &lt;= 20000 No garden has 4 or more paths coming into or leaving it. It is guaranteed an answer exists.  2. 算法思路这道题很多人点了不喜欢，一开始我也没做出来，看了解析之后才发现是自己想复杂了。 和二分图不同，这里像是四分图，且保证一定有解，这里不是非黑即白的选择，例如和1连通的有2，3，和4，我们假设四种颜色为红黄蓝白，1为红色，2、3、4可选的颜色种类太多了，如果都...</div></div></div></a><a class="pagination-related" href="/LeetCode-1306-Jump-Game-III/" title="LeetCode 1306. Jump Game III"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-20</div><div class="info-item-2">LeetCode 1306. Jump Game III</div></div><div class="info-2"><div class="info-item-1">ProblemLeetCode 1306. Jump Game III 1. 题目简述给出一个整形非负数组，初始在index为start的位置。当处于i位置时，可以跳跃到i - arr[i]或者i + arr[i]的位置。判断是否能够到达一个值为0的位置。例如： Example 1:  Input: arr = [4,2,3,0,3,1,2], start = 5 Output: true Explanation:  All possible ways to reach at index 3 with value 0 are:  index 5 -&gt; index 4 -&gt; index 1 -&gt; index 3  index 5 -&gt; index 6 -&gt; index 4 -&gt; index 1 -&gt; index 3   Example 2:  Input: arr = [3,0,2,1,2], start = 2 Output: false Explanation: There is no way to reach at index 1 w...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">maye</div><div class="author-info-description">Personal blog about engineering, system design, data structures, and life reflections.</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">162</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">46</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">图的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">图的表示方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">邻接矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">邻接表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">图的相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">图的搜索</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.1.</span> <span class="toc-text">BFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.2.</span> <span class="toc-text">DFS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">二分图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text">深拷贝图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">拓扑排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">判断环</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">最小生成树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">Kruskal Algorithm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.2.</span> <span class="toc-text">Prim Algorithm</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">单源最短路径</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.1.</span> <span class="toc-text">Dijkstra</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.2.</span> <span class="toc-text">堆优化版Dijkstra</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">最短路径问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">欧拉路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text">最大流</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/C++%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/" title="C++算法模板">C++算法模板</a><time datetime="2022-07-06T16:47:32.000Z" title="Created 2022-07-06 09:47">2022-07-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021%E7%A7%8B%E6%8B%9B%E8%8B%B1%E6%96%87%E9%9D%A2%E7%BB%8F/" title="2021秋招英文面经">2021秋招英文面经</a><time datetime="2021-09-26T00:22:41.000Z" title="Created 2021-09-25 17:22">2021-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/LeetCode-664-Strange-Printer/" title="LeetCode 664. Strange Printer">LeetCode 664. Strange Printer</a><time datetime="2021-05-26T02:54:03.000Z" title="Created 2021-05-25 19:54">2021-05-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/LeetCode-174-Dungeon-Game/" title="LeetCode 174. Dungeon Game">LeetCode 174. Dungeon Game</a><time datetime="2021-04-27T20:14:24.000Z" title="Created 2021-04-27 13:14">2021-04-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%B8%B8%E7%94%A8%E8%AF%AD%E8%A8%80%E6%B3%9B%E5%9E%8B%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" title="常用语言泛型学习总结">常用语言泛型学习总结</a><time datetime="2021-04-11T05:33:34.000Z" title="Created 2021-04-10 22:33">2021-04-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By maye</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5-b1"></script><script src="/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script>
+<h1>最短路径问题</h1><h1>欧拉路径</h1><h1>最大流</h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maye.dev/%E5%9B%BE%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" data-id="cmod9t9yj00ejaf9kh95mgtp2" data-title="图算法总结" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/graph/" rel="tag">graph</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/LeetCode-886-Possible-Bipartition/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          LeetCode 886. Possible Bipartition
+        
+      </div>
+    </a>
+  
+  
+    <a href="/LeetCode-525-Contiguous-Array/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LeetCode 525. Contiguous Array</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/core-problems/">core problems</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/daily-diary/">daily diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/easy/">easy</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hard/">hard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/medium/">medium</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%BB%E7%BB%93/">总结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A0%A1%E6%8B%9B/">校招</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">知识点总结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/" rel="tag">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/back-tracking/" rel="tag">back tracking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backtracking/" rel="tag">backtracking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfs/" rel="tag">bfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/binary-indexed-tree/" rel="tag">binary indexed tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/binary-search/" rel="tag">binary search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bit-manipulation/" rel="tag">bit manipulation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design/" rel="tag">design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/" rel="tag">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/divide-and-conquer/" rel="tag">divide and conquer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-programing/" rel="tag">dynamic programing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-programming/" rel="tag">dynamic programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/engineering/" rel="tag">engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graph/" rel="tag">graph</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/" rel="tag">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash-table/" rel="tag">hash table</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashmap/" rel="tag">hashmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashset/" rel="tag">hashset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heap/" rel="tag">heap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jump-game/" rel="tag">jump game</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/knapsack-problem/" rel="tag">knapsack problem</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode-diary/" rel="tag">leetcode diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linked-list/" rel="tag">linked list</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedlist/" rel="tag">linkedlist</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/list/" rel="tag">list</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/map/" rel="tag">map</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monotonous-queue/" rel="tag">monotonous queue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monotonous-stack/" rel="tag">monotonous stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/path-sum/" rel="tag">path sum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/" rel="tag">queue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recursion/" rel="tag">recursion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set/" rel="tag">set</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sliding-window/" rel="tag">sliding window</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/" rel="tag">sort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/" rel="tag">stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/" rel="tag">string</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/summary/" rel="tag">summary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/topological-sort/" rel="tag">topological sort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tree/" rel="tag">tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-pointers/" rel="tag">two pointers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/union-find/" rel="tag">union find</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/union-find/" rel="tag">union-find</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E5%BA%A6%E8%AE%B0%E5%BD%95/" rel="tag">进度记录</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/array/" style="font-size: 18px;">array</a> <a href="/tags/back-tracking/" style="font-size: 14px;">back tracking</a> <a href="/tags/backtracking/" style="font-size: 12px;">backtracking</a> <a href="/tags/bfs/" style="font-size: 13.33px;">bfs</a> <a href="/tags/binary-indexed-tree/" style="font-size: 10px;">binary indexed tree</a> <a href="/tags/binary-search/" style="font-size: 16.67px;">binary search</a> <a href="/tags/bit-manipulation/" style="font-size: 10px;">bit manipulation</a> <a href="/tags/design/" style="font-size: 10.67px;">design</a> <a href="/tags/dfs/" style="font-size: 18.67px;">dfs</a> <a href="/tags/divide-and-conquer/" style="font-size: 12px;">divide and conquer</a> <a href="/tags/dynamic-programing/" style="font-size: 10px;">dynamic programing</a> <a href="/tags/dynamic-programming/" style="font-size: 20px;">dynamic programming</a> <a href="/tags/engineering/" style="font-size: 10px;">engineering</a> <a href="/tags/graph/" style="font-size: 16px;">graph</a> <a href="/tags/greedy/" style="font-size: 13.33px;">greedy</a> <a href="/tags/hash-table/" style="font-size: 13.33px;">hash table</a> <a href="/tags/hashmap/" style="font-size: 11.33px;">hashmap</a> <a href="/tags/hashset/" style="font-size: 10px;">hashset</a> <a href="/tags/heap/" style="font-size: 12.67px;">heap</a> <a href="/tags/jump-game/" style="font-size: 11.33px;">jump game</a> <a href="/tags/knapsack-problem/" style="font-size: 10px;">knapsack problem</a> <a href="/tags/leetcode/" style="font-size: 11.33px;">leetcode</a> <a href="/tags/leetcode-diary/" style="font-size: 12px;">leetcode diary</a> <a href="/tags/linked-list/" style="font-size: 15.33px;">linked list</a> <a href="/tags/linkedlist/" style="font-size: 10px;">linkedlist</a> <a href="/tags/list/" style="font-size: 10px;">list</a> <a href="/tags/map/" style="font-size: 10px;">map</a> <a href="/tags/math/" style="font-size: 12px;">math</a> <a href="/tags/monotonous-queue/" style="font-size: 10px;">monotonous queue</a> <a href="/tags/monotonous-stack/" style="font-size: 12px;">monotonous stack</a> <a href="/tags/path-sum/" style="font-size: 12px;">path sum</a> <a href="/tags/queue/" style="font-size: 10px;">queue</a> <a href="/tags/recursion/" style="font-size: 10.67px;">recursion</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/sliding-window/" style="font-size: 12px;">sliding window</a> <a href="/tags/sort/" style="font-size: 10px;">sort</a> <a href="/tags/stack/" style="font-size: 15.33px;">stack</a> <a href="/tags/string/" style="font-size: 17.33px;">string</a> <a href="/tags/summary/" style="font-size: 14.67px;">summary</a> <a href="/tags/topological-sort/" style="font-size: 10.67px;">topological sort</a> <a href="/tags/tree/" style="font-size: 19.33px;">tree</a> <a href="/tags/two-pointers/" style="font-size: 13.33px;">two pointers</a> <a href="/tags/union-find/" style="font-size: 10px;">union find</a> <a href="/tags/union-find/" style="font-size: 10px;">union-find</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 10px;">杂项</a> <a href="/tags/%E8%BF%9B%E5%BA%A6%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">进度记录</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/C++%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">C++算法模板</a>
+          </li>
+        
+          <li>
+            <a href="/2021%E7%A7%8B%E6%8B%9B%E8%8B%B1%E6%96%87%E9%9D%A2%E7%BB%8F/">2021秋招英文面经</a>
+          </li>
+        
+          <li>
+            <a href="/LeetCode-664-Strange-Printer/">LeetCode 664. Strange Printer</a>
+          </li>
+        
+          <li>
+            <a href="/LeetCode-174-Dungeon-Game/">LeetCode 174. Dungeon Game</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%B8%B8%E7%94%A8%E8%AF%AD%E8%A8%80%E6%B3%9B%E5%9E%8B%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">常用语言泛型学习总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 maye<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+<script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body></html>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
