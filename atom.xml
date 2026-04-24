@@ -28,15 +28,16 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;排序&quot;&gt;&lt;a href=&quot;#排序&quot; class=&quot;headerlink&quot; title=&quot;排序&quot;&gt;&lt;/a&gt;排序&lt;/h1&gt;&lt;h2 id=&quot;快速排序&quot;&gt;&lt;a href=&quot;#快速排序&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1&gt;排序&lt;/h1&gt;&lt;h2&gt;快速排序&lt;/h2&gt;&lt;h2&gt;归并排序&lt;/h2&gt;&lt;p&gt;个人不是很喜欢下面这种，写起来很难解释。&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-cpp&quot; data-language=&quot;cpp&quot;&gt;&lt;code</summary>
         
       
     
     
     
-    <category term="总结" scheme="https://maye.dev/categories/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="算法" scheme="https://maye.dev/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="总结" scheme="https://maye.dev/categories/%E6%80%BB%E7%BB%93/"/>
     
     
     <category term="summary" scheme="https://maye.dev/tags/summary/"/>
@@ -58,7 +59,7 @@
     <summary type="html">&lt;ol&gt;
 &lt;li&gt;Hashcode() vs Equals()&lt;/li&gt;
 &lt;/ol&gt;
-&lt;figure class=&quot;highlight text&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
+&lt;pre class=&quot;line-numbers language-text&quot; data-language=&quot;text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;​​Java</summary>
         
       
     
@@ -81,7 +82,7 @@
         
     <summary type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
 
-&lt;h1 id=&quot;Problem&quot;&gt;&lt;a</summary>
+&lt;h1&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
         
       
     
@@ -106,7 +107,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+    <summary type="html">&lt;h1&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode.com/problems/dungeon-game/&quot;&gt;LeetCode 174. Dungeon Game&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
         
       
     
@@ -146,9 +148,7 @@
       
         
         
-    <summary type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
-
-&lt;h1 id=&quot;国内实习&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;script type=&quot;text/javascript&quot;</summary>
         
       
     
@@ -175,7 +175,8 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;Hexo使用过程踩坑记录&quot;&gt;&lt;a href=&quot;#Hexo使用过程踩坑记录&quot; class=&quot;headerlink&quot; title=&quot;Hexo使用过程踩坑记录&quot;&gt;&lt;/a&gt;Hexo使用过程踩坑记录&lt;/h2&gt;&lt;h3</summary>
+    <summary type="html">&lt;h2&gt;Hexo使用过程踩坑记录&lt;/h2&gt;&lt;h3&gt;hexo new title 时title含有特殊字符无法识别&lt;/h3&gt;&lt;p&gt;举个例子，我们想写一篇新的blog叫做”C++指南”的文章，”hexo new C++指南”会出现什么呢？如下：&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
         
       
     
@@ -198,9 +199,9 @@
     
     
     
-    <category term="总结" scheme="https://maye.dev/categories/%E6%80%BB%E7%BB%93/"/>
-    
     <category term="C++" scheme="https://maye.dev/categories/C/"/>
+    
+    <category term="总结" scheme="https://maye.dev/categories/%E6%80%BB%E7%BB%93/"/>
     
     
     <category term="summary" scheme="https://maye.dev/tags/summary/"/>
@@ -232,7 +233,10 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;计算机网络面试知识点&quot;&gt;&lt;a href=&quot;#计算机网络面试知识点&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1&gt;计算机网络面试知识点&lt;/h1&gt;&lt;p&gt;备注：应该把CS438的手写笔记重新整理一遍的。。。拖延症啊拖延症。&lt;/p&gt;
+&lt;h2&gt;概述&lt;/h2&gt;&lt;p&gt;五层：应用层，传输层，网络层，链接层，物理层&lt;/p&gt;
+&lt;p&gt;问TCP&amp;#x2F;IP协议族就是问&lt;/p&gt;
+&lt;h2&gt;应用层&lt;/h2&gt;</summary>
         
       
     
@@ -257,7 +261,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;数据库面试知识点（未完待续）&quot;&gt;&lt;a href=&quot;#数据库面试知识点（未完待续）&quot; class=&quot;headerlink&quot; title=&quot;数据库面试知识点（未完待续）&quot;&gt;&lt;/a&gt;数据库面试知识点（未完待续）&lt;/h1&gt;&lt;h2 id=&quot;通用基础&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;h1&gt;数据库面试知识点（未完待续）&lt;/h1&gt;&lt;h2&gt;通用基础&lt;/h2&gt;&lt;h3&gt;事务与隔离级别&lt;/h3&gt;&lt;h4&gt;事务特性&lt;/h4&gt;&lt;p&gt;ACID：原子性（要么做了，要么没做），一致性（多个事务对同一数据读出结果相同），隔离性（事务之间不会相互影响），持久性（事务被提交后，修改是永</summary>
         
       
     
@@ -282,7 +286,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;操作系统知识点总结&quot;&gt;&lt;a href=&quot;#操作系统知识点总结&quot; class=&quot;headerlink&quot; title=&quot;操作系统知识点总结&quot;&gt;&lt;/a&gt;操作系统知识点总结&lt;/h1&gt;&lt;h2 id=&quot;进程线程&quot;&gt;&lt;a href=&quot;#进程线程&quot;</summary>
+    <summary type="html">&lt;h1&gt;操作系统知识点总结&lt;/h1&gt;&lt;h2&gt;进程线程&lt;/h2&gt;&lt;h3&gt;进程和线程的区别&lt;/h3&gt;</summary>
         
       
     
@@ -307,7 +311,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Java面试知识点总结&quot;&gt;&lt;a href=&quot;#Java面试知识点总结&quot; class=&quot;headerlink&quot; title=&quot;Java面试知识点总结&quot;&gt;&lt;/a&gt;Java面试知识点总结&lt;/h1&gt;&lt;p&gt;参考：&lt;a</summary>
+    <summary type="html">&lt;h1&gt;Java面试知识点总结&lt;/h1&gt;&lt;p&gt;参考：&lt;a href=&quot;https://github.com/Snailclimb/JavaGuide&quot;&gt;JavaGuide&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;JVM相关&lt;/h2&gt;&lt;h3&gt;JVM的内存分布&lt;/h3&gt;&lt;p&gt;JVM</summary>
         
       
     
@@ -332,7 +337,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+    <summary type="html">&lt;h1&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/rotate-list/&quot;&gt;LeetCode 61. 旋转链表&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;1.</summary>
         
       
     
@@ -359,7 +365,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+    <summary type="html">&lt;h1&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/jian-sheng-zi-lcof/&quot;&gt;剑指 Offer 14- I. 剪绳子 I&lt;/a&gt;&lt;br&gt;&lt;a</summary>
         
       
     
@@ -386,7 +392,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+    <summary type="html">&lt;h1&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/&quot;&gt;剑指 Offer 20. 表示数值的字符串&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;1.</summary>
         
       
     
@@ -411,7 +418,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h1&gt;&lt;p&gt;两道题是基本一致的，只不过一个是nums[i] &amp;gt; nums[j]，另一个是nums[i]</summary>
+    <summary type="html">&lt;h1&gt;Problem&lt;/h1&gt;&lt;p&gt;两道题是基本一致的，只不过一个是nums[i] &amp;gt; nums[j]，另一个是nums[i] &amp;gt; 2 * nums[j]，这里以剑指offer为例。&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
         
       
     
@@ -442,7 +450,7 @@
         
     <summary type="html">&lt;p&gt; Problem&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/&quot;&gt;剑指 Offer 51. 数组中的逆序对&lt;/a&gt;&lt;/p&gt;
-&lt;h2</summary>
+&lt;h2&gt;1.</summary>
         
       
     
@@ -473,7 +481,10 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;String相关&quot;&gt;&lt;a href=&quot;#String相关&quot; class=&quot;headerlink&quot; title=&quot;String相关&quot;&gt;&lt;/a&gt;String相关&lt;/h2&gt;&lt;h3 id=&quot;各种类型转String&quot;&gt;&lt;a href=&quot;#各种类型转String&quot;</summary>
+    <summary type="html">&lt;h2&gt;String相关&lt;/h2&gt;&lt;h3&gt;各种类型转String&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;valueOf(boolean b): 返回 boolean 参数的字符串表示形式。.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;valueOf(char c): 返回 char</summary>
         
       
     
@@ -502,7 +513,7 @@
         
     <summary type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
 
-&lt;h1 id=&quot;Problem&quot;&gt;&lt;a</summary>
+&lt;h1&gt;Problem&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
         
       
     
