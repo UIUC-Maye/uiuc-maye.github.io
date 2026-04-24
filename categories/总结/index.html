@@ -100,114 +100,187 @@
 
 
       <div class="flex-container">
-        <!-- 标签详情页，展示某个标签下的文章列表，url形式：https://yoursite/tags/某个标签/ -->
+        <div class="container category">
 
-<div class="container category-details">
-  <div class="content-title">
-    <h2>
-      <span>总结</span>
-    </h2>
+  <!-- 排序下拉菜单 -->
+  <div class="sort-container">
+    <label>排序方式：</label>
+    <select id="sortSelect">
+      <option value="date">按日期</option>
+      <option value="title">按名称</option>
+    </select>
   </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="C++算法模板">
-        <span class="time-m-d">2022-07-06</span>
-        <a href="/C++%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">
-          <span>C++算法模板</span>
-        </a>
+
+  <div class="post-list" id="post-list">
+    
+      <div class="post-item" data-title="C++算法模板" data-date="2022-07-06">
+        <div class="title">
+          <a href="/C++%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">C++算法模板</a>
+        </div>
+        <div class="time-m-d">2022-07-06</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="hexo搭建个人blog及使用指南">
-        <span class="time-m-d">2021-03-05</span>
-        <a href="/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
-          <span>hexo搭建个人blog及使用指南</span>
-        </a>
+    
+      <div class="post-item" data-title="hexo搭建个人blog及使用指南" data-date="2021-03-05">
+        <div class="title">
+          <a href="/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">hexo搭建个人blog及使用指南</a>
+        </div>
+        <div class="time-m-d">2021-03-05</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="C++常用api汇总">
-        <span class="time-m-d">2021-03-05</span>
-        <a href="/C++%E5%B8%B8%E7%94%A8api%E6%B1%87%E6%80%BB/">
-          <span>C++常用api汇总</span>
-        </a>
+    
+      <div class="post-item" data-title="C++常用api汇总" data-date="2021-03-05">
+        <div class="title">
+          <a href="/C++%E5%B8%B8%E7%94%A8api%E6%B1%87%E6%80%BB/">C++常用api汇总</a>
+        </div>
+        <div class="time-m-d">2021-03-05</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="计算机网络面试知识点">
-        <span class="time-m-d">2021-02-26</span>
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">
-          <span>计算机网络面试知识点</span>
-        </a>
+    
+      <div class="post-item" data-title="计算机网络面试知识点" data-date="2021-02-26">
+        <div class="title">
+          <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">计算机网络面试知识点</a>
+        </div>
+        <div class="time-m-d">2021-02-26</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="数据库面试知识点">
-        <span class="time-m-d">2021-02-26</span>
-        <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">
-          <span>数据库面试知识点</span>
-        </a>
+    
+      <div class="post-item" data-title="数据库面试知识点" data-date="2021-02-26">
+        <div class="title">
+          <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">数据库面试知识点</a>
+        </div>
+        <div class="time-m-d">2021-02-26</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="操作系统面试知识点">
-        <span class="time-m-d">2021-02-26</span>
-        <a href="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">
-          <span>操作系统面试知识点</span>
-        </a>
+    
+      <div class="post-item" data-title="操作系统面试知识点" data-date="2021-02-26">
+        <div class="title">
+          <a href="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">操作系统面试知识点</a>
+        </div>
+        <div class="time-m-d">2021-02-26</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="Java面试知识点">
-        <span class="time-m-d">2021-02-26</span>
-        <a href="/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">
-          <span>Java面试知识点</span>
-        </a>
+    
+      <div class="post-item" data-title="Java面试知识点" data-date="2021-02-26">
+        <div class="title">
+          <a href="/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">Java面试知识点</a>
+        </div>
+        <div class="time-m-d">2021-02-26</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="Java各种类型转换">
-        <span class="time-m-d">2021-02-16</span>
-        <a href="/Java%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
-          <span>Java各种类型转换</span>
-        </a>
+    
+      <div class="post-item" data-title="Java各种类型转换" data-date="2021-02-16">
+        <div class="title">
+          <a href="/Java%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">Java各种类型转换</a>
+        </div>
+        <div class="time-m-d">2021-02-16</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="算法模板">
-        <span class="time-m-d">2020-07-20</span>
-        <a href="/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">
-          <span>算法模板</span>
-        </a>
+    
+      <div class="post-item" data-title="算法模板" data-date="2020-07-20">
+        <div class="title">
+          <a href="/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">算法模板</a>
+        </div>
+        <div class="time-m-d">2020-07-20</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="图算法——最短路径算法">
-        <span class="time-m-d">2020-06-18</span>
-        <a href="/%E5%9B%BE%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/">
-          <span>图算法——最短路径算法</span>
-        </a>
+    
+      <div class="post-item" data-title="图算法——最短路径算法" data-date="2020-06-18">
+        <div class="title">
+          <a href="/%E5%9B%BE%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/">图算法——最短路径算法</a>
+        </div>
+        <div class="time-m-d">2020-06-18</div>
       </div>
-    </div>
-  
+    
+      <div class="post-item" data-title="Union-Find总结" data-date="2020-06-07">
+        <div class="title">
+          <a href="/Union-Find%E6%80%BB%E7%BB%93/">Union-Find总结</a>
+        </div>
+        <div class="time-m-d">2020-06-07</div>
+      </div>
+    
+      <div class="post-item" data-title="回溯法小结" data-date="2020-06-04">
+        <div class="title">
+          <a href="/%E5%9B%9E%E6%BA%AF%E6%B3%95%E5%B0%8F%E7%BB%93/">回溯法小结</a>
+        </div>
+        <div class="time-m-d">2020-06-04</div>
+      </div>
+    
+      <div class="post-item" data-title="Java小tips记录" data-date="2020-05-31">
+        <div class="title">
+          <a href="/Java%E5%B0%8Ftips%E8%AE%B0%E5%BD%95/">Java小tips记录</a>
+        </div>
+        <div class="time-m-d">2020-05-31</div>
+      </div>
+    
+      <div class="post-item" data-title="字符串总结" data-date="2020-05-29">
+        <div class="title">
+          <a href="/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93/">字符串总结</a>
+        </div>
+        <div class="time-m-d">2020-05-29</div>
+      </div>
+    
+      <div class="post-item" data-title="图算法总结" data-date="2020-05-28">
+        <div class="title">
+          <a href="/%E5%9B%BE%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">图算法总结</a>
+        </div>
+        <div class="time-m-d">2020-05-28</div>
+      </div>
+    
+      <div class="post-item" data-title="二分搜索" data-date="2020-05-27">
+        <div class="title">
+          <a href="/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/">二分搜索</a>
+        </div>
+        <div class="time-m-d">2020-05-27</div>
+      </div>
+    
+      <div class="post-item" data-title="动态规划一" data-date="2020-05-25">
+        <div class="title">
+          <a href="/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80/">动态规划一</a>
+        </div>
+        <div class="time-m-d">2020-05-25</div>
+      </div>
+    
+  </div>
+
   <nav class="post-navigation">
     
-    <span class="page-num">1 / 2</span>
-    
-      <a href="/categories/%E6%80%BB%E7%BB%93/page/2/"><i class="iconfont icon-angleright"></i></a>
+    <span class="page-num">1 / 1</span>
     
   </nav>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('#post-list');
+  const select = document.querySelector('#sortSelect');
+  const articles = Array.from(container.querySelectorAll('.post-item'));
+
+  select.addEventListener('change', () => {
+    const sortBy = select.value;
+    const sorted = articles.sort((a, b) => {
+      if (sortBy === 'title') {
+        const aTitle = a.dataset.title || '';
+        const bTitle = b.dataset.title || '';
+        const isChinese = str => /[\u4e00-\u9fff]/.test(str);
+        const aChinese = isChinese(aTitle);
+        const bChinese = isChinese(bTitle);
+
+        if (aChinese && !bChinese) return -1;
+        if (!aChinese && bChinese) return 1;
+        return aTitle.localeCompare(bTitle, aChinese ? 'zh-CN' : 'en', { numeric: true });
+      } else {
+        return new Date(b.dataset.date) - new Date(a.dataset.date);
+      }
+    });
+
+    container.innerHTML = '';
+    sorted.forEach(node => container.appendChild(node));
+  });
+});
+</script>
+
+<style>
+.sort-container {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.sort-container select {
+  margin-left: 8px;
+  padding: 4px 8px;
+}
+</style>
         <div class="footer">
   <div class="social">
     <ul>

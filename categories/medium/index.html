@@ -100,69 +100,63 @@
 
 
       <div class="flex-container">
-        <!-- 标签详情页，展示某个标签下的文章列表，url形式：https://yoursite/tags/某个标签/ -->
+        <div class="container category">
 
-<div class="container category-details">
-  <div class="content-title">
-    <h2>
-      <span>medium</span>
-    </h2>
+  <!-- 排序下拉菜单 -->
+  <div class="sort-container">
+    <label>排序方式：</label>
+    <select id="sortSelect">
+      <option value="date">按日期</option>
+      <option value="title">按名称</option>
+    </select>
   </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="LeetCode 22. Generate Parentheses">
-        <span class="time-m-d">2021-02-13</span>
-        <a href="/LeetCode-22-Generate-Parentheses/">
-          <span>LeetCode 22. Generate Parentheses</span>
-        </a>
+
+  <div class="post-list" id="post-list">
+    
+      <div class="post-item" data-title="LeetCode 22. Generate Parentheses" data-date="2021-02-13">
+        <div class="title">
+          <a href="/LeetCode-22-Generate-Parentheses/">LeetCode 22. Generate Parentheses</a>
+        </div>
+        <div class="time-m-d">2021-02-13</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="LeetCode 475. Heaters">
-        <span class="time-m-d">2021-02-12</span>
-        <a href="/LeetCode-475-Heaters/">
-          <span>LeetCode 475. Heaters</span>
-        </a>
+    
+      <div class="post-item" data-title="LeetCode 475. Heaters" data-date="2021-02-12">
+        <div class="title">
+          <a href="/LeetCode-475-Heaters/">LeetCode 475. Heaters</a>
+        </div>
+        <div class="time-m-d">2021-02-12</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="LeetCode 331. Verify Preorder Serialization of a Binary Tree">
-        <span class="time-m-d">2021-02-08</span>
-        <a href="/LeetCode-331-Verify-Preorder-Serialization-of-a-Binary-Tree/">
-          <span>LeetCode 331. Verify Preorder Serialization of a Binary Tree</span>
-        </a>
+    
+      <div class="post-item" data-title="LeetCode 331. Verify Preorder Serialization of a Binary Tree" data-date="2021-02-08">
+        <div class="title">
+          <a href="/LeetCode-331-Verify-Preorder-Serialization-of-a-Binary-Tree/">LeetCode 331. Verify Preorder Serialization of a Binary Tree</a>
+        </div>
+        <div class="time-m-d">2021-02-08</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="LeetCode 60. Permutation Sequence">
-        <span class="time-m-d">2020-06-26</span>
-        <a href="/LeetCode-60-Permutation-Sequence/">
-          <span>LeetCode 60. Permutation Sequence</span>
-        </a>
+    
+      <div class="post-item" data-title="LeetCode 60. Permutation Sequence" data-date="2020-06-26">
+        <div class="title">
+          <a href="/LeetCode-60-Permutation-Sequence/">LeetCode 60. Permutation Sequence</a>
+        </div>
+        <div class="time-m-d">2020-06-26</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="LeetCode 56. Merge Intervals">
-        <span class="time-m-d">2020-06-26</span>
-        <a href="/LeetCode-56-Merge-Intervals/">
-          <span>LeetCode 56. Merge Intervals</span>
-        </a>
+    
+      <div class="post-item" data-title="LeetCode 56. Merge Intervals" data-date="2020-06-26">
+        <div class="title">
+          <a href="/LeetCode-56-Merge-Intervals/">LeetCode 56. Merge Intervals</a>
+        </div>
+        <div class="time-m-d">2020-06-26</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="LeetCode 49. Group Anagrams">
-        <span class="time-m-d">2020-06-25</span>
-        <a href="/LeetCode-49-Group-Anagrams/">
-          <span>LeetCode 49. Group Anagrams</span>
-        </a>
+    
+      <div class="post-item" data-title="LeetCode 49. Group Anagrams" data-date="2020-06-25">
+        <div class="title">
+          <a href="/LeetCode-49-Group-Anagrams/">LeetCode 49. Group Anagrams</a>
+        </div>
+        <div class="time-m-d">2020-06-25</div>
       </div>
-    </div>
-  
+    
+  </div>
+
   <nav class="post-navigation">
     
     <span class="page-num">1 / 1</span>
@@ -170,6 +164,46 @@
   </nav>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('#post-list');
+  const select = document.querySelector('#sortSelect');
+  const articles = Array.from(container.querySelectorAll('.post-item'));
+
+  select.addEventListener('change', () => {
+    const sortBy = select.value;
+    const sorted = articles.sort((a, b) => {
+      if (sortBy === 'title') {
+        const aTitle = a.dataset.title || '';
+        const bTitle = b.dataset.title || '';
+        const isChinese = str => /[\u4e00-\u9fff]/.test(str);
+        const aChinese = isChinese(aTitle);
+        const bChinese = isChinese(bTitle);
+
+        if (aChinese && !bChinese) return -1;
+        if (!aChinese && bChinese) return 1;
+        return aTitle.localeCompare(bTitle, aChinese ? 'zh-CN' : 'en', { numeric: true });
+      } else {
+        return new Date(b.dataset.date) - new Date(a.dataset.date);
+      }
+    });
+
+    container.innerHTML = '';
+    sorted.forEach(node => container.appendChild(node));
+  });
+});
+</script>
+
+<style>
+.sort-container {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.sort-container select {
+  margin-left: 8px;
+  padding: 4px 8px;
+}
+</style>
         <div class="footer">
   <div class="social">
     <ul>

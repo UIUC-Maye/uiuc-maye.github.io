@@ -100,51 +100,49 @@
 
 
       <div class="flex-container">
-        <!-- 标签详情页，展示某个标签下的文章列表，url形式：https://yoursite/tags/某个标签/ -->
+        <div class="container category">
 
-<div class="container category-details">
-  <div class="content-title">
-    <h2>
-      <span>剑指offer</span>
-    </h2>
+  <!-- 排序下拉菜单 -->
+  <div class="sort-container">
+    <label>排序方式：</label>
+    <select id="sortSelect">
+      <option value="date">按日期</option>
+      <option value="title">按名称</option>
+    </select>
   </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="LeetCode 343. Integer Break">
-        <span class="time-m-d">2021-02-19</span>
-        <a href="/LeetCode-343-Integer-Break/">
-          <span>LeetCode 343. Integer Break</span>
-        </a>
+
+  <div class="post-list" id="post-list">
+    
+      <div class="post-item" data-title="LeetCode 343. Integer Break" data-date="2021-02-19">
+        <div class="title">
+          <a href="/LeetCode-343-Integer-Break/">LeetCode 343. Integer Break</a>
+        </div>
+        <div class="time-m-d">2021-02-19</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="剑指 Offer 20. 表示数值的字符串">
-        <span class="time-m-d">2021-02-19</span>
-        <a href="/%E5%89%91%E6%8C%87-Offer-20-%E8%A1%A8%E7%A4%BA%E6%95%B0%E5%80%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/">
-          <span>剑指 Offer 20. 表示数值的字符串</span>
-        </a>
+    
+      <div class="post-item" data-title="剑指 Offer 20. 表示数值的字符串" data-date="2021-02-19">
+        <div class="title">
+          <a href="/%E5%89%91%E6%8C%87-Offer-20-%E8%A1%A8%E7%A4%BA%E6%95%B0%E5%80%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/">剑指 Offer 20. 表示数值的字符串</a>
+        </div>
+        <div class="time-m-d">2021-02-19</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="LeetCode 295. Find Median from Data Stream">
-        <span class="time-m-d">2021-02-19</span>
-        <a href="/LeetCode-295-Find-Median-from-Data-Stream/">
-          <span>LeetCode 295. Find Median from Data Stream</span>
-        </a>
+    
+      <div class="post-item" data-title="LeetCode 295. Find Median from Data Stream" data-date="2021-02-19">
+        <div class="title">
+          <a href="/LeetCode-295-Find-Median-from-Data-Stream/">LeetCode 295. Find Median from Data Stream</a>
+        </div>
+        <div class="time-m-d">2021-02-19</div>
       </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="LeetCode 493. Reverse Pairs">
-        <span class="time-m-d">2021-02-18</span>
-        <a href="/LeetCode-493-Reverse-Pairs/">
-          <span>LeetCode 493. Reverse Pairs</span>
-        </a>
+    
+      <div class="post-item" data-title="LeetCode 493. Reverse Pairs" data-date="2021-02-18">
+        <div class="title">
+          <a href="/LeetCode-493-Reverse-Pairs/">LeetCode 493. Reverse Pairs</a>
+        </div>
+        <div class="time-m-d">2021-02-18</div>
       </div>
-    </div>
-  
+    
+  </div>
+
   <nav class="post-navigation">
     
     <span class="page-num">1 / 1</span>
@@ -152,6 +150,46 @@
   </nav>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('#post-list');
+  const select = document.querySelector('#sortSelect');
+  const articles = Array.from(container.querySelectorAll('.post-item'));
+
+  select.addEventListener('change', () => {
+    const sortBy = select.value;
+    const sorted = articles.sort((a, b) => {
+      if (sortBy === 'title') {
+        const aTitle = a.dataset.title || '';
+        const bTitle = b.dataset.title || '';
+        const isChinese = str => /[\u4e00-\u9fff]/.test(str);
+        const aChinese = isChinese(aTitle);
+        const bChinese = isChinese(bTitle);
+
+        if (aChinese && !bChinese) return -1;
+        if (!aChinese && bChinese) return 1;
+        return aTitle.localeCompare(bTitle, aChinese ? 'zh-CN' : 'en', { numeric: true });
+      } else {
+        return new Date(b.dataset.date) - new Date(a.dataset.date);
+      }
+    });
+
+    container.innerHTML = '';
+    sorted.forEach(node => container.appendChild(node));
+  });
+});
+</script>
+
+<style>
+.sort-container {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.sort-container select {
+  margin-left: 8px;
+  padding: 4px 8px;
+}
+</style>
         <div class="footer">
   <div class="social">
     <ul>
